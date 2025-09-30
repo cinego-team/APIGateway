@@ -34,6 +34,21 @@ export class MicroservicioUsuariosService {
         }
     }
 
+    async registerEmpleado(registerBody: any) {
+        try {
+            return await axiosServicioUsuarios.post(
+                config.MSUsuariosUrls.registerEmpleado,
+                {
+                    body: registerBody,
+                },
+            );
+        } catch (err) {
+            const status = err.response?.status || 403;
+            const message = err.response?.data?.message || 'Unauthorized';
+            throw new HttpException(message, status);
+        }
+    }
+
     async refreshToken(refreshToken: string) {
         try {
             return await axiosServicioUsuarios.get(

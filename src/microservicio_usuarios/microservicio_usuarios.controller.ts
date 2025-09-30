@@ -17,6 +17,11 @@ export class MicroservicioUsuariosController {
         return this.service.register(registerBody);
     }
 
+    @Post('register/empleado')
+    registerEmpleado(@Body() registerBody) {
+        return this.service.registerEmpleado(registerBody);
+    }
+
     @Get('refresh-token')
     refreshToken(@Req() request: Request) {
         return this.service.refreshToken(
