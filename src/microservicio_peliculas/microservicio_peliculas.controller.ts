@@ -5,7 +5,7 @@ import { MicroservicioPeliculasService } from './microservicio_peliculas.service
 export class MicroservicioPeliculasController {
     constructor(private readonly service: MicroservicioPeliculasService) {}
 
-    @Get('pelicula')
+    @Get('peliculas')
     getAllPeliculas() {
         return this.service.getAllPeliculas();
     }

@@ -4,7 +4,7 @@ import { MicroservicioFuncionesYSalasService } from './microservicio_funciones-y
 @Controller('microservicio-funciones-y-salas')
 export class MicroservicioFuncionesYSalasController {
     constructor(private service: MicroservicioFuncionesYSalasService) {}
-    @Get('funcion-por-pelicula/:id')
+    @Get('funciones-por-pelicula/:id')
     findAllByPeliculaId(@Param('id') id: number) {
         return this.service.findAllByPeliculaId(id);
     }
