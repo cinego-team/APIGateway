@@ -3,18 +3,17 @@ import {
     ExecutionContext,
     HttpException,
     Injectable,
-    UnauthorizedException,
 } from '@nestjs/common';
 import { Reflector } from '@nestjs/core';
 import axios from 'axios';
 import { Permissions } from './decorators/permissions.decorator';
 
-const LOCALHOST_URL = `http://localhost:3000`;
+const LOCALHOST_URL = `http://localhost:3004`;
 const PRODUCCION_URL = null;
 
 @Injectable()
 export class AuthGuard implements CanActivate {
-    constructor(private reflector: Reflector) {}
+    constructor(private reflector: Reflector) { }
 
     async canActivate(context: ExecutionContext): Promise<boolean> {
         const request = context.switchToHttp().getRequest();

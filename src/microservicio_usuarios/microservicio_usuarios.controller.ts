@@ -5,14 +5,14 @@ import { Request } from 'express';
 //AÑADIR GUARD!!!
 @Controller('microservicio-usuarios')
 export class MicroservicioUsuariosController {
-    constructor(private service: MicroservicioUsuariosService) {}
+    constructor(private service: MicroservicioUsuariosService) { }
 
-    @Post('login')
+    @Post('usuario/login')
     login(@Body() loginBody) {
         return this.service.login(loginBody);
     }
 
-    @Post('register')
+    @Post('usuario/register')
     register(@Body() registerBody) {
         return this.service.register(registerBody);
     }

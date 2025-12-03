@@ -1,9 +1,9 @@
-import { Body, Controller, Get, Param, Post, Put } from '@nestjs/common';
+import { Body, Controller, Delete, Get, Param, Post, Put } from '@nestjs/common';
 import { MicroservicioPeliculasService } from './microservicio_peliculas.service';
 
 @Controller('microservicio-peliculas')
 export class MicroservicioPeliculasController {
-    constructor(private readonly service: MicroservicioPeliculasService) {}
+    constructor(private readonly service: MicroservicioPeliculasService) { }
 
     @Get('peliculas')
     getAllPeliculas() {
@@ -15,7 +15,7 @@ export class MicroservicioPeliculasController {
         return this.service.getPeliculaById(id);
     }
 
-    @Post('pelicula')
+    @Post('pelicula/new')
     registrarPelicula(@Body() peliculaBody) {
         return this.service.registrarPelicula(peliculaBody);
     }
@@ -25,7 +25,12 @@ export class MicroservicioPeliculasController {
         return this.service.actualizarPelicula(id, peliculaBody);
     }
 
-    @Post('genero')
+    @Delete('pelicula/:id')
+    eliminarPelicula(@Param('id') id: number) {
+        return this.service.eliminarPelicula(id);
+    }
+
+    @Post('genero/new')
     registrarGenero(@Body() generoBody) {
         return this.service.registrarGenero(generoBody);
     }
@@ -35,12 +40,22 @@ export class MicroservicioPeliculasController {
         return this.service.actualizarGenero(id, generoBody);
     }
 
-    @Get('genero')
+    @Get('generos')
     getAllGeneros() {
         return this.service.getAllGeneros();
     }
 
-    @Post('idioma')
+    @Get('genero/:id')
+    getGeneroById(@Param('id') id: number) {
+        return this.service.getGeneroById(id);
+    }
+
+    @Delete('genero/:id')
+    eliminarGenero(@Param('id') id: number) {
+        return this.service.eliminarGenero(id);
+    }
+
+    @Post('idioma/new')
     agregarIdioma(@Body() idiomaBody) {
         return this.service.registrarIdioma(idiomaBody);
     }
@@ -50,12 +65,17 @@ export class MicroservicioPeliculasController {
         return this.service.actualizarIdioma(id, idiomaBody);
     }
 
-    @Get('idioma')
+    @Get('idiomas')
     getAllIdiomas() {
         return this.service.getAllIdiomas();
     }
 
-    @Post('clasificacion')
+    @Get('idioma/:id')
+    getIdiomaById(@Param('id') id: number) {
+        return this.service.getIdiomaById(id);
+    }
+
+    @Post('clasificacion/new')
     agregarClasificacion(@Body() clasificacionBody) {
         return this.service.registrarClasificacion(clasificacionBody);
     }
@@ -68,12 +88,22 @@ export class MicroservicioPeliculasController {
         return this.service.actualizarClasificacion(id, clasificacionBody);
     }
 
-    @Get('clasificacion')
+    @Get('clasificaciones')
     getAllClasificaciones() {
         return this.service.getAllClasificaciones();
     }
 
-    @Post('estado-pelicula')
+    @Get('clasificacion/:id')
+    getClasificacionById(@Param('id') id: number) {
+        return this.service.getClasificacionById(id);
+    }
+
+    @Delete('clasificacion/:id')
+    eliminarClasificacion(@Param('id') id: number) {
+        return this.service.eliminarClasificacion(id);
+    }
+
+    @Post('estado-pelicula/new')
     registrarEstadoPelicula(@Body() estadoPeliculaBody) {
         return this.service.registrarEstadoPelicula(estadoPeliculaBody);
     }
@@ -86,9 +116,19 @@ export class MicroservicioPeliculasController {
         return this.service.actualizarEstadoPelicula(id, estadoPeliculaBody);
     }
 
-    @Get('estado-pelicula')
+    @Get('estados-pelicula')
     getAllEstadosPeliculas() {
         return this.service.getAllEstadosPelicula();
+    }
+
+    @Get('estado-pelicula/:id')
+    getEstadoPeliculaById(@Param('id') id: number) {
+        return this.service.getEstadoPeliculaById(id);
+    }
+
+    @Delete('estado-pelicula/:id')
+    eliminarEstadoPelicula(@Param('id') id: number) {
+        return this.service.eliminarEstadoPelicula(id);
     }
 
     @Post('formato')

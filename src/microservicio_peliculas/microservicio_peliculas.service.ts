@@ -54,6 +54,18 @@ export class MicroservicioPeliculasService {
         }
     }
 
+    async eliminarPelicula(id: number) {
+        try {
+            return await axiosServicioPeliculas.delete(
+                config.MSPeliculasUrls.deletePeliculaById(id),
+            );
+        } catch (err) {
+            const status = err.response?.status || 403;
+            const message = err.response?.data?.message || 'Unauthorized';
+            throw new HttpException(message, status);
+        }
+    }
+
     async registrarGenero(generoBody: any) {
         try {
             return await axiosServicioPeliculas.post(
@@ -84,6 +96,30 @@ export class MicroservicioPeliculasService {
         try {
             return await axiosServicioPeliculas.get(
                 config.MSPeliculasUrls.getAllGeneros,
+            );
+        } catch (err) {
+            const status = err.response?.status || 403;
+            const message = err.response?.data?.message || 'Unauthorized';
+            throw new HttpException(message, status);
+        }
+    }
+
+    async getGeneroById(id: number) {
+        try {
+            return await axiosServicioPeliculas.get(
+                config.MSPeliculasUrls.getGeneroById(id),
+            );
+        } catch (err) {
+            const status = err.response?.status || 403;
+            const message = err.response?.data?.message || 'Unauthorized';
+            throw new HttpException(message, status);
+        }
+    }
+
+    async eliminarGenero(id: number) {
+        try {
+            return await axiosServicioPeliculas.delete(
+                config.MSPeliculasUrls.deleteGeneroById(id),
             );
         } catch (err) {
             const status = err.response?.status || 403;
@@ -130,6 +166,18 @@ export class MicroservicioPeliculasService {
         }
     }
 
+    async getIdiomaById(id: number) {
+        try {
+            return await axiosServicioPeliculas.get(
+                config.MSPeliculasUrls.getIdiomaById(id),
+            );
+        } catch (err) {
+            const status = err.response?.status || 403;
+            const message = err.response?.data?.message || 'Unauthorized';
+            throw new HttpException(message, status);
+        }
+    }
+
     async registrarClasificacion(clasificacionBody: any) {
         try {
             return await axiosServicioPeliculas.post(
@@ -168,6 +216,31 @@ export class MicroservicioPeliculasService {
         }
     }
 
+    async getClasificacionById(id: number) {
+        try {
+            return await axiosServicioPeliculas.get(
+                config.MSPeliculasUrls.getClasificacionById(id),
+            );
+        } catch (err) {
+            const status = err.response?.status || 403;
+            const message = err.response?.data?.message || 'Unauthorized';
+            throw new HttpException(message, status);
+
+        }
+    }
+
+    async eliminarClasificacion(id: number) {
+        try {
+            return await axiosServicioPeliculas.delete(
+                config.MSPeliculasUrls.deleteClasificacionById(id),
+            );
+        } catch (err) {
+            const status = err.response?.status || 403;
+            const message = err.response?.data?.message || 'Unauthorized';
+            throw new HttpException(message, status);
+        }
+    }
+
     async registrarEstadoPelicula(estadoBody: any) {
         try {
             return await axiosServicioPeliculas.post(
@@ -198,6 +271,30 @@ export class MicroservicioPeliculasService {
         try {
             return await axiosServicioPeliculas.get(
                 config.MSPeliculasUrls.getAllEstadosPelicula,
+            );
+        } catch (err) {
+            const status = err.response?.status || 403;
+            const message = err.response?.data?.message || 'Unauthorized';
+            throw new HttpException(message, status);
+        }
+    }
+
+    async getEstadoPeliculaById(id: number) {
+        try {
+            return await axiosServicioPeliculas.get(
+                config.MSPeliculasUrls.getEstadoPeliculaById(id),
+            );
+        } catch (err) {
+            const status = err.response?.status || 403;
+            const message = err.response?.data?.message || 'Unauthorized';
+            throw new HttpException(message, status);
+        }
+    }
+
+    async eliminarEstadoPelicula(id: number) {
+        try {
+            return await axiosServicioPeliculas.delete(
+                config.MSPeliculasUrls.deleteEstadoPeliculaById(id),
             );
         } catch (err) {
             const status = err.response?.status || 403;
