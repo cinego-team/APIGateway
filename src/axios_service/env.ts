@@ -67,5 +67,15 @@ export const config = {
     },
     MSPromocionesUrls: {
         baseUrl: 'http://localhost:3004',
+        registrarPromocion: '/promocion/new',
+        actualizarPromocionById: (id: number) => `/promocion/${id}`,
+        getAllPromociones: '/promocion',
+        getPromocionById: (id: number) => `/promocion/${id}`,
+        deletePromocionById: (id: number) => `/promocion/${id}`,
+        registrarDia: '/dia/new',
+        actualizarDiaById: (id: number) => `/dia/${id}`,
+        getAllDias: '/dia',
+        getDiaById: (id: number) => `/dia/${id}`,
+        deleteDiaById: (id: number) => `/dia/${id}`,
     },
 };
