@@ -4,29 +4,40 @@ import { config } from 'src/axios_service/env';
 
 @Injectable()
 export class MicroservicioUsuariosService {
-    async login(loginBody: any) {
+    async login(loginBody: any, access_token: string, refresh_token: string) {
         try {
-            return await axiosServicioUsuarios.post(
+            const response = await axiosServicioUsuarios.post(
                 config.MSUsuariosUrls.login,
+                loginBody,
                 {
-                    body: loginBody,
-                },
+                    headers: {
+                        Authorization: access_token || "",
+                        "refresh-token": refresh_token || ""
+                    }
+                }
             );
+            return response.data;
         } catch (err) {
             const status = err.response?.status || 403;
             const message = err.response?.data?.message || 'Unauthorized';
+            console.log(message)
             throw new HttpException(message, status);
         }
     }
 
-    async register(registerBody: any) {
+    async register(registerBody: any, access_token: string, refresh_token: string) {
         try {
-            return await axiosServicioUsuarios.post(
+            const response = await axiosServicioUsuarios.post(
                 config.MSUsuariosUrls.register,
+                registerBody,
                 {
-                    body: registerBody,
-                },
+                    headers: {
+                        Authorization: access_token || "",
+                        "refresh-token": refresh_token || ""
+                    }
+                }
             );
+            return response.data;
         } catch (err) {
             const status = err.response?.status || 403;
             const message = err.response?.data?.message || 'Unauthorized';

@@ -8,19 +8,6 @@ export const axiosServicioUsuarios = axios.create({
     },
 });
 
-axiosServicioUsuarios.interceptors.request.use((config) => {
-    const token = localStorage.getItem('access_token');
-    const refreshToken = localStorage.getItem('refresh_token');
-    if (token) {
-        config.headers.Authorization = token;
-    }
-    if (refreshToken) {
-        config.headers['refresh-token'] = refreshToken;
-    }
-
-    return config;
-});
-
 export const axiosServicioFunciones = axios.create({
     baseURL: config.MSFuncionesUrls.baseUrl,
     headers: {

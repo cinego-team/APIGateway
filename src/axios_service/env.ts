@@ -1,6 +1,6 @@
 export const config = {
     MSUsuariosUrls: {
-        baseUrl: 'http://localhost:3000',
+        baseUrl: 'http://localhost:3004',
         login: '/usuario/login',
         register: '/usuario/register',
         registerEmpleado: '/usuario/register/empleado',
@@ -13,11 +13,12 @@ export const config = {
     MSFuncionesUrls: {
         baseUrl: 'http://localhost:3001',
         getDisponibilidadByFuncionId: (id: number) =>
-            `/funciones/butaca-por-funcion/${id}`,
+            `/funcion/${id}/butacas-detalle`,
+        getFuncionesByPeliculaId: (id: number) => `/funcion/funciones-por-pelicula/${id}`,
+        getFuncionById: (id: number) => `/funcion/${id}`,
     },
     MSPeliculasUrls: {
         baseUrl: 'http://localhost:3002',
-        getFuncionesByPeliculaId: (id: number) => `/pelicula/funciones/${id}`,
         registrarPelicula: '/pelicula/new',
         actualizarPeliculaById: (id: number) => `/pelicula/${id}`,
         getAllPeliculas: '/pelicula',

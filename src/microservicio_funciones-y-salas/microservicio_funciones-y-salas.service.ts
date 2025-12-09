@@ -7,7 +7,7 @@ export class MicroservicioFuncionesYSalasService {
     async findAllByPeliculaId(peliculaId: number) {
         try {
             return await axiosServicioFunciones.get(
-                config.MSPeliculasUrls.getFuncionesByPeliculaId(peliculaId),
+                config.MSFuncionesUrls.getFuncionesByPeliculaId(peliculaId),
             );
         } catch (err) {
             const status = err.response?.status || 403;
@@ -20,6 +20,18 @@ export class MicroservicioFuncionesYSalasService {
         try {
             return await axiosServicioFunciones.get(
                 config.MSFuncionesUrls.getDisponibilidadByFuncionId(funcionId),
+            );
+        } catch (err) {
+            const status = err.response?.status || 403;
+            const message = err.response?.data?.message || 'Unauthorized';
+            throw new HttpException(message, status);
+        }
+    }
+
+    async getFuncionById(id: number) {
+        try {
+            return await axiosServicioFunciones.get(
+                config.MSFuncionesUrls.getFuncionById(id),
             );
         } catch (err) {
             const status = err.response?.status || 403;

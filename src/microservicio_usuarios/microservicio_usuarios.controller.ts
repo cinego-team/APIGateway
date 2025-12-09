@@ -1,20 +1,35 @@
-import { Body, Controller, Get, Param, Post, Req } from '@nestjs/common';
+import { Body, Controller, Get, Param, Post, Req, Headers } from '@nestjs/common';
 import { MicroservicioUsuariosService } from './microservicio_usuarios.service';
 import { Request } from 'express';
+import { CaptchaService } from 'src/captcha_service/captcha-service';
 
 //AÑADIR GUARD!!!
 @Controller('microservicio-usuarios')
 export class MicroservicioUsuariosController {
-    constructor(private service: MicroservicioUsuariosService) { }
+    constructor(
+        private service: MicroservicioUsuariosService,
+        private captchaService: CaptchaService
+    ) { }
 
     @Post('usuario/login')
-    login(@Body() loginBody) {
-        return this.service.login(loginBody);
+    async login(
+        @Body() loginBody,
+        @Headers('x-captcha-token') captchaToken: string,
+        @Headers('authorization') access_token: string,
+        @Headers('refresh-token') refresh_token: string
+    ) {
+        await this.captchaService.validateCaptcha(captchaToken);
+        return this.service.login(loginBody, access_token, refresh_token);
     }
 
     @Post('usuario/register')
-    register(@Body() registerBody) {
-        return this.service.register(registerBody);
+    async register(@Body() registerBody,
+        @Headers('x-captcha-token') captchaToken: string,
+        @Headers('authorization') access_token: string,
+        @Headers('refresh-token') refresh_token: string
+    ) {
+        await this.captchaService.validateCaptcha(captchaToken);
+        return this.service.register(registerBody, access_token, refresh_token);
     }
 
     @Post('register/empleado')
