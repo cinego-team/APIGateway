@@ -60,4 +60,8 @@ export class MicroservicioPromocionesController {
     eliminarDia(@Param('id') id: number) {
         return this.service.eliminarDia(id);
     }
+    @Get('promocion/verificar-promocion/:id')
+    verificarPromocionById(@Param('id') id: number) {
+        return this.service.verificarPromocionById(id);
+    }
 }

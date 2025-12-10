@@ -14,7 +14,8 @@ export const config = {
         baseUrl: 'http://localhost:3001',
         getDisponibilidadByFuncionId: (id: number) =>
             `/funcion/${id}/butacas-detalle`,
-        getFuncionesByPeliculaId: (id: number) => `/funcion/funciones-por-pelicula/${id}`,
+        getFuncionesByPeliculaId: (id: number) =>
+            `/funcion/funciones-por-pelicula/${id}`,
         getFuncionById: (id: number) => `/funcion/${id}`,
     },
     MSPeliculasUrls: {
@@ -78,5 +79,7 @@ export const config = {
         getAllDias: '/dia',
         getDiaById: (id: number) => `/dia/${id}`,
         deleteDiaById: (id: number) => `/dia/${id}`,
+        verificarPromocionById: (id: number) =>
+            `/promocion/verificar-promocion/${id}`,
     },
 };

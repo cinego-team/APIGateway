@@ -126,4 +126,15 @@ export class MicroservicioPromocionesService {
             throw new HttpException(message, status);
         }
     }
+    async verificarPromocionById(id: number) {
+        try {
+            return await axiosServicioPromociones.get(
+                config.MSPromocionesUrls.verificarPromocionById(id),
+            );
+        } catch (err) {
+            const status = err.response?.status || 403;
+            const message = err.response?.data?.message || 'Unauthorized';
+            throw new HttpException(message, status);
+        }
+    }
 }
