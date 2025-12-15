@@ -15,18 +15,6 @@ export const axiosServicioFunciones = axios.create({
     },
 });
 
-axiosServicioFunciones.interceptors.request.use((config) => {
-    const token = localStorage.getItem('access_token');
-    const refreshToken = localStorage.getItem('refresh_token');
-    if (token) {
-        config.headers.Authorization = token;
-    }
-    if (refreshToken) {
-        config.headers['refresh-token'] = refreshToken;
-    }
-
-    return config;
-});
 export const axiosServicioPeliculas = axios.create({
     baseURL: config.MSPeliculasUrls.baseUrl,
     headers: {
@@ -34,18 +22,6 @@ export const axiosServicioPeliculas = axios.create({
     },
 });
 
-axiosServicioPeliculas.interceptors.request.use((config) => {
-    const token = localStorage.getItem('access_token');
-    const refreshToken = localStorage.getItem('refresh_token');
-    if (token) {
-        config.headers.Authorization = token;
-    }
-    if (refreshToken) {
-        config.headers['refresh-token'] = refreshToken;
-    }
-
-    return config;
-});
 
 export const axiosServicioVentas = axios.create({
     baseURL: config.MSVentasUrls.baseUrl,
@@ -54,34 +30,9 @@ export const axiosServicioVentas = axios.create({
     },
 });
 
-axiosServicioVentas.interceptors.request.use((config) => {
-    const token = localStorage.getItem('access_token');
-    const refreshToken = localStorage.getItem('refresh_token');
-    if (token) {
-        config.headers.Authorization = token;
-    }
-    if (refreshToken) {
-        config.headers['refresh-token'] = refreshToken;
-    }
-
-    return config;
-});
 export const axiosServicioPromociones = axios.create({
     baseURL: config.MSPromocionesUrls.baseUrl,
     headers: {
         'Content-Type': 'application/json',
     },
-});
-
-axiosServicioPromociones.interceptors.request.use((config) => {
-    const token = localStorage.getItem('access_token');
-    const refreshToken = localStorage.getItem('refresh_token');
-    if (token) {
-        config.headers.Authorization = token;
-    }
-    if (refreshToken) {
-        config.headers['refresh-token'] = refreshToken;
-    }
-
-    return config;
 });

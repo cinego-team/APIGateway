@@ -1,7 +1,9 @@
-import { Body, Controller, Get, Param, Post, Req, Headers } from '@nestjs/common';
+import { Body, Controller, Get, Param, Post, Req, Headers, UseGuards } from '@nestjs/common';
 import { MicroservicioUsuariosService } from './microservicio_usuarios.service';
 import { Request } from 'express';
 import { CaptchaService } from 'src/captcha_service/captcha-service';
+import { RequestWithUser } from './request-with-user.interface';
+import { AuthGuard } from 'src/middleware/auth.middleware';
 
 //AÑADIR GUARD!!!
 @Controller('microservicio-usuarios')
@@ -38,15 +40,17 @@ export class MicroservicioUsuariosController {
     }
 
     @Get('refresh-token')
-    refreshToken(@Req() request: Request) {
-        return this.service.refreshToken(
-            request.headers['refresh-token'] as string,
-        );
+    refreshToken(@Headers('refresh-token') refresh_token: string) {
+        return this.service.refreshToken(refresh_token);
     }
 
-    @Get('datos-cliente/:id')
-    getDatosClienteById(@Param('id') id: number) {
-        return this.service.getDatosClienteById(id);
+    @UseGuards(AuthGuard)
+    @Get('datos-cliente')
+    getDatosClienteById(
+        @Headers('authorization') access_token: string,
+        @Headers('refresh-token') refresh_token: string
+    ) {
+        return this.service.getDatosClienteById(access_token, refresh_token);
     }
 
     @Get('datos-empleado/:id')

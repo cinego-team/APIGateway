@@ -20,7 +20,6 @@ export class MicroservicioUsuariosService {
         } catch (err) {
             const status = err.response?.status || 403;
             const message = err.response?.data?.message || 'Unauthorized';
-            console.log(message)
             throw new HttpException(message, status);
         }
     }
@@ -62,12 +61,13 @@ export class MicroservicioUsuariosService {
 
     async refreshToken(refreshToken: string) {
         try {
-            return await axiosServicioUsuarios.get(
+            const response = await axiosServicioUsuarios.get(
                 config.MSUsuariosUrls.refreshToken,
                 {
-                    headers: { 'refresh-token': refreshToken },
+                    headers: { 'refresh-token': refreshToken || "" },
                 },
             );
+            return response.data;
         } catch (err) {
             const status = err.response?.status || 403;
             const message = err.response?.data?.message || 'Unauthorized';
@@ -75,12 +75,19 @@ export class MicroservicioUsuariosService {
         }
     }
 
-    async getDatosClienteById(id: number) {
+    async getDatosClienteById(access_token, refresh_token) {
         try {
-            return await axiosServicioUsuarios.get(
-                config.MSUsuariosUrls.getDatosClienteById(id),
-            );
+            const response = await axiosServicioUsuarios.get(
+                config.MSUsuariosUrls.getDatosCliente,
+                {
+                    headers: {
+                        Authorization: access_token || "",
+                        "refresh-token": refresh_token || ""
+                    }
+                });
+            return response.data;
         } catch (err) {
+            console.log(err.message)
             const status = err.response?.status || 403;
             const message = err.response?.data?.message || 'Unauthorized';
             throw new HttpException(message, status);

@@ -4,11 +4,18 @@ import { config } from 'src/axios_service/env';
 
 @Injectable()
 export class MicroservicioPeliculasService {
-    async getAllPeliculas() {
+    async getAllPeliculas(access_token, refresh_token) {
         try {
-            return await axiosServicioPeliculas.get(
+            const response = await axiosServicioPeliculas.get(
                 config.MSPeliculasUrls.getAllPeliculas,
+                {
+                    headers: {
+                        Authorization: access_token || "",
+                        "refresh-token": refresh_token || ""
+                    }
+                }
             );
+            return response.data
         } catch (err) {
             const status = err.response?.status || 403;
             const message = err.response?.data?.message || 'Unauthorized';

@@ -5,13 +5,13 @@ export const config = {
         register: '/usuario/register',
         registerEmpleado: '/usuario/register/empleado',
         refreshToken: '/usuario/refresh-token',
-        getDatosClienteById: (id: number) => `/usuario/datos-cliente/${id}`,
+        getDatosCliente: '/usuario/datos-cliente',
         getDatosEmpleadoById: (id: number) => `/usuario/datos-empleado/${id}`,
         verificarExistenciaTipoClienteById: (id: number) =>
             `/tipo-cliente/validar-existencia/${id}`,
     },
     MSFuncionesUrls: {
-        baseUrl: 'http://localhost:3001',
+        baseUrl: 'http://localhost:3003',
         getDisponibilidadByFuncionId: (id: number) =>
             `/funcion/${id}/butacas-detalle`,
         getFuncionesByPeliculaId: (id: number) =>
@@ -19,7 +19,7 @@ export const config = {
         getFuncionById: (id: number) => `/funcion/${id}`,
     },
     MSPeliculasUrls: {
-        baseUrl: 'http://localhost:3002',
+        baseUrl: 'http://localhost:3001',
         registrarPelicula: '/pelicula/new',
         actualizarPeliculaById: (id: number) => `/pelicula/${id}`,
         getAllPeliculas: '/pelicula',

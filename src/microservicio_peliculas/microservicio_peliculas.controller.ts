@@ -1,4 +1,4 @@
-import { Body, Controller, Delete, Get, Param, Post, Put } from '@nestjs/common';
+import { Body, Controller, Delete, Get, Headers, Param, Post, Put } from '@nestjs/common';
 import { MicroservicioPeliculasService } from './microservicio_peliculas.service';
 
 @Controller('microservicio-peliculas')
@@ -6,8 +6,11 @@ export class MicroservicioPeliculasController {
     constructor(private readonly service: MicroservicioPeliculasService) { }
 
     @Get('peliculas')
-    getAllPeliculas() {
-        return this.service.getAllPeliculas();
+    getAllPeliculas(
+        @Headers('authorization') access_token: string,
+        @Headers('refresh-token') refresh_token: string
+    ) {
+        return this.service.getAllPeliculas(access_token, refresh_token);
     }
 
     @Get('pelicula/:id')
