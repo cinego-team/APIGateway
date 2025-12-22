@@ -1,7 +1,7 @@
 import { Body, Controller, Get, Param, Post, Req, Headers, UseGuards } from '@nestjs/common';
 import { MicroservicioUsuariosService } from './microservicio_usuarios.service';
 import { Request } from 'express';
-import { CaptchaService } from 'src/captcha_service/captcha-service';
+import { CaptchaService } from 'src/services/captcha_service/captcha-service';
 import { RequestWithUser } from './request-with-user.interface';
 import { AuthGuard } from 'src/middleware/auth.middleware';
 

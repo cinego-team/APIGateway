@@ -1,6 +1,6 @@
 import { HttpException, Injectable } from '@nestjs/common';
-import { axiosServicioUsuarios } from 'src/axios_service/axios.client';
-import { config } from 'src/axios_service/env';
+import { axiosServicioUsuarios } from 'src/services/axios_service/axios.client';
+import { config } from 'src/services/axios_service/env';
 
 @Injectable()
 export class MicroservicioUsuariosService {
@@ -46,12 +46,13 @@ export class MicroservicioUsuariosService {
 
     async registerEmpleado(registerBody: any) {
         try {
-            return await axiosServicioUsuarios.post(
+            const response = await axiosServicioUsuarios.post(
                 config.MSUsuariosUrls.registerEmpleado,
                 {
                     body: registerBody,
                 },
             );
+            return response.data;
         } catch (err) {
             const status = err.response?.status || 403;
             const message = err.response?.data?.message || 'Unauthorized';
@@ -96,9 +97,10 @@ export class MicroservicioUsuariosService {
 
     async getDatosEmpleadoById(id: number) {
         try {
-            return await axiosServicioUsuarios.get(
+            const response = await axiosServicioUsuarios.get(
                 config.MSUsuariosUrls.getDatosEmpleadoById(id),
             );
+            return response.data;
         } catch (err) {
             const status = err.response?.status || 403;
             const message = err.response?.data?.message || 'Unauthorized';
@@ -108,9 +110,23 @@ export class MicroservicioUsuariosService {
 
     async verificarExistenciaTipoClienteById(id: number) {
         try {
-            return await axiosServicioUsuarios.get(
+            const response = await axiosServicioUsuarios.get(
                 config.MSUsuariosUrls.verificarExistenciaTipoClienteById(id),
             );
+            return response.data;
+        } catch (err) {
+            const status = err.response?.status || 403;
+            const message = err.response?.data?.message || 'Unauthorized';
+            throw new HttpException(message, status);
+        }
+    }
+
+    async findByEmail(email: string) {
+        try {
+            const response = await axiosServicioUsuarios.get(
+                config.MSUsuariosUrls.findUserByEmail(email),
+            );
+            return response.data;
         } catch (err) {
             const status = err.response?.status || 403;
             const message = err.response?.data?.message || 'Unauthorized';

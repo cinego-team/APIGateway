@@ -1,6 +1,6 @@
 import { HttpException, Injectable } from '@nestjs/common';
-import { axiosServicioPeliculas } from 'src/axios_service/axios.client';
-import { config } from 'src/axios_service/env';
+import { axiosServicioPeliculas } from 'src/services/axios_service/axios.client';
+import { config } from 'src/services/axios_service/env';
 
 @Injectable()
 export class MicroservicioPeliculasService {
@@ -25,9 +25,10 @@ export class MicroservicioPeliculasService {
 
     async getPeliculaById(id: number) {
         try {
-            return await axiosServicioPeliculas.get(
+            const response = await axiosServicioPeliculas.get(
                 config.MSPeliculasUrls.getPeliculaById(id),
             );
+            return response.data;
         } catch (err) {
             const status = err.response?.status || 403;
             const message = err.response?.data?.message || 'Unauthorized';
@@ -37,10 +38,11 @@ export class MicroservicioPeliculasService {
 
     async registrarPelicula(peliculaBody: any) {
         try {
-            return await axiosServicioPeliculas.post(
+            const response = await axiosServicioPeliculas.post(
                 config.MSPeliculasUrls.registrarPelicula,
                 { body: peliculaBody },
             );
+            return response.data;
         } catch (err) {
             const status = err.response?.status || 403;
             const message = err.response?.data?.message || 'Unauthorized';
@@ -50,10 +52,11 @@ export class MicroservicioPeliculasService {
 
     async actualizarPelicula(id: number, peliculaBody: any) {
         try {
-            return await axiosServicioPeliculas.put(
+            const response = await axiosServicioPeliculas.put(
                 config.MSPeliculasUrls.actualizarPeliculaById(id),
                 { body: peliculaBody },
             );
+            return response.data;
         } catch (err) {
             const status = err.response?.status || 403;
             const message = err.response?.data?.message || 'Unauthorized';
@@ -63,9 +66,10 @@ export class MicroservicioPeliculasService {
 
     async eliminarPelicula(id: number) {
         try {
-            return await axiosServicioPeliculas.delete(
+            const response = await axiosServicioPeliculas.delete(
                 config.MSPeliculasUrls.deletePeliculaById(id),
             );
+            return response.data;
         } catch (err) {
             const status = err.response?.status || 403;
             const message = err.response?.data?.message || 'Unauthorized';
@@ -75,10 +79,11 @@ export class MicroservicioPeliculasService {
 
     async registrarGenero(generoBody: any) {
         try {
-            return await axiosServicioPeliculas.post(
+            const response = await axiosServicioPeliculas.post(
                 config.MSPeliculasUrls.registrarGenero,
                 { body: generoBody },
             );
+            return response.data;
         } catch (err) {
             const status = err.response?.status || 403;
             const message = err.response?.data?.message || 'Unauthorized';
@@ -88,10 +93,11 @@ export class MicroservicioPeliculasService {
 
     async actualizarGenero(id: number, generoBody: any) {
         try {
-            return await axiosServicioPeliculas.put(
+            const response = await axiosServicioPeliculas.put(
                 config.MSPeliculasUrls.actualizarGeneroById(id),
                 { body: generoBody },
             );
+            return response.data;
         } catch (err) {
             const status = err.response?.status || 403;
             const message = err.response?.data?.message || 'Unauthorized';
@@ -101,9 +107,10 @@ export class MicroservicioPeliculasService {
 
     async getAllGeneros() {
         try {
-            return await axiosServicioPeliculas.get(
+            const response = await axiosServicioPeliculas.get(
                 config.MSPeliculasUrls.getAllGeneros,
             );
+            return response.data;
         } catch (err) {
             const status = err.response?.status || 403;
             const message = err.response?.data?.message || 'Unauthorized';
@@ -113,9 +120,10 @@ export class MicroservicioPeliculasService {
 
     async getGeneroById(id: number) {
         try {
-            return await axiosServicioPeliculas.get(
+            const response = await axiosServicioPeliculas.get(
                 config.MSPeliculasUrls.getGeneroById(id),
             );
+            return response.data;
         } catch (err) {
             const status = err.response?.status || 403;
             const message = err.response?.data?.message || 'Unauthorized';
@@ -125,9 +133,10 @@ export class MicroservicioPeliculasService {
 
     async eliminarGenero(id: number) {
         try {
-            return await axiosServicioPeliculas.delete(
+            const response = await axiosServicioPeliculas.delete(
                 config.MSPeliculasUrls.deleteGeneroById(id),
             );
+            return response.data;
         } catch (err) {
             const status = err.response?.status || 403;
             const message = err.response?.data?.message || 'Unauthorized';
@@ -137,10 +146,11 @@ export class MicroservicioPeliculasService {
 
     async registrarIdioma(idiomaBody: any) {
         try {
-            return await axiosServicioPeliculas.post(
+            const response = await axiosServicioPeliculas.post(
                 config.MSPeliculasUrls.registrarIdioma,
                 { body: idiomaBody },
             );
+            return response.data;
         } catch (err) {
             const status = err.response?.status || 403;
             const message = err.response?.data?.message || 'Unauthorized';
@@ -150,10 +160,11 @@ export class MicroservicioPeliculasService {
 
     async actualizarIdioma(id: number, idiomaBody: any) {
         try {
-            return await axiosServicioPeliculas.put(
+            const response = await axiosServicioPeliculas.put(
                 config.MSPeliculasUrls.actualizarIdiomaById(id),
                 { body: idiomaBody },
             );
+            return response.data;
         } catch (err) {
             const status = err.response?.status || 403;
             const message = err.response?.data?.message || 'Unauthorized';
@@ -163,9 +174,10 @@ export class MicroservicioPeliculasService {
 
     async getAllIdiomas() {
         try {
-            return await axiosServicioPeliculas.get(
+            const response = await axiosServicioPeliculas.get(
                 config.MSPeliculasUrls.getAllIdiomas,
             );
+            return response.data;
         } catch (err) {
             const status = err.response?.status || 403;
             const message = err.response?.data?.message || 'Unauthorized';
@@ -175,9 +187,10 @@ export class MicroservicioPeliculasService {
 
     async getIdiomaById(id: number) {
         try {
-            return await axiosServicioPeliculas.get(
+            const response = await axiosServicioPeliculas.get(
                 config.MSPeliculasUrls.getIdiomaById(id),
             );
+            return response.data;
         } catch (err) {
             const status = err.response?.status || 403;
             const message = err.response?.data?.message || 'Unauthorized';
@@ -187,10 +200,11 @@ export class MicroservicioPeliculasService {
 
     async registrarClasificacion(clasificacionBody: any) {
         try {
-            return await axiosServicioPeliculas.post(
+            const response = await axiosServicioPeliculas.post(
                 config.MSPeliculasUrls.registrarClasificacion,
                 { body: clasificacionBody },
             );
+            return response.data;
         } catch (err) {
             const status = err.response?.status || 403;
             const message = err.response?.data?.message || 'Unauthorized';
@@ -200,10 +214,11 @@ export class MicroservicioPeliculasService {
 
     async actualizarClasificacion(id: number, clasificacionBody: any) {
         try {
-            return await axiosServicioPeliculas.put(
+            const response = await axiosServicioPeliculas.put(
                 config.MSPeliculasUrls.actualizarClasificacionById(id),
                 { body: clasificacionBody },
             );
+            return response.data;
         } catch (err) {
             const status = err.response?.status || 403;
             const message = err.response?.data?.message || 'Unauthorized';
@@ -213,9 +228,10 @@ export class MicroservicioPeliculasService {
 
     async getAllClasificaciones() {
         try {
-            return await axiosServicioPeliculas.get(
+            const response = await axiosServicioPeliculas.get(
                 config.MSPeliculasUrls.getAllClasificaciones,
             );
+            return response.data;
         } catch (err) {
             const status = err.response?.status || 403;
             const message = err.response?.data?.message || 'Unauthorized';
@@ -225,9 +241,10 @@ export class MicroservicioPeliculasService {
 
     async getClasificacionById(id: number) {
         try {
-            return await axiosServicioPeliculas.get(
+            const response = await axiosServicioPeliculas.get(
                 config.MSPeliculasUrls.getClasificacionById(id),
             );
+            return response.data;
         } catch (err) {
             const status = err.response?.status || 403;
             const message = err.response?.data?.message || 'Unauthorized';
@@ -238,9 +255,10 @@ export class MicroservicioPeliculasService {
 
     async eliminarClasificacion(id: number) {
         try {
-            return await axiosServicioPeliculas.delete(
+            const response = await axiosServicioPeliculas.delete(
                 config.MSPeliculasUrls.deleteClasificacionById(id),
             );
+            return response.data;
         } catch (err) {
             const status = err.response?.status || 403;
             const message = err.response?.data?.message || 'Unauthorized';
@@ -250,10 +268,11 @@ export class MicroservicioPeliculasService {
 
     async registrarEstadoPelicula(estadoBody: any) {
         try {
-            return await axiosServicioPeliculas.post(
+            const response = await axiosServicioPeliculas.post(
                 config.MSPeliculasUrls.registrarEstadoPelicula,
                 { body: estadoBody },
             );
+            return response.data;
         } catch (err) {
             const status = err.response?.status || 403;
             const message = err.response?.data?.message || 'Unauthorized';
@@ -263,10 +282,11 @@ export class MicroservicioPeliculasService {
 
     async actualizarEstadoPelicula(id: number, estadoBody: any) {
         try {
-            return await axiosServicioPeliculas.put(
+            const response = await axiosServicioPeliculas.put(
                 config.MSPeliculasUrls.actualizarEstadoPeliculaById(id),
                 { body: estadoBody },
             );
+            return response.data;
         } catch (err) {
             const status = err.response?.status || 403;
             const message = err.response?.data?.message || 'Unauthorized';
@@ -276,9 +296,10 @@ export class MicroservicioPeliculasService {
 
     async getAllEstadosPelicula() {
         try {
-            return await axiosServicioPeliculas.get(
+            const response = await axiosServicioPeliculas.get(
                 config.MSPeliculasUrls.getAllEstadosPelicula,
             );
+            return response.data;
         } catch (err) {
             const status = err.response?.status || 403;
             const message = err.response?.data?.message || 'Unauthorized';
@@ -288,9 +309,10 @@ export class MicroservicioPeliculasService {
 
     async getEstadoPeliculaById(id: number) {
         try {
-            return await axiosServicioPeliculas.get(
+            const response = await axiosServicioPeliculas.get(
                 config.MSPeliculasUrls.getEstadoPeliculaById(id),
             );
+            return response.data;
         } catch (err) {
             const status = err.response?.status || 403;
             const message = err.response?.data?.message || 'Unauthorized';
@@ -300,9 +322,10 @@ export class MicroservicioPeliculasService {
 
     async eliminarEstadoPelicula(id: number) {
         try {
-            return await axiosServicioPeliculas.delete(
+            const response = await axiosServicioPeliculas.delete(
                 config.MSPeliculasUrls.deleteEstadoPeliculaById(id),
             );
+            return response.data;
         } catch (err) {
             const status = err.response?.status || 403;
             const message = err.response?.data?.message || 'Unauthorized';
@@ -312,10 +335,11 @@ export class MicroservicioPeliculasService {
 
     async registrarFormato(formatoBody: any) {
         try {
-            return await axiosServicioPeliculas.post(
+            const response = await axiosServicioPeliculas.post(
                 config.MSPeliculasUrls.registrarFormato,
                 { body: formatoBody },
             );
+            return response.data;
         } catch (err) {
             const status = err.response?.status || 403;
             const message = err.response?.data?.message || 'Unauthorized';
@@ -325,10 +349,11 @@ export class MicroservicioPeliculasService {
 
     async actualizarFormato(id: number, formatoBody: any) {
         try {
-            return await axiosServicioPeliculas.put(
+            const response = await axiosServicioPeliculas.put(
                 config.MSPeliculasUrls.actualizarFormatoById(id),
                 { body: formatoBody },
             );
+            return response.data;
         } catch (err) {
             const status = err.response?.status || 403;
             const message = err.response?.data?.message || 'Unauthorized';
@@ -338,9 +363,10 @@ export class MicroservicioPeliculasService {
 
     async getAllFormatos() {
         try {
-            return await axiosServicioPeliculas.get(
+            const response = await axiosServicioPeliculas.get(
                 config.MSPeliculasUrls.getAllFormatos,
             );
+            return response.data;
         } catch (err) {
             const status = err.response?.status || 403;
             const message = err.response?.data?.message || 'Unauthorized';
@@ -350,10 +376,11 @@ export class MicroservicioPeliculasService {
 
     async registrarSala(salaBody: any) {
         try {
-            return await axiosServicioPeliculas.post(
+            const response = await axiosServicioPeliculas.post(
                 config.MSPeliculasUrls.registrarSala,
                 { body: salaBody },
             );
+            return response.data;
         } catch (err) {
             const status = err.response?.status || 403;
             const message = err.response?.data?.message || 'Unauthorized';
@@ -363,10 +390,11 @@ export class MicroservicioPeliculasService {
 
     async actualizarSala(id: number, salaBody: any) {
         try {
-            return await axiosServicioPeliculas.put(
+            const response = await axiosServicioPeliculas.put(
                 config.MSPeliculasUrls.actualizarSalaById(id),
                 { body: salaBody },
             );
+            return response.data;
         } catch (err) {
             const status = err.response?.status || 403;
             const message = err.response?.data?.message || 'Unauthorized';
@@ -376,9 +404,10 @@ export class MicroservicioPeliculasService {
 
     async getAllSalas() {
         try {
-            return await axiosServicioPeliculas.get(
+            const response = await axiosServicioPeliculas.get(
                 config.MSPeliculasUrls.getAllSalas,
             );
+            return response.data;
         } catch (err) {
             const status = err.response?.status || 403;
             const message = err.response?.data?.message || 'Unauthorized';
@@ -388,10 +417,11 @@ export class MicroservicioPeliculasService {
 
     async registrarFuncion(funcionBody: any) {
         try {
-            return await axiosServicioPeliculas.post(
+            const response = await axiosServicioPeliculas.post(
                 config.MSPeliculasUrls.registrarFuncion,
                 { body: funcionBody },
             );
+            return response.data;
         } catch (err) {
             const status = err.response?.status || 403;
             const message = err.response?.data?.message || 'Unauthorized';
@@ -401,10 +431,11 @@ export class MicroservicioPeliculasService {
 
     async actualizarFuncion(id: number, funcionBody: any) {
         try {
-            return await axiosServicioPeliculas.put(
+            const response = await axiosServicioPeliculas.put(
                 config.MSPeliculasUrls.actualizarFuncionById(id),
                 { body: funcionBody },
             );
+            return response.data;
         } catch (err) {
             const status = err.response?.status || 403;
             const message = err.response?.data?.message || 'Unauthorized';
@@ -414,9 +445,10 @@ export class MicroservicioPeliculasService {
 
     async getAllFunciones() {
         try {
-            return await axiosServicioPeliculas.get(
+            const response = await axiosServicioPeliculas.get(
                 config.MSPeliculasUrls.getAllFunciones,
             );
+            return response.data;
         } catch (err) {
             const status = err.response?.status || 403;
             const message = err.response?.data?.message || 'Unauthorized';
@@ -426,10 +458,11 @@ export class MicroservicioPeliculasService {
 
     async registrarFila(filaBody: any) {
         try {
-            return await axiosServicioPeliculas.post(
+            const response = await axiosServicioPeliculas.post(
                 config.MSPeliculasUrls.registrarFila,
                 { body: filaBody },
             );
+            return response.data;
         } catch (err) {
             const status = err.response?.status || 403;
             const message = err.response?.data?.message || 'Unauthorized';
@@ -439,10 +472,11 @@ export class MicroservicioPeliculasService {
 
     async actualizarFila(id: number, filaBody: any) {
         try {
-            return await axiosServicioPeliculas.put(
+            const response = await axiosServicioPeliculas.put(
                 config.MSPeliculasUrls.actualizarFilaById(id),
                 { body: filaBody },
             );
+            return response.data;
         } catch (err) {
             const status = err.response?.status || 403;
             const message = err.response?.data?.message || 'Unauthorized';
@@ -452,9 +486,10 @@ export class MicroservicioPeliculasService {
 
     async getAllFilas() {
         try {
-            return await axiosServicioPeliculas.get(
+            const response = await axiosServicioPeliculas.get(
                 config.MSPeliculasUrls.getAllFilas,
             );
+            return response.data;
         } catch (err) {
             const status = err.response?.status || 403;
             const message = err.response?.data?.message || 'Unauthorized';
@@ -464,10 +499,11 @@ export class MicroservicioPeliculasService {
 
     async registrarButaca(butacaBody: any) {
         try {
-            return await axiosServicioPeliculas.post(
+            const response = await axiosServicioPeliculas.post(
                 config.MSPeliculasUrls.registrarButaca,
                 { body: butacaBody },
             );
+            return response.data;
         } catch (err) {
             const status = err.response?.status || 403;
             const message = err.response?.data?.message || 'Unauthorized';
@@ -477,10 +513,11 @@ export class MicroservicioPeliculasService {
 
     async actualizarButaca(id: number, butacaBody: any) {
         try {
-            return await axiosServicioPeliculas.put(
+            const response = await axiosServicioPeliculas.put(
                 config.MSPeliculasUrls.actualizarButacaById(id),
                 { body: butacaBody },
             );
+            return response.data;
         } catch (err) {
             const status = err.response?.status || 403;
             const message = err.response?.data?.message || 'Unauthorized';
@@ -490,9 +527,10 @@ export class MicroservicioPeliculasService {
 
     async getAllButacas() {
         try {
-            return await axiosServicioPeliculas.get(
+            const response = await axiosServicioPeliculas.get(
                 config.MSPeliculasUrls.getAllButacas,
             );
+            return response.data;
         } catch (err) {
             const status = err.response?.status || 403;
             const message = err.response?.data?.message || 'Unauthorized';

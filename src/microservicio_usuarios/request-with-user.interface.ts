@@ -5,3 +5,10 @@ export interface RequestWithUser extends Request {
         id: number;
     };
 }
+
+export interface RequestWithUserInput extends Request {
+    user?: {
+        id: number;
+        email: string;
+    }
+}

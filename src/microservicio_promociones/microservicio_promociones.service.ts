@@ -1,14 +1,15 @@
 import { Injectable, HttpException } from '@nestjs/common';
-import { axiosServicioPromociones } from 'src/axios_service/axios.client';
-import { config } from 'src/axios_service/env';
+import { axiosServicioPromociones } from 'src/services/axios_service/axios.client';
+import { config } from 'src/services/axios_service/env';
 
 @Injectable()
 export class MicroservicioPromocionesService {
     async getAllPromociones() {
         try {
-            return await axiosServicioPromociones.get(
+            const response = await axiosServicioPromociones.get(
                 config.MSPromocionesUrls.getAllPromociones,
             );
+            return response.data;
         } catch (err) {
             const status = err.response?.status || 403;
             const message = err.response?.data?.message || 'Unauthorized';
@@ -18,9 +19,10 @@ export class MicroservicioPromocionesService {
 
     async getPromocionById(id: number) {
         try {
-            return await axiosServicioPromociones.get(
+            const response = await axiosServicioPromociones.get(
                 config.MSPromocionesUrls.getPromocionById(id),
             );
+            return response.data;
         } catch (err) {
             const status = err.response?.status || 403;
             const message = err.response?.data?.message || 'Unauthorized';
@@ -30,10 +32,11 @@ export class MicroservicioPromocionesService {
 
     async registrarPromocion(promocionBody: any) {
         try {
-            return await axiosServicioPromociones.post(
+            const response = await axiosServicioPromociones.post(
                 config.MSPromocionesUrls.registrarPromocion,
                 { body: promocionBody },
             );
+            return response.data;
         } catch (err) {
             const status = err.response?.status || 403;
             const message = err.response?.data?.message || 'Unauthorized';
@@ -43,10 +46,11 @@ export class MicroservicioPromocionesService {
 
     async actualizarPromocion(id: number, promocionBody: any) {
         try {
-            return await axiosServicioPromociones.put(
+            const response = await axiosServicioPromociones.put(
                 config.MSPromocionesUrls.actualizarPromocionById(id),
                 { body: promocionBody },
             );
+            return response.data;
         } catch (err) {
             const status = err.response?.status || 403;
             const message = err.response?.data?.message || 'Unauthorized';
@@ -56,9 +60,10 @@ export class MicroservicioPromocionesService {
 
     async eliminarPromocion(id: number) {
         try {
-            return await axiosServicioPromociones.delete(
+            const response = await axiosServicioPromociones.delete(
                 config.MSPromocionesUrls.deletePromocionById(id),
             );
+            return response.data;
         } catch (err) {
             const status = err.response?.status || 403;
             const message = err.response?.data?.message || 'Unauthorized';
@@ -67,9 +72,10 @@ export class MicroservicioPromocionesService {
     }
     async getAllDias() {
         try {
-            return await axiosServicioPromociones.get(
+            const response = await axiosServicioPromociones.get(
                 config.MSPromocionesUrls.getAllDias,
             );
+            return response.data;
         } catch (err) {
             const status = err.response?.status || 403;
             const message = err.response?.data?.message || 'Unauthorized';
@@ -79,9 +85,10 @@ export class MicroservicioPromocionesService {
 
     async getDiaById(id: number) {
         try {
-            return await axiosServicioPromociones.get(
+            const response = await axiosServicioPromociones.get(
                 config.MSPromocionesUrls.getDiaById(id),
             );
+            return response.data;
         } catch (err) {
             const status = err.response?.status || 403;
             const message = err.response?.data?.message || 'Unauthorized';
@@ -91,10 +98,11 @@ export class MicroservicioPromocionesService {
 
     async registrarDia(diaBody: any) {
         try {
-            return await axiosServicioPromociones.post(
+            const response = await axiosServicioPromociones.post(
                 config.MSPromocionesUrls.registrarDia,
                 { body: diaBody },
             );
+            return response.data;
         } catch (err) {
             const status = err.response?.status || 403;
             const message = err.response?.data?.message || 'Unauthorized';
@@ -104,10 +112,11 @@ export class MicroservicioPromocionesService {
 
     async actualizarDia(id: number, diaBody: any) {
         try {
-            return await axiosServicioPromociones.put(
+            const response = await axiosServicioPromociones.put(
                 config.MSPromocionesUrls.actualizarDiaById(id),
                 { body: diaBody },
             );
+            return response.data;
         } catch (err) {
             const status = err.response?.status || 403;
             const message = err.response?.data?.message || 'Unauthorized';
@@ -117,9 +126,10 @@ export class MicroservicioPromocionesService {
 
     async eliminarDia(id: number) {
         try {
-            return await axiosServicioPromociones.delete(
+            const response = await axiosServicioPromociones.delete(
                 config.MSPromocionesUrls.deleteDiaById(id),
             );
+            return response.data;
         } catch (err) {
             const status = err.response?.status || 403;
             const message = err.response?.data?.message || 'Unauthorized';
@@ -128,9 +138,10 @@ export class MicroservicioPromocionesService {
     }
     async verificarPromocionById(id: number) {
         try {
-            return await axiosServicioPromociones.get(
+            const response = await axiosServicioPromociones.get(
                 config.MSPromocionesUrls.verificarPromocionById(id),
             );
+            return response.data;
         } catch (err) {
             const status = err.response?.status || 403;
             const message = err.response?.data?.message || 'Unauthorized';

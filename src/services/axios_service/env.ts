@@ -9,6 +9,7 @@ export const config = {
         getDatosEmpleadoById: (id: number) => `/usuario/datos-empleado/${id}`,
         verificarExistenciaTipoClienteById: (id: number) =>
             `/tipo-cliente/validar-existencia/${id}`,
+        findUserByEmail: (email: string) => `/usuario/find-by-email/${email}`
     },
     MSFuncionesUrls: {
         baseUrl: 'http://localhost:3003',

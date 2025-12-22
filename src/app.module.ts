@@ -6,10 +6,18 @@ import { MicroservicioPromocionesModule } from './microservicio_promociones/micr
 import { MicroservicioFuncionesYSalasModule } from './microservicio_funciones-y-salas/microservicio_funciones-y-salas.module';
 import { MicroservicioPeliculasModule } from './microservicio_peliculas/microservicio_peliculas.module';
 import { MicroservicioUsuariosModule } from './microservicio_usuarios/microservicio_usuarios.module';
+import { JwtModule } from './services/jwt_service/jwt.module';
 
 @Module({
-  imports: [MicroservicioVentasModule, MicroservicioPromocionesModule, MicroservicioFuncionesYSalasModule, MicroservicioPeliculasModule, MicroservicioUsuariosModule],
-  controllers: [AppController],
-  providers: [AppService],
+    imports: [
+        MicroservicioVentasModule,
+        MicroservicioPromocionesModule,
+        MicroservicioFuncionesYSalasModule,
+        MicroservicioPeliculasModule,
+        MicroservicioUsuariosModule,
+        JwtModule
+    ],
+    controllers: [AppController],
+    providers: [AppService],
 })
-export class AppModule {}
+export class AppModule { }
