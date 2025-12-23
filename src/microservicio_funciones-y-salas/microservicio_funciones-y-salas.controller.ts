@@ -1,6 +1,8 @@
-import { Controller, Get, Headers, Param } from '@nestjs/common';
+import { Controller, Get, Headers, Param, UseGuards } from '@nestjs/common';
 import { MicroservicioFuncionesYSalasService } from './microservicio_funciones-y-salas.service';
+import { AuthGuard } from 'src/middleware/auth.middleware';
 
+@UseGuards(AuthGuard)
 @Controller('microservicio-funciones-y-salas')
 export class MicroservicioFuncionesYSalasController {
     constructor(private service: MicroservicioFuncionesYSalasService) { }

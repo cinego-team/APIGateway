@@ -6,12 +6,15 @@ import {
     Put,
     Body,
     Delete,
+    UseGuards,
 } from '@nestjs/common';
 import { MicroservicioPromocionesService } from './microservicio_promociones.service';
+import { AuthGuard } from 'src/middleware/auth.middleware';
 
+@UseGuards(AuthGuard)
 @Controller('microservicio-promociones')
 export class MicroservicioPromocionesController {
-    constructor(private readonly service: MicroservicioPromocionesService) {}
+    constructor(private readonly service: MicroservicioPromocionesService) { }
     @Get('promociones')
     getAllPromociones() {
         return this.service.getAllPromociones();

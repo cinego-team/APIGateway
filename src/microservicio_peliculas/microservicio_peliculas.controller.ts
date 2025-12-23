@@ -1,6 +1,8 @@
-import { Body, Controller, Delete, Get, Headers, Param, Post, Put } from '@nestjs/common';
+import { Body, Controller, Delete, Get, Headers, Param, Post, Put, UseGuards } from '@nestjs/common';
 import { MicroservicioPeliculasService } from './microservicio_peliculas.service';
+import { AuthGuard } from 'src/middleware/auth.middleware';
 
+@UseGuards(AuthGuard)
 @Controller('microservicio-peliculas')
 export class MicroservicioPeliculasController {
     constructor(private readonly service: MicroservicioPeliculasService) { }
