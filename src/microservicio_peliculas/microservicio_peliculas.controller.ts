@@ -1,4 +1,4 @@
-import { Body, Controller, Delete, Get, Headers, Param, Post, Put, UseGuards } from '@nestjs/common';
+import { Body, Controller, Delete, Get, Headers, Patch,Param, Post, Put, UseGuards } from '@nestjs/common';
 import { MicroservicioPeliculasService } from './microservicio_peliculas.service';
 import { AuthGuard } from 'src/middleware/auth.middleware';
 
@@ -35,6 +35,61 @@ export class MicroservicioPeliculasController {
         return this.service.eliminarPelicula(id);
     }
 
+
+    @Patch('pelicula/:id/poner-en-cartelera')
+    ponerEnCartelera(
+    @Param('id') id: number
+    ) {
+    return this.service.ponerEnCartelera(id);
+    }
+
+    @Patch('pelicula/:id/sacar-de-cartelera')
+    sacarDeCartelera(
+    @Param('id') id: number
+    ) {
+    return this.service.sacarDeCartelera(id);
+    }
+
+    // ADMIN
+
+    @Get('pelicula/admin/selec')
+    getPeliculasParaSelec() {
+    return this.service.getPeliculasParaSelec();
+    }
+
+    @Get('pelicula/admin/all')
+    getPeliculasAdmin() {
+    return this.service.getPeliculasAdmin();
+    }
+
+    @Get('pelicula/admin/:id')
+    getPeliculaAdminById(
+    @Param('id') id: number
+    ) {
+    return this.service.getPeliculaAdminById(id);
+    }
+
+    @Post('pelicula/admin/new')
+    crearPeliculaAdmin(@Body() body) {
+    return this.service.crearPeliculaAdmin(body);
+    }
+
+    @Put('pelicula/admin/:id')
+    actualizarPeliculaAdmin(
+    @Param('id') id: number,
+    @Body() body
+    ) {
+    return this.service.actualizarPeliculaAdmin(id, body);
+    }
+
+    @Delete('pelicula/admin/:id')
+    eliminarPeliculaAdmin(
+    @Param('id') id: number
+    ) {
+    return this.service.eliminarPeliculaAdmin(id);
+    }
+
+
     @Post('genero/new')
     registrarGenero(@Body() generoBody) {
         return this.service.registrarGenero(generoBody);
@@ -60,25 +115,47 @@ export class MicroservicioPeliculasController {
         return this.service.eliminarGenero(id);
     }
 
-    @Post('idioma/new')
-    agregarIdioma(@Body() idiomaBody) {
-        return this.service.registrarIdioma(idiomaBody);
+    @Post('genero/admin/new')
+    crearGenero(@Body() body) {
+    return this.service.registrarGenero(body);
     }
 
-    @Put('idioma/:id')
-    actualizarIdioma(@Param('id') id: number, @Body() idiomaBody) {
-        return this.service.actualizarIdioma(id, idiomaBody);
+    @Get('genero/admin/all')
+    getAllGenerosAdmin() {
+    return this.service.getAllGenerosAdmin();
     }
 
-    @Get('idiomas')
-    getAllIdiomas() {
-        return this.service.getAllIdiomas();
+    @Get('genero/admin/:id')
+    getGeneroAdminById(
+    @Param('id') id: number
+    ) {
+    return this.service.getGeneroAdminById(id);
     }
 
-    @Get('idioma/:id')
-    getIdiomaById(@Param('id') id: number) {
-        return this.service.getIdiomaById(id);
+    @Put('genero/admin/:id')
+    actualizarGeneroAdmin(
+    @Param('id') id: number,
+    @Body() body
+    ) {
+    return this.service.actualizarGeneroAdmin(id, body);
     }
+
+    @Patch('genero/:id')
+    actualizarGeneroParcial(
+    @Param('id') id: number,
+    @Body() body
+    ) {
+    return this.service.actualizarGeneroParcial(id, body);
+    }
+
+    @Delete('genero/admin/:id')
+    eliminarGeneroAdmin(
+    @Param('id') id: number
+    ) {
+    return this.service.eliminarGeneroAdmin(id);
+    }
+
+
 
     @Post('clasificacion/new')
     agregarClasificacion(@Body() clasificacionBody) {
@@ -108,6 +185,47 @@ export class MicroservicioPeliculasController {
         return this.service.eliminarClasificacion(id);
     }
 
+    @Post('clasificacion/admin/new')
+    crearClasificacion(@Body() body) {
+    return this.service.crearClasificacion(body);
+    }
+
+    @Get('clasificacion/admin/all')
+    getAllClasificacionesAdmin() {
+    return this.service.getAllClasificacionesAdmin();
+    }
+
+    @Get('clasificacion/admin/:id')
+    getClasificacionAdminById(
+    @Param('id') id: number
+    ) {
+    return this.service.getClasificacionAdminById(id);
+    }
+
+    @Put('clasificacion/admin/:id')
+    actualizarClasificacionAdmin(
+    @Param('id') id: number,
+    @Body() body
+    ) {
+    return this.service.actualizarClasificacionAdmin(id, body);
+    }
+
+    @Patch('clasificacion/:id')
+    actualizarClasificacionParcial(
+    @Param('id') id: number,
+    @Body() body
+    ) {
+    return this.service.actualizarClasificacionParcial(id, body);
+    }
+
+    @Delete('clasificacion/admin/:id')
+    eliminarClasificacionAdmin(
+    @Param('id') id: number
+    ) {
+    return this.service.eliminarClasificacionAdmin(id);
+    }
+
+
     @Post('estado-pelicula/new')
     registrarEstadoPelicula(@Body() estadoPeliculaBody) {
         return this.service.registrarEstadoPelicula(estadoPeliculaBody);
@@ -136,78 +254,47 @@ export class MicroservicioPeliculasController {
         return this.service.eliminarEstadoPelicula(id);
     }
 
-    @Post('formato')
-    registrarFormato(@Body() formatoBody) {
-        return this.service.registrarFormato(formatoBody);
+
+    @Post('estado-pelicula/admin/new')
+    crearEstadoPelicula(@Body() body) {
+    return this.service.crearEstadoPelicula(body);
     }
 
-    @Put('formato/:id')
-    actualizarFormato(@Param('id') id: number, @Body() formatoBody) {
-        return this.service.actualizarFormato(id, formatoBody);
+    @Get('estado-pelicula/admin/all')
+    getAllEstadosPeliculasAdmin() {
+    return this.service.getAllEstadosPeliculasAdmin();
     }
 
-    @Get('formato')
-    getAllFormatos() {
-        return this.service.getAllFormatos();
+    @Get('estado-pelicula/admin/:id')
+    getEstadoPeliculaAdminById(
+    @Param('id') id: number
+    ) {
+    return this.service.getEstadoPeliculaAdminById(id);
     }
 
-    @Post('sala')
-    registrarSala(@Body() salaBody) {
-        return this.service.registrarSala(salaBody);
+    @Put('estado-pelicula/admin/:id')
+    actualizarEstadoPeliculaAdmin(
+    @Param('id') id: number,
+    @Body() body
+    ) {
+    return this.service.actualizarEstadoPeliculaAdmin(id, body);
     }
 
-    @Put('sala/:id')
-    actualizarSala(@Param('id') id: number, @Body() salaBody) {
-        return this.service.actualizarSala(id, salaBody);
+    @Patch('estado-pelicula/:id')
+    actualizarEstadoPeliculaParcial(
+    @Param('id') id: number,
+    @Body() body
+    ) {
+    return this.service.actualizarEstadoPeliculaParcial(id, body);
     }
 
-    @Get('sala')
-    getAllSalas() {
-        return this.service.getAllSalas();
+    @Delete('estado-pelicula/admin/:id')
+    eliminarEstadoPeliculaAdmin(
+    @Param('id') id: number
+    ) {
+    return this.service.eliminarEstadoPeliculaAdmin(id);
     }
 
-    @Post('funcion')
-    registrarFuncion(@Body() funcionBody) {
-        return this.service.registrarFuncion(funcionBody);
-    }
 
-    @Put('funcion/:id')
-    actualizarFuncion(@Param('id') id: number, @Body() funcionBody) {
-        return this.service.actualizarFuncion(id, funcionBody);
-    }
-
-    @Get('funcion')
-    getAllFunciones() {
-        return this.service.getAllFunciones();
-    }
-
-    @Post('fila')
-    registrarFila(@Body() filaBody) {
-        return this.service.registrarFila(filaBody);
-    }
-
-    @Put('fila/:id')
-    actualizarFila(@Param('id') id: number, @Body() filaBody) {
-        return this.service.actualizarFila(id, filaBody);
-    }
-
-    @Get('fila')
-    getAllFilas() {
-        return this.service.getAllFilas();
-    }
-
-    @Post('butaca')
-    registrarButaca(@Body() butacaBody) {
-        return this.service.registrarButaca(butacaBody);
-    }
-
-    @Put('butaca/:id')
-    actualizarButaca(@Param('id') id: number, @Body() butacaBody) {
-        return this.service.actualizarButaca(id, butacaBody);
-    }
-
-    @Get('butaca')
-    getAllButacas() {
-        return this.service.getAllButacas();
-    }
+   
 }
