@@ -136,10 +136,10 @@ export class MicroservicioPromocionesService {
             throw new HttpException(message, status);
         }
     }
-    async verificarPromocionById(id: number) {
+    async verificarPromocionById(Userid: number) {
         try {
             const response = await axiosServicioPromociones.get(
-                config.MSPromocionesUrls.verificarPromocionById(id),
+                config.MSPromocionesUrls.verificarPromocionById(Userid),
             );
             return response.data;
         } catch (err) {

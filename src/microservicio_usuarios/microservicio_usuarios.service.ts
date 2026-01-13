@@ -11,10 +11,10 @@ export class MicroservicioUsuariosService {
                 loginBody,
                 {
                     headers: {
-                        Authorization: access_token || "",
-                        "refresh-token": refresh_token || ""
-                    }
-                }
+                        Authorization: access_token || '',
+                        'refresh-token': refresh_token || '',
+                    },
+                },
             );
             return response.data;
         } catch (err) {
@@ -24,17 +24,21 @@ export class MicroservicioUsuariosService {
         }
     }
 
-    async register(registerBody: any, access_token: string, refresh_token: string) {
+    async register(
+        registerBody: any,
+        access_token: string,
+        refresh_token: string,
+    ) {
         try {
             const response = await axiosServicioUsuarios.post(
                 config.MSUsuariosUrls.register,
                 registerBody,
                 {
                     headers: {
-                        Authorization: access_token || "",
-                        "refresh-token": refresh_token || ""
-                    }
-                }
+                        Authorization: access_token || '',
+                        'refresh-token': refresh_token || '',
+                    },
+                },
             );
             return response.data;
         } catch (err) {
@@ -65,7 +69,7 @@ export class MicroservicioUsuariosService {
             const response = await axiosServicioUsuarios.get(
                 config.MSUsuariosUrls.refreshToken,
                 {
-                    headers: { 'refresh-token': refreshToken || "" },
+                    headers: { 'refresh-token': refreshToken || '' },
                 },
             );
             return response.data;
@@ -82,13 +86,14 @@ export class MicroservicioUsuariosService {
                 config.MSUsuariosUrls.getDatosCliente,
                 {
                     headers: {
-                        Authorization: access_token || "",
-                        "refresh-token": refresh_token || ""
-                    }
-                });
+                        Authorization: access_token || '',
+                        'refresh-token': refresh_token || '',
+                    },
+                },
+            );
             return response.data;
         } catch (err) {
-            console.log(err.message)
+            console.log(err.message);
             const status = err.response?.status || 403;
             const message = err.response?.data?.message || 'Unauthorized';
             throw new HttpException(message, status);
@@ -125,6 +130,126 @@ export class MicroservicioUsuariosService {
         try {
             const response = await axiosServicioUsuarios.get(
                 config.MSUsuariosUrls.findUserByEmail(email),
+            );
+            return response.data;
+        } catch (err) {
+            const status = err.response?.status || 403;
+            const message = err.response?.data?.message || 'Unauthorized';
+            throw new HttpException(message, status);
+        }
+    }
+    async getTipoClienteById(id: number) {
+        try {
+            const response = await axiosServicioUsuarios.get(
+                config.MSUsuariosUrls.GetTipoClienteById(id),
+            );
+            return response.data;
+        } catch (err) {
+            const status = err.response?.status || 403;
+            const message = err.response?.data?.message || 'Unauthorized';
+            throw new HttpException(message, status);
+        }
+    }
+    async getAllTipoClientes() {
+        try {
+            const response = await axiosServicioUsuarios.get(
+                config.MSUsuariosUrls.GetAllTipoClientes(),
+            );
+            return response.data;
+        } catch (err) {
+            const status = err.response?.status || 403;
+            const message = err.response?.data?.message || 'Unauthorized';
+            throw new HttpException(message, status);
+        }
+    }
+    async deleteTipoCliente(id: number) {
+        try {
+            const response = await axiosServicioUsuarios.delete(
+                config.MSUsuariosUrls.DeleteTipoCliente(id),
+            );
+            return response.data;
+        } catch (err) {
+            const status = err.response?.status || 403;
+            const message = err.response?.data?.message || 'Unauthorized';
+            throw new HttpException(message, status);
+        }
+    }
+    async createTipoCliente(createTipoClienteDto: any) {
+        try {
+            const response = await axiosServicioUsuarios.post(
+                config.MSUsuariosUrls.CreateTipoCliente,
+                {
+                    body: createTipoClienteDto,
+                },
+            );
+            return response.data;
+        } catch (err) {
+            const status = err.response?.status || 403;
+            const message = err.response?.data?.message || 'Unauthorized';
+            throw new HttpException(message, status);
+        }
+    }
+    async updateTipoCliente(id: number, updateTipoClienteDto: any) {
+        try {
+            const response = await axiosServicioUsuarios.put(
+                config.MSUsuariosUrls.UpdateTipoCliente(id),
+                {
+                    body: updateTipoClienteDto,
+                },
+            );
+            return response.data;
+        } catch (err) {
+            const status = err.response?.status || 403;
+            const message = err.response?.data?.message || 'Unauthorized';
+            throw new HttpException(message, status);
+        }
+    }
+    async createRoles(name: string) {
+        try {
+            const response = await axiosServicioUsuarios.post(
+                config.MSUsuariosUrls.CreateRole,
+                {
+                    body: name,
+                },
+            );
+            return response.data;
+        } catch (err) {
+            const status = err.response?.status || 403;
+            const message = err.response?.data?.message || 'Unauthorized';
+            throw new HttpException(message, status);
+        }
+    }
+    async createPermissions(code: string) {
+        try {
+            const response = await axiosServicioUsuarios.post(
+                config.MSUsuariosUrls.CreatePermission,
+                {
+                    body: code,
+                },
+            );
+            return response.data;
+        } catch (err) {
+            const status = err.response?.status || 403;
+            const message = err.response?.data?.message || 'Unauthorized';
+            throw new HttpException(message, status);
+        }
+    }
+    async getAllRoles() {
+        try {
+            const response = await axiosServicioUsuarios.get(
+                config.MSUsuariosUrls.GetAllRoles(),
+            );
+            return response.data;
+        } catch (err) {
+            const status = err.response?.status || 403;
+            const message = err.response?.data?.message || 'Unauthorized';
+            throw new HttpException(message, status);
+        }
+    }
+    async getAllPermissions() {
+        try {
+            const response = await axiosServicioUsuarios.get(
+                config.MSUsuariosUrls.GetAllPermissions(),
             );
             return response.data;
         } catch (err) {

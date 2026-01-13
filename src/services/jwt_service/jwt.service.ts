@@ -1,7 +1,4 @@
-import {
-    Injectable,
-    UnauthorizedException,
-} from '@nestjs/common';
+import { Injectable, UnauthorizedException } from '@nestjs/common';
 import { verify } from 'jsonwebtoken';
 import { Payload } from './payload.interface';
 
@@ -24,12 +21,23 @@ export class JwtService {
     // verifica el token y obtiene el payload desencriptado
     // [
     getPayload(token: string, type: 'refresh' | 'auth' = 'auth'): Payload {
-        const decoded = verify(token, this.config[type].secret);
-        if (typeof decoded === 'string') {
-            throw new UnauthorizedException('Invalid token');
-        }
+        try {
+            const decoded = verify(token, this.config[type].secret);
 
-        return decoded as Payload;
+            if (!decoded || typeof decoded === 'string') {
+                throw new UnauthorizedException('Invalid token');
+            }
+
+            // Validar que las propiedades mínimas existen
+            const { sub, email, role, permissions } = decoded as any;
+            if (!sub || !email || !role || !permissions) {
+                throw new UnauthorizedException('Invalid token payload');
+            }
+
+            return decoded as Payload;
+        } catch (err) {
+            throw new UnauthorizedException('Token verification failed');
+        }
     }
     // ]
 }
