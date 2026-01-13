@@ -18,6 +18,42 @@ export const config = {
         getFuncionesByPeliculaId: (id: number) =>
             `/funcion/funciones-por-pelicula/${id}`,
         getFuncionById: (id: number) => `/funcion/${id}`,
+        
+        registrarButaca: '/butaca',
+        actualizarButacaById: (id: number) => `/butaca/${id}`,
+        getAllButacas: '/butaca',
+        getAllDisponibilidadButaca: '/disponibilidad-butaca',
+        getDisponibilidadButacaById: (id: number) =>
+            `/disponibilidad-butaca/${id}`,
+        updateDisponibilidadButacaById: (id: number) =>
+            `/disponibilidad-butaca/${id}`,
+        reservarDisponibilidadButaca: '/disponibilidad-butaca/reservar',
+        ocuparDisponibilidadButaca: '/disponibilidad-butaca/ocupar',
+        registrarEstadoDisponibilidadButaca: '/estado-disponibilidad-butaca',
+        getAllEstadosDisponibilidadButaca: '/estado-disponibilidad-butaca',
+        getEstadoDisponibilidadButacaById: (id: number) =>
+            `/estado-disponibilidad-butaca/${id}`,
+        actualizarEstadoDisponibilidadButacaById: (id: number) =>
+            `/estado-disponibilidad-butaca/${id}`,
+        registrarFila: '/fila',
+        actualizarFilaById: (id: number) => `/fila/${id}`,
+        getAllFilas: '/fila',
+        registrarFormato: '/formato/admin/new',
+        actualizarFormatoById: (id: number) => `/formato/admin/${id}`,
+        getAllFormatos: '/formato',
+        getAllFormatosAdmin: '/formato/admin/all',
+        getFormatoAdminById: (id: number) => `/formato/admin/${id}`,
+        getFormatoForPut: (id: number) => `/formato/${id}/admin`,
+        registrarIdioma: '/idioma/admin/new',
+        getAllIdiomas: '/idioma/admin/all',
+        getIdiomaById: (id: number) => `/idioma/admin/${id}`,
+        actualizarIdiomaById: (id: number) => `/idioma/admin/${id}`,
+        actualizarIdiomaParcialById: (id: number) => `/idioma/${id}`,
+        registrarSala: '/salas/admin/new',
+        actualizarSalaById: (id: number) => `/salas/admin/${id}`,
+        getAllSalas: '/salas',
+        getAllSalasAdmin: '/salas/admin/all',
+        getSalasForSelect: '/salas/admin/selec',
     },
     MSPeliculasUrls: {
         baseUrl: 'http://localhost:3001',
