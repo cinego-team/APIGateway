@@ -1,7 +1,7 @@
 import { Controller, Get,Put, Delete, Post, Patch,Body, Headers, Param, UseGuards } from '@nestjs/common';
 import { MicroservicioFuncionesYSalasService } from './microservicio_funciones-y-salas.service';
 import { AuthGuard } from 'src/middleware/auth.middleware';
-
+import { Permissions } from 'src/middleware/decorators/permissions.decorator';
 @UseGuards(AuthGuard)
 @Controller('microservicio-funciones-y-salas')
 export class MicroservicioFuncionesYSalasController {
@@ -116,6 +116,9 @@ export class MicroservicioFuncionesYSalasController {
     return this.service.deleteFila(id);
     }
 // FORMATO
+    @UseGuards(AuthGuard)
+    @Permissions('EMPLEADO')
+
     @Post('formato/admin/new')
     createFormato(@Body() body) {
     return this.service.createFormato(body);
@@ -132,6 +135,8 @@ export class MicroservicioFuncionesYSalasController {
     ) {
     return this.service.getFormatoById(id);
     }
+     @UseGuards(AuthGuard)
+    @Permissions('EMPLEADO')
 
     @Put('formato/admin/:id')
     updateFormato(
@@ -141,6 +146,9 @@ export class MicroservicioFuncionesYSalasController {
     return this.service.updateFormato(id, body);
     }
 
+    @UseGuards(AuthGuard)
+    @Permissions('EMPLEADO')
+
     @Delete('formato/admin/:id')
     deleteFormato(
     @Param('id') id: number
@@ -148,10 +156,16 @@ export class MicroservicioFuncionesYSalasController {
     return this.service.deleteFormato(id);
     }
 
+    @UseGuards(AuthGuard)
+    @Permissions('EMPLEADO')
+
     @Get('formato/admin/all')
     getAllFormatosAdmin() {
     return this.service.getAllFormatosAdmin();
     }
+
+     @UseGuards(AuthGuard)
+    @Permissions('EMPLEADO')
 
     @Get('formato/admin/:id')
     getFormatoAdminById(
@@ -159,6 +173,8 @@ export class MicroservicioFuncionesYSalasController {
     ) {
     return this.service.getFormatoAdminById(id);
     }
+     @UseGuards(AuthGuard)
+    @Permissions('EMPLEADO')
 
     @Get('formato/:id/admin')
     getFormatoForPut(
@@ -168,16 +184,23 @@ export class MicroservicioFuncionesYSalasController {
     }
 
 // IDIOMA
+     @UseGuards(AuthGuard)
+    @Permissions('EMPLEADO')
+
     @Post('idioma/admin/new')
     createIdioma(@Body() body) {
     return this.service.createIdioma(body);
     }
+     @UseGuards(AuthGuard)
+    @Permissions('EMPLEADO')
 
     @Get('idioma/admin/all')
     getAllIdiomas(
     ) {
     return this.service.getAllIdiomas();
     }
+     @UseGuards(AuthGuard)
+    @Permissions('EMPLEADO')
 
     @Get('idioma/admin/:id')
     getIdiomaById(
@@ -185,6 +208,9 @@ export class MicroservicioFuncionesYSalasController {
     ) {
     return this.service.getIdiomaById(id);
     }
+
+     @UseGuards(AuthGuard)
+    @Permissions('EMPLEADO')
 
     @Put('idioma/admin/:id')
     updateIdioma(
@@ -201,6 +227,8 @@ export class MicroservicioFuncionesYSalasController {
     ) {
     return this.service.updateIdiomaPartial(id, body);
     }
+     @UseGuards(AuthGuard)
+    @Permissions('EMPLEADO')
 
     @Delete('idioma/admin/:id')
     deleteIdioma(
@@ -210,6 +238,9 @@ export class MicroservicioFuncionesYSalasController {
     }
 
 // SALA
+    @UseGuards(AuthGuard)
+    @Permissions('EMPLEADO')
+
     @Post('salas/admin/new')
     createSala(@Body() body) {
     return this.service.createSala(body);
@@ -219,6 +250,8 @@ export class MicroservicioFuncionesYSalasController {
     getAllSalas() {
     return this.service.getAllSalas();
     }
+     @UseGuards(AuthGuard)
+    @Permissions('EMPLEADO')
 
     @Get('salas/admin/:id')
     getSalaById(
@@ -226,6 +259,8 @@ export class MicroservicioFuncionesYSalasController {
     ) {
     return this.service.getSalaById(id);
     }
+     @UseGuards(AuthGuard)
+    @Permissions('EMPLEADO')
 
     @Put('salas/admin/:id')
     updateSala(
@@ -234,6 +269,8 @@ export class MicroservicioFuncionesYSalasController {
     ) {
     return this.service.updateSala(id, body);
     }
+     @UseGuards(AuthGuard)
+    @Permissions('EMPLEADO')
 
     @Delete('salas/admin/:id')
     deleteSala(
@@ -241,11 +278,15 @@ export class MicroservicioFuncionesYSalasController {
     ) {
     return this.service.deleteSala(id);
     }
+     @UseGuards(AuthGuard)
+    @Permissions('EMPLEADO')
 
     @Get('salas/admin/selec')
     getSalasForSelect() {
     return this.service.getSalasForSelect();
     }
+     @UseGuards(AuthGuard)
+    @Permissions('EMPLEADO')
 
     @Get('salas/admin/all')
     getAllSalasAdmin() {

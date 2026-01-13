@@ -1,7 +1,7 @@
 import { Body, Controller, Delete, Get, Headers, Patch,Param, Post, Put, UseGuards } from '@nestjs/common';
 import { MicroservicioPeliculasService } from './microservicio_peliculas.service';
 import { AuthGuard } from 'src/middleware/auth.middleware';
-
+import { Permissions } from 'src/middleware/decorators/permissions.decorator';
 @UseGuards(AuthGuard)
 @Controller('microservicio-peliculas')
 export class MicroservicioPeliculasController {
@@ -51,16 +51,22 @@ export class MicroservicioPeliculasController {
     }
 
     // ADMIN
-
+     @UseGuards(AuthGuard)
+    @Permissions('EMPLEADO')
+    
     @Get('pelicula/admin/selec')
     getPeliculasParaSelec() {
     return this.service.getPeliculasParaSelec();
     }
-
+     @UseGuards(AuthGuard)
+    @Permissions('EMPLEADO')
+    
     @Get('pelicula/admin/all')
     getPeliculasAdmin() {
     return this.service.getPeliculasAdmin();
     }
+     @UseGuards(AuthGuard)
+    @Permissions('EMPLEADO')
 
     @Get('pelicula/admin/:id')
     getPeliculaAdminById(
@@ -68,11 +74,15 @@ export class MicroservicioPeliculasController {
     ) {
     return this.service.getPeliculaAdminById(id);
     }
+     @UseGuards(AuthGuard)
+    @Permissions('EMPLEADO')
 
     @Post('pelicula/admin/new')
     crearPeliculaAdmin(@Body() body) {
     return this.service.crearPeliculaAdmin(body);
     }
+     @UseGuards(AuthGuard)
+    @Permissions('EMPLEADO')
 
     @Put('pelicula/admin/:id')
     actualizarPeliculaAdmin(
@@ -81,6 +91,8 @@ export class MicroservicioPeliculasController {
     ) {
     return this.service.actualizarPeliculaAdmin(id, body);
     }
+     @UseGuards(AuthGuard)
+    @Permissions('EMPLEADO')
 
     @Delete('pelicula/admin/:id')
     eliminarPeliculaAdmin(
@@ -114,16 +126,22 @@ export class MicroservicioPeliculasController {
     eliminarGenero(@Param('id') id: number) {
         return this.service.eliminarGenero(id);
     }
+     @UseGuards(AuthGuard)
+    @Permissions('EMPLEADO')
 
     @Post('genero/admin/new')
     crearGenero(@Body() body) {
     return this.service.registrarGenero(body);
     }
+    @UseGuards(AuthGuard)
+    @Permissions('EMPLEADO')
 
     @Get('genero/admin/all')
     getAllGenerosAdmin() {
     return this.service.getAllGenerosAdmin();
     }
+     @UseGuards(AuthGuard)
+    @Permissions('EMPLEADO')
 
     @Get('genero/admin/:id')
     getGeneroAdminById(
@@ -131,6 +149,9 @@ export class MicroservicioPeliculasController {
     ) {
     return this.service.getGeneroAdminById(id);
     }
+
+     @UseGuards(AuthGuard)
+    @Permissions('EMPLEADO')
 
     @Put('genero/admin/:id')
     actualizarGeneroAdmin(
@@ -147,6 +168,8 @@ export class MicroservicioPeliculasController {
     ) {
     return this.service.actualizarGeneroParcial(id, body);
     }
+     @UseGuards(AuthGuard)
+    @Permissions('EMPLEADO')
 
     @Delete('genero/admin/:id')
     eliminarGeneroAdmin(
@@ -184,16 +207,22 @@ export class MicroservicioPeliculasController {
     eliminarClasificacion(@Param('id') id: number) {
         return this.service.eliminarClasificacion(id);
     }
+     @UseGuards(AuthGuard)
+    @Permissions('EMPLEADO')
 
     @Post('clasificacion/admin/new')
     crearClasificacion(@Body() body) {
     return this.service.crearClasificacion(body);
     }
+     @UseGuards(AuthGuard)
+    @Permissions('EMPLEADO')
 
     @Get('clasificacion/admin/all')
     getAllClasificacionesAdmin() {
     return this.service.getAllClasificacionesAdmin();
     }
+     @UseGuards(AuthGuard)
+    @Permissions('EMPLEADO')
 
     @Get('clasificacion/admin/:id')
     getClasificacionAdminById(
@@ -201,6 +230,8 @@ export class MicroservicioPeliculasController {
     ) {
     return this.service.getClasificacionAdminById(id);
     }
+     @UseGuards(AuthGuard)
+    @Permissions('EMPLEADO')
 
     @Put('clasificacion/admin/:id')
     actualizarClasificacionAdmin(
@@ -217,6 +248,8 @@ export class MicroservicioPeliculasController {
     ) {
     return this.service.actualizarClasificacionParcial(id, body);
     }
+     @UseGuards(AuthGuard)
+    @Permissions('EMPLEADO')
 
     @Delete('clasificacion/admin/:id')
     eliminarClasificacionAdmin(
@@ -259,11 +292,15 @@ export class MicroservicioPeliculasController {
     crearEstadoPelicula(@Body() body) {
     return this.service.crearEstadoPelicula(body);
     }
+     @UseGuards(AuthGuard)
+    @Permissions('EMPLEADO')
 
     @Get('estado-pelicula/admin/all')
     getAllEstadosPeliculasAdmin() {
     return this.service.getAllEstadosPeliculasAdmin();
     }
+     @UseGuards(AuthGuard)
+    @Permissions('EMPLEADO')
 
     @Get('estado-pelicula/admin/:id')
     getEstadoPeliculaAdminById(
@@ -271,6 +308,8 @@ export class MicroservicioPeliculasController {
     ) {
     return this.service.getEstadoPeliculaAdminById(id);
     }
+     @UseGuards(AuthGuard)
+    @Permissions('EMPLEADO')
 
     @Put('estado-pelicula/admin/:id')
     actualizarEstadoPeliculaAdmin(
@@ -287,6 +326,8 @@ export class MicroservicioPeliculasController {
     ) {
     return this.service.actualizarEstadoPeliculaParcial(id, body);
     }
+     @UseGuards(AuthGuard)
+    @Permissions('EMPLEADO')
 
     @Delete('estado-pelicula/admin/:id')
     eliminarEstadoPeliculaAdmin(
