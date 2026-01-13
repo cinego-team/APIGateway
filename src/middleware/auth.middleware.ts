@@ -39,9 +39,8 @@ export class AuthGuard implements CanActivate {
         request.user = payload;
         //manejo de permisos
         const requiredPermissions =
-            this.reflector.get<string[]>(Permissions, context.getHandler()) ||
+            this.reflector.get<string[]>('permissions', context.getHandler()) ||
             [];
-
         if (requiredPermissions.length === 0) {
             return true;
         }

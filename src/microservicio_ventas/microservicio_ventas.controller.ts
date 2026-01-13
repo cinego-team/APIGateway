@@ -23,14 +23,17 @@ export class MicroservicioVentasController {
     iniciarProcesoPago(@Body() idDisponibilidades: number[]) {
         return this.service.iniciarProcesoPago(idDisponibilidades);
     }
+    @Permissions('EMPLEADO')
     @Get('admin/reportes/horarios-mas-elegidos/actual')
     obtenerHorarioMasElegidoActual() {
         return this.service.getHorariosMasElegidos();
     }
+    @Permissions('EMPLEADO')
     @Get('admin/reportes/entradas-por-dia-semana/actual')
     async getEntradasPorDiaSemanaMesActual() {
         return await this.service.getEntradasPorDiaSemanaMesActual();
     }
+    @Permissions('EMPLEADO')
     @Get('admin/reportes/peliculas-rango-ventas/trimestral')
     getPeliculasPorRangoVentasTrimestral(
         @Query(
@@ -52,24 +55,28 @@ export class MicroservicioVentasController {
             anio,
         );
     }
-    @UseGuards(AuthGuard)
+
     @Permissions('EMPLEADO')
     @Get('venta/admin/all')
     findAllVentas() {
         return this.service.findAllVentas();
     }
+    @Permissions('EMPLEADO')
     @Post('estado-venta/admin/new')
     crearEstadoVenta(@Body() dato: any) {
         return this.service.crearEstadoVenta(dato);
     }
+    @Permissions('EMPLEADO')
     @Get('estado-venta/admin/all')
     findAllEstadoVenta() {
         return this.service.findAllEstadoVenta();
     }
+    @Permissions('EMPLEADO')
     @Get('estado-venta/admin/:id')
     getEstadoVentaById(@Param('id') id: number) {
         return this.service.getEstadoVentaById(id);
     }
+    @Permissions('EMPLEADO')
     @Delete('estado-venta/admin/:id')
     eliminarEstadoVenta(@Param('id') id: number) {
         return this.service.eliminarEstadoVenta(id);
