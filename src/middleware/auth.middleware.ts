@@ -7,7 +7,7 @@ import {
 } from '@nestjs/common';
 import { Reflector } from '@nestjs/core';
 import axios from 'axios';
-import { Permissions } from './decorators/permissions.decorator';
+import { Permissions as PermissionsDecorator } from './decorators/permissions.decorator';
 import { RequestWithUserInput } from 'src/microservicio_usuarios/request-with-user.interface';
 import { JwtService } from 'src/services/jwt_service/jwt.service';
 import { Payload } from 'src/services/jwt_service/payload.interface';

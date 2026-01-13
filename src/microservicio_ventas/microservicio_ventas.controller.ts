@@ -12,6 +12,7 @@ import {
 import { MicroservicioVentasService } from './microservicio_ventas.service';
 import { AuthGuard } from 'src/middleware/auth.middleware';
 import { DefaultValuePipe, ParseIntPipe } from '@nestjs/common/pipes';
+import { Permissions } from 'src/middleware/decorators/permissions.decorator';
 
 @UseGuards(AuthGuard)
 @Controller('microservicio-ventas')
@@ -51,6 +52,8 @@ export class MicroservicioVentasController {
             anio,
         );
     }
+    @UseGuards(AuthGuard)
+    @Permissions('EMPLEADO')
     @Get('venta/admin/all')
     findAllVentas() {
         return this.service.findAllVentas();
