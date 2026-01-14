@@ -86,7 +86,7 @@ export class MicroservicioUsuariosService {
                 config.MSUsuariosUrls.getDatosCliente,
                 {
                     headers: {
-                        Authorization: access_token || '',
+                        Authorization: `Bearer ${access_token}`,
                         'refresh-token': refresh_token || '',
                     },
                 },
