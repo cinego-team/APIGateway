@@ -10,12 +10,12 @@ export class MicroservicioPeliculasService {
                 config.MSPeliculasUrls.getAllPeliculas,
                 {
                     headers: {
-                        Authorization: access_token || "",
-                        "refresh-token": refresh_token || ""
-                    }
-                }
+                        Authorization: access_token || '',
+                        'refresh-token': refresh_token || '',
+                    },
+                },
             );
-            return response.data
+            return response.data;
         } catch (err) {
             const status = err.response?.status || 403;
             const message = err.response?.data?.message || 'Unauthorized';
@@ -111,7 +111,7 @@ export class MicroservicioPeliculasService {
                 '/pelicula/admin/selec',
             );
             return response.data;
-        }catch (err) {
+        } catch (err) {
             const status = err.response?.status || 403;
             const message = err.response?.data?.message || 'Unauthorized';
             throw new HttpException(message, status);
@@ -220,7 +220,7 @@ export class MicroservicioPeliculasService {
                 body,
             );
             return response.data;
-        }catch (err) {
+        } catch (err) {
             const status = err.response?.status || 403;
             const message = err.response?.data?.message || 'Unauthorized';
             throw new HttpException(message, status);
@@ -233,7 +233,7 @@ export class MicroservicioPeliculasService {
                 config.MSPeliculasUrls.getAllGeneros,
             );
             return response.data;
-        }catch (err) {
+        } catch (err) {
             const status = err.response?.status || 403;
             const message = err.response?.data?.message || 'Unauthorized';
             throw new HttpException(message, status);
@@ -266,14 +266,12 @@ export class MicroservicioPeliculasService {
         }
     }
 
-  
     async getAllGenerosAdmin() {
         try {
-            const response = await axiosServicioPeliculas.get(
-                '/genero/admin/all'
-            );
+            const response =
+                await axiosServicioPeliculas.get('/genero/admin/all');
             return response.data;
-        }catch (err) {
+        } catch (err) {
             const status = err.response?.status || 403;
             const message = err.response?.data?.message || 'Unauthorized';
             throw new HttpException(message, status);
@@ -283,10 +281,10 @@ export class MicroservicioPeliculasService {
     async getGeneroAdminById(id: number) {
         try {
             const response = await axiosServicioPeliculas.get(
-                `/genero/admin/${id}`
+                `/genero/admin/${id}`,
             );
             return response.data;
-        }catch (err) {
+        } catch (err) {
             const status = err.response?.status || 403;
             const message = err.response?.data?.message || 'Unauthorized';
             throw new HttpException(message, status);
@@ -297,7 +295,7 @@ export class MicroservicioPeliculasService {
         try {
             const response = await axiosServicioPeliculas.put(
                 `/genero/admin/${id}`,
-                body
+                body,
             );
             return response.data;
         } catch (err) {
@@ -308,29 +306,30 @@ export class MicroservicioPeliculasService {
     }
 
     async eliminarGeneroAdmin(id: number) {
-    try {
-        const response = await axiosServicioPeliculas.delete(
-            `/genero/admin/${id}`
-        );
-        return response.data;
-    } catch (err) {
-            const status = err.response?.status || 403;
-            const message = err.response?.data?.message || 'Unauthorized';
-            throw new HttpException(message, status);
-        }
-}
-
-
-    async registrarClasificacion(clasificacionBody: any) {
         try {
-            const response = await axiosServicioPeliculas.post(
-                config.MSPeliculasUrls.registrarClasificacion,
-                { body: clasificacionBody },
+            const response = await axiosServicioPeliculas.delete(
+                `/genero/admin/${id}`,
             );
             return response.data;
         } catch (err) {
             const status = err.response?.status || 403;
             const message = err.response?.data?.message || 'Unauthorized';
+            throw new HttpException(message, status);
+        }
+    }
+
+    async registrarClasificacion(clasificacionBody: { nombre: string }) {
+        try {
+            const response = await axiosServicioPeliculas.post(
+                config.MSPeliculasUrls.registrarClasificacion,
+                clasificacionBody, // ✅ ASÍ
+            );
+            return response.data;
+        } catch (err) {
+            const status = err.response?.status || 500;
+            const message =
+                err.response?.data?.message ||
+                'Error al registrar clasificación';
             throw new HttpException(message, status);
         }
     }
@@ -372,7 +371,6 @@ export class MicroservicioPeliculasService {
             const status = err.response?.status || 403;
             const message = err.response?.data?.message || 'Unauthorized';
             throw new HttpException(message, status);
-
         }
     }
 
@@ -389,88 +387,84 @@ export class MicroservicioPeliculasService {
         }
     }
 
-
-async crearClasificacion(body: any) {
-    try {
-        const response = await axiosServicioPeliculas.post(
-            '/clasificacion/admin/new',
-            body
-        );
-        return response.data;
-    }catch (err) {
+    async crearClasificacion(body: any) {
+        try {
+            const response = await axiosServicioPeliculas.post(
+                '/clasificacion/admin/new',
+                body,
+            );
+            return response.data;
+        } catch (err) {
             const status = err.response?.status || 403;
             const message = err.response?.data?.message || 'Unauthorized';
             throw new HttpException(message, status);
         }
     }
 
-async getAllClasificacionesAdmin() {
-    try {
-        const response = await axiosServicioPeliculas.get(
-            '/clasificacion/admin/all'
-        );
-        return response.data;
-    } catch (err) {
+    async getAllClasificacionesAdmin() {
+        try {
+            const response = await axiosServicioPeliculas.get(
+                '/clasificacion/admin/all',
+            );
+            return response.data;
+        } catch (err) {
             const status = err.response?.status || 403;
             const message = err.response?.data?.message || 'Unauthorized';
             throw new HttpException(message, status);
         }
     }
 
-async getClasificacionAdminById(id: number) {
-    try {
-        const response = await axiosServicioPeliculas.get(
-            `/clasificacion/admin/${id}`
-        );
-        return response.data;
-    } catch (err) {
+    async getClasificacionAdminById(id: number) {
+        try {
+            const response = await axiosServicioPeliculas.get(
+                `/clasificacion/admin/${id}`,
+            );
+            return response.data;
+        } catch (err) {
             const status = err.response?.status || 403;
             const message = err.response?.data?.message || 'Unauthorized';
             throw new HttpException(message, status);
         }
     }
-async actualizarClasificacionAdmin(id: number, body: any) {
-    try {
-        const response = await axiosServicioPeliculas.put(
-            `/clasificacion/admin/${id}`,
-            body
-        );
-        return response.data;
-    } catch (err) {
+    async actualizarClasificacionAdmin(id: number, body: any) {
+        try {
+            const response = await axiosServicioPeliculas.put(
+                `/clasificacion/admin/${id}`,
+                body,
+            );
+            return response.data;
+        } catch (err) {
             const status = err.response?.status || 403;
             const message = err.response?.data?.message || 'Unauthorized';
             throw new HttpException(message, status);
         }
     }
-async eliminarClasificacionAdmin(id: number) {
-    try {
-        const response = await axiosServicioPeliculas.delete(
-            `/clasificacion/admin/${id}`
-        );
-        return response.data;
-    } catch (err) {
-            const status = err.response?.status || 403;
-            const message = err.response?.data?.message || 'Unauthorized';
-            throw new HttpException(message, status);
-        }
-    }
-
-
-async actualizarClasificacionParcial(id: number, body: any) {
-    try {
-        const response = await axiosServicioPeliculas.patch(
-            `/clasificacion/${id}`,
-            body
-        );
-        return response.data;
-    } catch (err) {
+    async eliminarClasificacionAdmin(id: number) {
+        try {
+            const response = await axiosServicioPeliculas.delete(
+                `/clasificacion/admin/${id}`,
+            );
+            return response.data;
+        } catch (err) {
             const status = err.response?.status || 403;
             const message = err.response?.data?.message || 'Unauthorized';
             throw new HttpException(message, status);
         }
     }
 
-
+    async actualizarClasificacionParcial(id: number, body: any) {
+        try {
+            const response = await axiosServicioPeliculas.patch(
+                `/clasificacion/${id}`,
+                body,
+            );
+            return response.data;
+        } catch (err) {
+            const status = err.response?.status || 403;
+            const message = err.response?.data?.message || 'Unauthorized';
+            throw new HttpException(message, status);
+        }
+    }
 
     async registrarEstadoPelicula(estadoBody: any) {
         try {
@@ -539,89 +533,84 @@ async actualizarClasificacionParcial(id: number, body: any) {
         }
     }
 
-async crearEstadoPelicula(body: any) {
-    try {
-        const response = await axiosServicioPeliculas.post(
-            '/estado-pelicula/admin/new',
-            body
-        );
-        return response.data;
-    } catch (err) {
+    async crearEstadoPelicula(body: any) {
+        try {
+            const response = await axiosServicioPeliculas.post(
+                '/estado-pelicula/admin/new',
+                body,
+            );
+            return response.data;
+        } catch (err) {
             const status = err.response?.status || 403;
             const message = err.response?.data?.message || 'Unauthorized';
             throw new HttpException(message, status);
         }
     }
 
-async getAllEstadosPeliculasAdmin() {
-    try {
-        const response = await axiosServicioPeliculas.get(
-            '/estado-pelicula/admin/all'
-        );
-        return response.data;
-    } catch (err) {
+    async getAllEstadosPeliculasAdmin() {
+        try {
+            const response = await axiosServicioPeliculas.get(
+                '/estado-pelicula/admin/all',
+            );
+            return response.data;
+        } catch (err) {
             const status = err.response?.status || 403;
             const message = err.response?.data?.message || 'Unauthorized';
             throw new HttpException(message, status);
         }
     }
 
-
-async getEstadoPeliculaAdminById(id: number) {
-    try {
-        const response = await axiosServicioPeliculas.get(
-            `/estado-pelicula/admin/${id}`
-        );
-        return response.data;
-    } catch (err) {
+    async getEstadoPeliculaAdminById(id: number) {
+        try {
+            const response = await axiosServicioPeliculas.get(
+                `/estado-pelicula/admin/${id}`,
+            );
+            return response.data;
+        } catch (err) {
             const status = err.response?.status || 403;
             const message = err.response?.data?.message || 'Unauthorized';
             throw new HttpException(message, status);
         }
     }
 
-async actualizarEstadoPeliculaAdmin(id: number, body: any) {
-    try {
-        const response = await axiosServicioPeliculas.put(
-            `/estado-pelicula/admin/${id}`,
-            body
-        );
-        return response.data;
-    }catch (err) {
+    async actualizarEstadoPeliculaAdmin(id: number, body: any) {
+        try {
+            const response = await axiosServicioPeliculas.put(
+                `/estado-pelicula/admin/${id}`,
+                body,
+            );
+            return response.data;
+        } catch (err) {
             const status = err.response?.status || 403;
             const message = err.response?.data?.message || 'Unauthorized';
             throw new HttpException(message, status);
         }
     }
 
-async actualizarEstadoPeliculaParcial(id: number, body: any) {
-    try {
-        const response = await axiosServicioPeliculas.patch(
-            `/estado-pelicula/${id}`,
-            body
-        );
-        return response.data;
-    } catch (err) {
+    async actualizarEstadoPeliculaParcial(id: number, body: any) {
+        try {
+            const response = await axiosServicioPeliculas.patch(
+                `/estado-pelicula/${id}`,
+                body,
+            );
+            return response.data;
+        } catch (err) {
             const status = err.response?.status || 403;
             const message = err.response?.data?.message || 'Unauthorized';
             throw new HttpException(message, status);
         }
     }
 
-async eliminarEstadoPeliculaAdmin(id: number) {
-    try {
-        const response = await axiosServicioPeliculas.delete(
-            `/estado-pelicula/admin/${id}`
-        );
-        return response.data;
-    }catch (err) {
+    async eliminarEstadoPeliculaAdmin(id: number) {
+        try {
+            const response = await axiosServicioPeliculas.delete(
+                `/estado-pelicula/admin/${id}`,
+            );
+            return response.data;
+        } catch (err) {
             const status = err.response?.status || 403;
             const message = err.response?.data?.message || 'Unauthorized';
             throw new HttpException(message, status);
         }
     }
-
- 
-
-    
 }

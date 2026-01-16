@@ -1,16 +1,28 @@
-import { Body, Controller, Delete, Get, Headers, Patch,Param, Post, Put, UseGuards } from '@nestjs/common';
+import {
+    Body,
+    Controller,
+    Delete,
+    Get,
+    Headers,
+    Patch,
+    Param,
+    Post,
+    Put,
+    UseGuards,
+} from '@nestjs/common';
 import { MicroservicioPeliculasService } from './microservicio_peliculas.service';
 import { AuthGuard } from 'src/middleware/auth.middleware';
 import { Permissions } from 'src/middleware/decorators/permissions.decorator';
+import { ParseIntPipe } from '@nestjs/common/pipes/parse-int.pipe';
 @UseGuards(AuthGuard)
 @Controller('microservicio-peliculas')
 export class MicroservicioPeliculasController {
-    constructor(private readonly service: MicroservicioPeliculasService) { }
+    constructor(private readonly service: MicroservicioPeliculasService) {}
 
     @Get('peliculas')
     getAllPeliculas(
         @Headers('authorization') access_token: string,
-        @Headers('refresh-token') refresh_token: string
+        @Headers('refresh-token') refresh_token: string,
     ) {
         return this.service.getAllPeliculas(access_token, refresh_token);
     }
@@ -35,74 +47,56 @@ export class MicroservicioPeliculasController {
         return this.service.eliminarPelicula(id);
     }
 
-
     @Patch('pelicula/:id/poner-en-cartelera')
-    ponerEnCartelera(
-    @Param('id') id: number
-    ) {
-    return this.service.ponerEnCartelera(id);
+    ponerEnCartelera(@Param('id') id: number) {
+        return this.service.ponerEnCartelera(id);
     }
 
     @Patch('pelicula/:id/sacar-de-cartelera')
-    sacarDeCartelera(
-    @Param('id') id: number
-    ) {
-    return this.service.sacarDeCartelera(id);
+    sacarDeCartelera(@Param('id') id: number) {
+        return this.service.sacarDeCartelera(id);
     }
 
     // ADMIN
-     @UseGuards(AuthGuard)
+    @UseGuards(AuthGuard)
     @Permissions('EMPLEADO')
-    
     @Get('pelicula/admin/selec')
     getPeliculasParaSelec() {
-    return this.service.getPeliculasParaSelec();
+        return this.service.getPeliculasParaSelec();
     }
-     @UseGuards(AuthGuard)
+    @UseGuards(AuthGuard)
     @Permissions('EMPLEADO')
-    
     @Get('pelicula/admin/all')
     getPeliculasAdmin() {
-    return this.service.getPeliculasAdmin();
+        return this.service.getPeliculasAdmin();
     }
-     @UseGuards(AuthGuard)
+    @UseGuards(AuthGuard)
     @Permissions('EMPLEADO')
-
     @Get('pelicula/admin/:id')
-    getPeliculaAdminById(
-    @Param('id') id: number
-    ) {
-    return this.service.getPeliculaAdminById(id);
+    getPeliculaAdminById(@Param('id') id: number) {
+        return this.service.getPeliculaAdminById(id);
     }
-     @UseGuards(AuthGuard)
+    @UseGuards(AuthGuard)
     @Permissions('EMPLEADO')
-
     @Post('pelicula/admin/new')
     crearPeliculaAdmin(@Body() body) {
-    return this.service.crearPeliculaAdmin(body);
+        return this.service.crearPeliculaAdmin(body);
     }
-     @UseGuards(AuthGuard)
+    @UseGuards(AuthGuard)
     @Permissions('EMPLEADO')
-
     @Put('pelicula/admin/:id')
-    actualizarPeliculaAdmin(
-    @Param('id') id: number,
-    @Body() body
-    ) {
-    return this.service.actualizarPeliculaAdmin(id, body);
+    actualizarPeliculaAdmin(@Param('id') id: number, @Body() body) {
+        return this.service.actualizarPeliculaAdmin(id, body);
     }
-     @UseGuards(AuthGuard)
+    @UseGuards(AuthGuard)
     @Permissions('EMPLEADO')
-
     @Delete('pelicula/admin/:id')
-    eliminarPeliculaAdmin(
-    @Param('id') id: number
-    ) {
-    return this.service.eliminarPeliculaAdmin(id);
+    eliminarPeliculaAdmin(@Param('id') id: number) {
+        return this.service.eliminarPeliculaAdmin(id);
     }
-
-
-    @Post('genero/new')
+    @UseGuards(AuthGuard)
+    @Permissions('EMPLEADO')
+    @Post('genero/admin/new')
     registrarGenero(@Body() generoBody) {
         return this.service.registrarGenero(generoBody);
     }
@@ -126,62 +120,47 @@ export class MicroservicioPeliculasController {
     eliminarGenero(@Param('id') id: number) {
         return this.service.eliminarGenero(id);
     }
-     @UseGuards(AuthGuard)
+    @UseGuards(AuthGuard)
     @Permissions('EMPLEADO')
-
     @Post('genero/admin/new')
     crearGenero(@Body() body) {
-    return this.service.registrarGenero(body);
+        return this.service.registrarGenero(body);
     }
     @UseGuards(AuthGuard)
     @Permissions('EMPLEADO')
-
     @Get('genero/admin/all')
     getAllGenerosAdmin() {
-    return this.service.getAllGenerosAdmin();
+        return this.service.getAllGenerosAdmin();
     }
-     @UseGuards(AuthGuard)
+    @UseGuards(AuthGuard)
     @Permissions('EMPLEADO')
-
     @Get('genero/admin/:id')
-    getGeneroAdminById(
-    @Param('id') id: number
-    ) {
-    return this.service.getGeneroAdminById(id);
+    getGeneroAdminById(@Param('id') id: number) {
+        return this.service.getGeneroAdminById(id);
     }
 
-     @UseGuards(AuthGuard)
+    @UseGuards(AuthGuard)
     @Permissions('EMPLEADO')
-
     @Put('genero/admin/:id')
-    actualizarGeneroAdmin(
-    @Param('id') id: number,
-    @Body() body
-    ) {
-    return this.service.actualizarGeneroAdmin(id, body);
+    actualizarGeneroAdmin(@Param('id') id: number, @Body() body) {
+        return this.service.actualizarGeneroAdmin(id, body);
     }
 
     @Patch('genero/:id')
-    actualizarGeneroParcial(
-    @Param('id') id: number,
-    @Body() body
-    ) {
-    return this.service.actualizarGeneroParcial(id, body);
+    actualizarGeneroParcial(@Param('id') id: number, @Body() body) {
+        return this.service.actualizarGeneroParcial(id, body);
     }
-     @UseGuards(AuthGuard)
+    @UseGuards(AuthGuard)
     @Permissions('EMPLEADO')
-
     @Delete('genero/admin/:id')
-    eliminarGeneroAdmin(
-    @Param('id') id: number
-    ) {
-    return this.service.eliminarGeneroAdmin(id);
+    eliminarGeneroAdmin(@Param('id') id: number) {
+        return this.service.eliminarGeneroAdmin(id);
     }
 
-
-
-    @Post('clasificacion/new')
-    agregarClasificacion(@Body() clasificacionBody) {
+    @UseGuards(AuthGuard)
+    @Permissions('EMPLEADO')
+    @Post('clasificacion/admin/new')
+    agregarClasificacion(@Body() clasificacionBody: { nombre: string }) {
         return this.service.registrarClasificacion(clasificacionBody);
     }
 
@@ -202,62 +181,42 @@ export class MicroservicioPeliculasController {
     getClasificacionById(@Param('id') id: number) {
         return this.service.getClasificacionById(id);
     }
-
-    @Delete('clasificacion/:id')
-    eliminarClasificacion(@Param('id') id: number) {
+    @UseGuards(AuthGuard)
+    @Permissions('EMPLEADO')
+    @Delete('clasificacion/admin/:id')
+    eliminarClasificacion(@Param('id', ParseIntPipe) id: number) {
         return this.service.eliminarClasificacion(id);
     }
-     @UseGuards(AuthGuard)
-    @Permissions('EMPLEADO')
 
-    @Post('clasificacion/admin/new')
-    crearClasificacion(@Body() body) {
-    return this.service.crearClasificacion(body);
-    }
-     @UseGuards(AuthGuard)
+    @UseGuards(AuthGuard)
     @Permissions('EMPLEADO')
-
     @Get('clasificacion/admin/all')
     getAllClasificacionesAdmin() {
-    return this.service.getAllClasificacionesAdmin();
+        return this.service.getAllClasificacionesAdmin();
     }
-     @UseGuards(AuthGuard)
+    @UseGuards(AuthGuard)
     @Permissions('EMPLEADO')
-
     @Get('clasificacion/admin/:id')
-    getClasificacionAdminById(
-    @Param('id') id: number
-    ) {
-    return this.service.getClasificacionAdminById(id);
+    getClasificacionAdminById(@Param('id') id: number) {
+        return this.service.getClasificacionAdminById(id);
     }
-     @UseGuards(AuthGuard)
+    @UseGuards(AuthGuard)
     @Permissions('EMPLEADO')
-
     @Put('clasificacion/admin/:id')
-    actualizarClasificacionAdmin(
-    @Param('id') id: number,
-    @Body() body
-    ) {
-    return this.service.actualizarClasificacionAdmin(id, body);
+    actualizarClasificacionAdmin(@Param('id') id: number, @Body() body) {
+        return this.service.actualizarClasificacionAdmin(id, body);
     }
 
     @Patch('clasificacion/:id')
-    actualizarClasificacionParcial(
-    @Param('id') id: number,
-    @Body() body
-    ) {
-    return this.service.actualizarClasificacionParcial(id, body);
+    actualizarClasificacionParcial(@Param('id') id: number, @Body() body) {
+        return this.service.actualizarClasificacionParcial(id, body);
     }
-     @UseGuards(AuthGuard)
+    @UseGuards(AuthGuard)
     @Permissions('EMPLEADO')
-
     @Delete('clasificacion/admin/:id')
-    eliminarClasificacionAdmin(
-    @Param('id') id: number
-    ) {
-    return this.service.eliminarClasificacionAdmin(id);
+    eliminarClasificacionAdmin(@Param('id') id: number) {
+        return this.service.eliminarClasificacionAdmin(id);
     }
-
 
     @Post('estado-pelicula/new')
     registrarEstadoPelicula(@Body() estadoPeliculaBody) {
@@ -287,55 +246,37 @@ export class MicroservicioPeliculasController {
         return this.service.eliminarEstadoPelicula(id);
     }
 
-
     @Post('estado-pelicula/admin/new')
     crearEstadoPelicula(@Body() body) {
-    return this.service.crearEstadoPelicula(body);
+        return this.service.crearEstadoPelicula(body);
     }
-     @UseGuards(AuthGuard)
+    @UseGuards(AuthGuard)
     @Permissions('EMPLEADO')
-
     @Get('estado-pelicula/admin/all')
     getAllEstadosPeliculasAdmin() {
-    return this.service.getAllEstadosPeliculasAdmin();
+        return this.service.getAllEstadosPeliculasAdmin();
     }
-     @UseGuards(AuthGuard)
+    @UseGuards(AuthGuard)
     @Permissions('EMPLEADO')
-
     @Get('estado-pelicula/admin/:id')
-    getEstadoPeliculaAdminById(
-    @Param('id') id: number
-    ) {
-    return this.service.getEstadoPeliculaAdminById(id);
+    getEstadoPeliculaAdminById(@Param('id') id: number) {
+        return this.service.getEstadoPeliculaAdminById(id);
     }
-     @UseGuards(AuthGuard)
+    @UseGuards(AuthGuard)
     @Permissions('EMPLEADO')
-
     @Put('estado-pelicula/admin/:id')
-    actualizarEstadoPeliculaAdmin(
-    @Param('id') id: number,
-    @Body() body
-    ) {
-    return this.service.actualizarEstadoPeliculaAdmin(id, body);
+    actualizarEstadoPeliculaAdmin(@Param('id') id: number, @Body() body) {
+        return this.service.actualizarEstadoPeliculaAdmin(id, body);
     }
 
     @Patch('estado-pelicula/:id')
-    actualizarEstadoPeliculaParcial(
-    @Param('id') id: number,
-    @Body() body
-    ) {
-    return this.service.actualizarEstadoPeliculaParcial(id, body);
+    actualizarEstadoPeliculaParcial(@Param('id') id: number, @Body() body) {
+        return this.service.actualizarEstadoPeliculaParcial(id, body);
     }
-     @UseGuards(AuthGuard)
+    @UseGuards(AuthGuard)
     @Permissions('EMPLEADO')
-
     @Delete('estado-pelicula/admin/:id')
-    eliminarEstadoPeliculaAdmin(
-    @Param('id') id: number
-    ) {
-    return this.service.eliminarEstadoPeliculaAdmin(id);
+    eliminarEstadoPeliculaAdmin(@Param('id') id: number) {
+        return this.service.eliminarEstadoPeliculaAdmin(id);
     }
-
-
-   
 }

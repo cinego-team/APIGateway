@@ -36,6 +36,7 @@ export class AuthGuard implements CanActivate {
         //desencriptamos el payload
         const payload = this.jwtService.getPayload(token) as Payload;
 
+        console.log('PAYLOAD:', payload);
         request.user = payload;
         //manejo de permisos
         const requiredPermissions =

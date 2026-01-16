@@ -1,17 +1,33 @@
-import { Controller, Get,Put, Delete, Post, Patch,Body, Headers, Param, UseGuards } from '@nestjs/common';
+import {
+    Controller,
+    Get,
+    Put,
+    Delete,
+    Post,
+    Patch,
+    Body,
+    Headers,
+    Param,
+    UseGuards,
+} from '@nestjs/common';
 import { MicroservicioFuncionesYSalasService } from './microservicio_funciones-y-salas.service';
 import { AuthGuard } from 'src/middleware/auth.middleware';
 import { Permissions } from 'src/middleware/decorators/permissions.decorator';
 @UseGuards(AuthGuard)
 @Controller('microservicio-funciones-y-salas')
 export class MicroservicioFuncionesYSalasController {
-    constructor(private service: MicroservicioFuncionesYSalasService) { }
+    constructor(private service: MicroservicioFuncionesYSalasService) {}
     @Get('funciones-por-pelicula/:id')
     findAllByPeliculaId(
         @Param('id') id: number,
         @Headers('authorization') access_token: string,
-        @Headers('refresh-roken') refresh_token: string) {
-        return this.service.findAllByPeliculaId(id, access_token, refresh_token);
+        @Headers('refresh-roken') refresh_token: string,
+    ) {
+        return this.service.findAllByPeliculaId(
+            id,
+            access_token,
+            refresh_token,
+        );
     }
     @Get('butaca-por-funcion/:id')
     findAllDisponibilidadByFuncionId(@Param('id') id: number) {
@@ -34,10 +50,7 @@ export class MicroservicioFuncionesYSalasController {
     }
 
     @Put('butaca/:id')
-    updateButaca(
-        @Param('id') id: number,
-        @Body() body
-    ) {
+    updateButaca(@Param('id') id: number, @Body() body) {
         return this.service.updateButaca(id, body);
     }
 
@@ -45,253 +58,193 @@ export class MicroservicioFuncionesYSalasController {
     deleteButaca(@Param('id') id: number) {
         return this.service.deleteButaca(id);
     }
-    //disponibilidad butaca 
+    //disponibilidad butaca
 
     @Get('disponibilidad-butaca')
     getAllDisponibilidadButaca() {
-    return this.service.getAllDisponibilidadButaca();
+        return this.service.getAllDisponibilidadButaca();
     }
 
     @Get('disponibilidad-butaca/:id')
-    getDisponibilidadButacaById(
-    @Param('id') id: number
-    ) {
-    return this.service.getDisponibilidadButacaById(id);
+    getDisponibilidadButacaById(@Param('id') id: number) {
+        return this.service.getDisponibilidadButacaById(id);
     }
 
     @Put('disponibilidad-butaca/:id')
-    updateDisponibilidadButaca(
-    @Param('id') id: number,
-    @Body() body
-    ) {
-    return this.service.updateDisponibilidadButaca(id, body);
+    updateDisponibilidadButaca(@Param('id') id: number, @Body() body) {
+        return this.service.updateDisponibilidadButaca(id, body);
     }
 
     @Patch('disponibilidad-butaca/reservar')
-    reservarButacas(
-    @Body() body: { disponibilidadButacaIds: number[] }
-    ) {
-    return this.service.reservarButacas(body);
+    reservarButacas(@Body() body: { disponibilidadButacaIds: number[] }) {
+        return this.service.reservarButacas(body);
     }
 
     @Patch('disponibilidad-butaca/ocupar')
-    ocuparButacas(
-    @Body() body: { disponibilidadButacaIds: number[] }
-    ) {
-    return this.service.ocuparButacas(body);
+    ocuparButacas(@Body() body: { disponibilidadButacaIds: number[] }) {
+        return this.service.ocuparButacas(body);
     }
 
     @Delete('disponibilidad-butaca/:id')
-    deleteDisponibilidadButaca(
-    @Param('id') id: number
-    ) {
-    return this.service.deleteDisponibilidadButaca(id);
+    deleteDisponibilidadButaca(@Param('id') id: number) {
+        return this.service.deleteDisponibilidadButaca(id);
     }
 
     // FILA
     @Get('fila')
     getAllFilas() {
-    return this.service.getAllFilas();
+        return this.service.getAllFilas();
     }
 
     @Get('fila/:id')
-    getFilaById(
-    @Param('id') id: number
-    ) {
-    return this.service.getFilaById(id);
+    getFilaById(@Param('id') id: number) {
+        return this.service.getFilaById(id);
     }
 
     @Put('fila/:id')
-    updateFila(
-    @Param('id') id: number,
-    @Body() body
-    ) {
-    return this.service.updateFila(id, body);
+    updateFila(@Param('id') id: number, @Body() body) {
+        return this.service.updateFila(id, body);
     }
 
     @Delete('fila/:id')
-    deleteFila(
-    @Param('id') id: number
-    ) {
-    return this.service.deleteFila(id);
+    deleteFila(@Param('id') id: number) {
+        return this.service.deleteFila(id);
     }
-// FORMATO
+    // FORMATO
     @UseGuards(AuthGuard)
     @Permissions('EMPLEADO')
-
     @Post('formato/admin/new')
     createFormato(@Body() body) {
-    return this.service.createFormato(body);
+        return this.service.createFormato(body);
     }
 
     @Get('formato')
     getAllFormatos() {
-    return this.service.getAllFormatos();
+        return this.service.getAllFormatos();
     }
 
     @Get('formato/:id')
-    getFormatoById(
-    @Param('id') id: number
-    ) {
-    return this.service.getFormatoById(id);
+    getFormatoById(@Param('id') id: number) {
+        return this.service.getFormatoById(id);
     }
-     @UseGuards(AuthGuard)
+    @UseGuards(AuthGuard)
     @Permissions('EMPLEADO')
-
     @Put('formato/admin/:id')
-    updateFormato(
-    @Param('id') id: number,
-    @Body() body
-    ) {
-    return this.service.updateFormato(id, body);
+    updateFormato(@Param('id') id: number, @Body() body) {
+        return this.service.updateFormato(id, body);
     }
 
     @UseGuards(AuthGuard)
     @Permissions('EMPLEADO')
-
     @Delete('formato/admin/:id')
-    deleteFormato(
-    @Param('id') id: number
-    ) {
-    return this.service.deleteFormato(id);
+    deleteFormato(@Param('id') id: number) {
+        return this.service.deleteFormato(id);
     }
 
     @UseGuards(AuthGuard)
     @Permissions('EMPLEADO')
-
     @Get('formato/admin/all')
     getAllFormatosAdmin() {
-    return this.service.getAllFormatosAdmin();
+        return this.service.getAllFormatosAdmin();
     }
 
-     @UseGuards(AuthGuard)
+    @UseGuards(AuthGuard)
     @Permissions('EMPLEADO')
-
     @Get('formato/admin/:id')
-    getFormatoAdminById(
-    @Param('id') id: number
-    ) {
-    return this.service.getFormatoAdminById(id);
+    getFormatoAdminById(@Param('id') id: number) {
+        return this.service.getFormatoAdminById(id);
     }
-     @UseGuards(AuthGuard)
+    @UseGuards(AuthGuard)
     @Permissions('EMPLEADO')
-
     @Get('formato/:id/admin')
-    getFormatoForPut(
-    @Param('id') id: number
-    ) {
-    return this.service.getFormatoForPut(id);
+    getFormatoForPut(@Param('id') id: number) {
+        return this.service.getFormatoForPut(id);
     }
 
-// IDIOMA
-     @UseGuards(AuthGuard)
+    // IDIOMA
+    @UseGuards(AuthGuard)
     @Permissions('EMPLEADO')
-
     @Post('idioma/admin/new')
     createIdioma(@Body() body) {
-    return this.service.createIdioma(body);
+        return this.service.createIdioma(body);
     }
-     @UseGuards(AuthGuard)
+    @UseGuards(AuthGuard)
     @Permissions('EMPLEADO')
-
     @Get('idioma/admin/all')
-    getAllIdiomas(
-    ) {
-    return this.service.getAllIdiomas();
+    getAllIdiomas() {
+        return this.service.getAllIdiomas();
     }
-     @UseGuards(AuthGuard)
+    @UseGuards(AuthGuard)
     @Permissions('EMPLEADO')
-
     @Get('idioma/admin/:id')
-    getIdiomaById(
-    @Param('id') id: number
-    ) {
-    return this.service.getIdiomaById(id);
+    getIdiomaById(@Param('id') id: number) {
+        return this.service.getIdiomaById(id);
     }
 
-     @UseGuards(AuthGuard)
+    @UseGuards(AuthGuard)
     @Permissions('EMPLEADO')
-
     @Put('idioma/admin/:id')
-    updateIdioma(
-    @Param('id') id: number,
-    @Body() body
-    ) {
-    return this.service.updateIdioma(id, body);
+    updateIdioma(@Param('id') id: number, @Body() body) {
+        return this.service.updateIdioma(id, body);
     }
 
     @Patch('idioma/:id')
-    updateIdiomaPartial(
-    @Param('id') id: number,
-    @Body() body
-    ) {
-    return this.service.updateIdiomaPartial(id, body);
+    updateIdiomaPartial(@Param('id') id: number, @Body() body) {
+        return this.service.updateIdiomaPartial(id, body);
     }
-     @UseGuards(AuthGuard)
-    @Permissions('EMPLEADO')
-
-    @Delete('idioma/admin/:id')
-    deleteIdioma(
-    @Param('id') id: number
-    ) {
-    return this.service.deleteIdioma(id);
-    }
-
-// SALA
     @UseGuards(AuthGuard)
     @Permissions('EMPLEADO')
+    @Delete('idioma/admin/:id')
+    deleteIdioma(@Param('id') id: number) {
+        return this.service.deleteIdioma(id);
+    }
 
+    // SALA
+    @UseGuards(AuthGuard)
+    @Permissions('EMPLEADO')
     @Post('salas/admin/new')
     createSala(@Body() body) {
-    return this.service.createSala(body);
+        return this.service.createSala(body);
     }
 
     @Get('salas')
     getAllSalas() {
-    return this.service.getAllSalas();
+        return this.service.getAllSalas();
     }
-     @UseGuards(AuthGuard)
+    @UseGuards(AuthGuard)
     @Permissions('EMPLEADO')
-
     @Get('salas/admin/:id')
-    getSalaById(
-    @Param('id') id: number
-    ) {
-    return this.service.getSalaById(id);
+    getSalaById(@Param('id') id: number) {
+        return this.service.getSalaById(id);
     }
-     @UseGuards(AuthGuard)
+    @UseGuards(AuthGuard)
     @Permissions('EMPLEADO')
-
     @Put('salas/admin/:id')
-    updateSala(
-    @Param('id') id: number,
-    @Body() body
-    ) {
-    return this.service.updateSala(id, body);
+    updateSala(@Param('id') id: number, @Body() body) {
+        return this.service.updateSala(id, body);
     }
-     @UseGuards(AuthGuard)
+    @UseGuards(AuthGuard)
     @Permissions('EMPLEADO')
-
     @Delete('salas/admin/:id')
-    deleteSala(
-    @Param('id') id: number
-    ) {
-    return this.service.deleteSala(id);
+    deleteSala(@Param('id') id: number) {
+        return this.service.deleteSala(id);
     }
-     @UseGuards(AuthGuard)
+    @UseGuards(AuthGuard)
     @Permissions('EMPLEADO')
-
     @Get('salas/admin/selec')
     getSalasForSelect() {
-    return this.service.getSalasForSelect();
+        return this.service.getSalasForSelect();
     }
-     @UseGuards(AuthGuard)
+    @UseGuards(AuthGuard)
     @Permissions('EMPLEADO')
-
     @Get('salas/admin/all')
     getAllSalasAdmin() {
-    return this.service.getAllSalasAdmin();
+        return this.service.getAllSalasAdmin();
     }
-
-
+    @UseGuards(AuthGuard)
+    @Permissions('EMPLEADO')
+    @Get('funcion/admin/all')
+    getFunciones() {
+        return this.service.getFunciones();
+    }
 }

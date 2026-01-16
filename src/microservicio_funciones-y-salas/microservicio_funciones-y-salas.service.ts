@@ -4,16 +4,20 @@ import { config } from 'src/services/axios_service/env';
 
 @Injectable()
 export class MicroservicioFuncionesYSalasService {
-    async findAllByPeliculaId(peliculaId: number, access_token: string, refresh_token: string) {
+    async findAllByPeliculaId(
+        peliculaId: number,
+        access_token: string,
+        refresh_token: string,
+    ) {
         try {
             const response = await axiosServicioFunciones.get(
                 config.MSFuncionesUrls.getFuncionesByPeliculaId(peliculaId),
                 {
                     headers: {
-                        Authorization: access_token || "",
-                        "refresh-token": refresh_token || ""
-                    }
-                }
+                        Authorization: access_token || '',
+                        'refresh-token': refresh_token || '',
+                    },
+                },
             );
             return response.data;
         } catch (err) {
@@ -47,16 +51,27 @@ export class MicroservicioFuncionesYSalasService {
             throw new HttpException(message, status);
         }
     }
+    async getFunciones() {
+        try {
+            return await axiosServicioFunciones.get(
+                config.MSFuncionesUrls.getFunciones(),
+            );
+        } catch (err) {
+            const status = err.response?.status || 403;
+            const message = err.response?.data?.message || 'Unauthorized';
+            throw new HttpException(message, status);
+        }
+    }
 
-   // BUTACA
+    // BUTACA
 
     async getAllButacas() {
-    try {
-        const response = await axiosServicioFunciones.get(
-        config.MSFuncionesUrls.getAllButacas
-        );
-        return response.data;
-    } catch (err) {
+        try {
+            const response = await axiosServicioFunciones.get(
+                config.MSFuncionesUrls.getAllButacas,
+            );
+            return response.data;
+        } catch (err) {
             const status = err.response?.status || 403;
             const message = err.response?.data?.message || 'Unauthorized';
             throw new HttpException(message, status);
@@ -64,12 +79,12 @@ export class MicroservicioFuncionesYSalasService {
     }
 
     async getButacaById(id: number) {
-    try {
-        const response = await axiosServicioFunciones.get(
-        config.MSFuncionesUrls.actualizarButacaById(id)
-        );
-        return response.data;
-    } catch (err) {
+        try {
+            const response = await axiosServicioFunciones.get(
+                config.MSFuncionesUrls.actualizarButacaById(id),
+            );
+            return response.data;
+        } catch (err) {
             const status = err.response?.status || 403;
             const message = err.response?.data?.message || 'Unauthorized';
             throw new HttpException(message, status);
@@ -77,13 +92,13 @@ export class MicroservicioFuncionesYSalasService {
     }
 
     async updateButaca(id: number, body: any) {
-    try {
-        const response = await axiosServicioFunciones.put(
-        config.MSFuncionesUrls.actualizarButacaById(id),
-        body
-        );
-        return response.data;
-    } catch (err) {
+        try {
+            const response = await axiosServicioFunciones.put(
+                config.MSFuncionesUrls.actualizarButacaById(id),
+                body,
+            );
+            return response.data;
+        } catch (err) {
             const status = err.response?.status || 403;
             const message = err.response?.data?.message || 'Unauthorized';
             throw new HttpException(message, status);
@@ -91,27 +106,27 @@ export class MicroservicioFuncionesYSalasService {
     }
 
     async deleteButaca(id: number) {
-    try {
-        const response = await axiosServicioFunciones.delete(
-        config.MSFuncionesUrls.actualizarButacaById(id)
-        );
-        return response.data;
-    } catch (err) {
+        try {
+            const response = await axiosServicioFunciones.delete(
+                config.MSFuncionesUrls.actualizarButacaById(id),
+            );
+            return response.data;
+        } catch (err) {
             const status = err.response?.status || 403;
             const message = err.response?.data?.message || 'Unauthorized';
             throw new HttpException(message, status);
         }
     }
 
-    //DISPONIBILIDAD BUTACA 
+    //DISPONIBILIDAD BUTACA
 
     async getAllDisponibilidadButaca() {
-    try {
-    const response = await axiosServicioFunciones.get(
-        '/disponibilidad-butaca'
-    );
-    return response.data;
-    }catch (err) {
+        try {
+            const response = await axiosServicioFunciones.get(
+                '/disponibilidad-butaca',
+            );
+            return response.data;
+        } catch (err) {
             const status = err.response?.status || 403;
             const message = err.response?.data?.message || 'Unauthorized';
             throw new HttpException(message, status);
@@ -119,12 +134,12 @@ export class MicroservicioFuncionesYSalasService {
     }
 
     async getDisponibilidadButacaById(id: number) {
-    try {
-    const response = await axiosServicioFunciones.get(
-        `/disponibilidad-butaca/${id}`
-    );
-    return response.data;
-    } catch (err) {
+        try {
+            const response = await axiosServicioFunciones.get(
+                `/disponibilidad-butaca/${id}`,
+            );
+            return response.data;
+        } catch (err) {
             const status = err.response?.status || 403;
             const message = err.response?.data?.message || 'Unauthorized';
             throw new HttpException(message, status);
@@ -132,13 +147,13 @@ export class MicroservicioFuncionesYSalasService {
     }
 
     async updateDisponibilidadButaca(id: number, body: any) {
-    try {
-    const response = await axiosServicioFunciones.put(
-        `/disponibilidad-butaca/${id}`,
-        body
-    );
-    return response.data;
-    }catch (err) {
+        try {
+            const response = await axiosServicioFunciones.put(
+                `/disponibilidad-butaca/${id}`,
+                body,
+            );
+            return response.data;
+        } catch (err) {
             const status = err.response?.status || 403;
             const message = err.response?.data?.message || 'Unauthorized';
             throw new HttpException(message, status);
@@ -146,13 +161,13 @@ export class MicroservicioFuncionesYSalasService {
     }
 
     async reservarButacas(body: { disponibilidadButacaIds: number[] }) {
-    try {
-    const response = await axiosServicioFunciones.patch(
-        `/disponibilidad-butaca/reservar`,
-        body
-    );
-    return response.data;
-    } catch (err) {
+        try {
+            const response = await axiosServicioFunciones.patch(
+                `/disponibilidad-butaca/reservar`,
+                body,
+            );
+            return response.data;
+        } catch (err) {
             const status = err.response?.status || 403;
             const message = err.response?.data?.message || 'Unauthorized';
             throw new HttpException(message, status);
@@ -160,13 +175,13 @@ export class MicroservicioFuncionesYSalasService {
     }
 
     async ocuparButacas(body: { disponibilidadButacaIds: number[] }) {
-    try {
-    const response = await axiosServicioFunciones.patch(
-        `/disponibilidad-butaca/ocupar`,
-        body
-    );
-    return response.data;
-    } catch (err) {
+        try {
+            const response = await axiosServicioFunciones.patch(
+                `/disponibilidad-butaca/ocupar`,
+                body,
+            );
+            return response.data;
+        } catch (err) {
             const status = err.response?.status || 403;
             const message = err.response?.data?.message || 'Unauthorized';
             throw new HttpException(message, status);
@@ -174,421 +189,403 @@ export class MicroservicioFuncionesYSalasService {
     }
 
     async deleteDisponibilidadButaca(id: number) {
-    try {
-    const response = await axiosServicioFunciones.delete(
-        `/disponibilidad-butaca/${id}`
-    );
-    return response.data;
-    } catch (err) {
+        try {
+            const response = await axiosServicioFunciones.delete(
+                `/disponibilidad-butaca/${id}`,
+            );
+            return response.data;
+        } catch (err) {
             const status = err.response?.status || 403;
             const message = err.response?.data?.message || 'Unauthorized';
             throw new HttpException(message, status);
         }
     }
 
-// ESTADO DISPONIBILIDAD BUTACA
-async createEstadoDisponibilidad(body: any) {
-  try {
-    const response = await axiosServicioFunciones.post(
-      '/estado-disponibilidad-butaca',
-      body
-    );
-    return response.data;
-  } catch (err) {
+    // ESTADO DISPONIBILIDAD BUTACA
+    async createEstadoDisponibilidad(body: any) {
+        try {
+            const response = await axiosServicioFunciones.post(
+                '/estado-disponibilidad-butaca',
+                body,
+            );
+            return response.data;
+        } catch (err) {
             const status = err.response?.status || 403;
             const message = err.response?.data?.message || 'Unauthorized';
             throw new HttpException(message, status);
         }
-}
+    }
 
-async getAllEstadoDisponibilidad() {
-  try {
-    const response = await axiosServicioFunciones.get(
-      '/estado-disponibilidad-butaca'
-    );
-    return response.data;
-  } catch (err) {
+    async getAllEstadoDisponibilidad() {
+        try {
+            const response = await axiosServicioFunciones.get(
+                '/estado-disponibilidad-butaca',
+            );
+            return response.data;
+        } catch (err) {
             const status = err.response?.status || 403;
             const message = err.response?.data?.message || 'Unauthorized';
             throw new HttpException(message, status);
         }
-}
+    }
 
-async getEstadoDisponibilidadById(id: number) {
-  try {
-    const response = await axiosServicioFunciones.get(
-      `/estado-disponibilidad-butaca/${id}`
-    );
-    return response.data;
-  } catch (err) {
+    async getEstadoDisponibilidadById(id: number) {
+        try {
+            const response = await axiosServicioFunciones.get(
+                `/estado-disponibilidad-butaca/${id}`,
+            );
+            return response.data;
+        } catch (err) {
             const status = err.response?.status || 403;
             const message = err.response?.data?.message || 'Unauthorized';
             throw new HttpException(message, status);
         }
-}
+    }
 
-async updateEstadoDisponibilidad(id: number, body: any) {
-  try {
-    const response = await axiosServicioFunciones.put(
-      `/estado-disponibilidad-butaca/${id}`,
-      body
-    );
-    return response.data;
-  } catch (err) {
+    async updateEstadoDisponibilidad(id: number, body: any) {
+        try {
+            const response = await axiosServicioFunciones.put(
+                `/estado-disponibilidad-butaca/${id}`,
+                body,
+            );
+            return response.data;
+        } catch (err) {
             const status = err.response?.status || 403;
             const message = err.response?.data?.message || 'Unauthorized';
             throw new HttpException(message, status);
         }
-}
+    }
 
-async deleteEstadoDisponibilidad(id: number) {
-  try {
-    const response = await axiosServicioFunciones.delete(
-      `/estado-disponibilidad-butaca/${id}`
-    );
-    return response.data;
-  } catch (err) {
+    async deleteEstadoDisponibilidad(id: number) {
+        try {
+            const response = await axiosServicioFunciones.delete(
+                `/estado-disponibilidad-butaca/${id}`,
+            );
+            return response.data;
+        } catch (err) {
             const status = err.response?.status || 403;
             const message = err.response?.data?.message || 'Unauthorized';
             throw new HttpException(message, status);
         }
-}
+    }
 
-//fila
-async getAllFilas() {
-  try {
-    const response = await axiosServicioFunciones.get(
-      '/fila'
-    );
-    return response.data;
-  } catch (err) {
+    //fila
+    async getAllFilas() {
+        try {
+            const response = await axiosServicioFunciones.get('/fila');
+            return response.data;
+        } catch (err) {
             const status = err.response?.status || 403;
             const message = err.response?.data?.message || 'Unauthorized';
             throw new HttpException(message, status);
         }
-}
+    }
 
-async getFilaById(id: number) {
-  try {
-    const response = await axiosServicioFunciones.get(
-      `/fila/${id}`
-    );
-    return response.data;
-  } catch (err) {
+    async getFilaById(id: number) {
+        try {
+            const response = await axiosServicioFunciones.get(`/fila/${id}`);
+            return response.data;
+        } catch (err) {
             const status = err.response?.status || 403;
             const message = err.response?.data?.message || 'Unauthorized';
             throw new HttpException(message, status);
         }
-}
+    }
 
-async updateFila(id: number, body: any) {
-  try {
-    const response = await axiosServicioFunciones.put(
-      `/fila/${id}`,
-      body
-    );
-    return response.data;
-  } catch (err) {
+    async updateFila(id: number, body: any) {
+        try {
+            const response = await axiosServicioFunciones.put(
+                `/fila/${id}`,
+                body,
+            );
+            return response.data;
+        } catch (err) {
             const status = err.response?.status || 403;
             const message = err.response?.data?.message || 'Unauthorized';
             throw new HttpException(message, status);
         }
-}
+    }
 
-async deleteFila(id: number) {
-  try {
-    const response = await axiosServicioFunciones.delete(
-      `/fila/${id}`
-    );
-    return response.data;
-  } catch (err) {
+    async deleteFila(id: number) {
+        try {
+            const response = await axiosServicioFunciones.delete(`/fila/${id}`);
+            return response.data;
+        } catch (err) {
             const status = err.response?.status || 403;
             const message = err.response?.data?.message || 'Unauthorized';
             throw new HttpException(message, status);
         }
-}
+    }
 
-//formato
-async createFormato(body: any) {
-  try {
-    const response = await axiosServicioFunciones.post(
-      '/formato/admin/new',
-      body
-    );
-    return response.data;
-  } catch (err) {
+    //formato
+    async createFormato(body: any) {
+        try {
+            const response = await axiosServicioFunciones.post(
+                '/formato/admin/new',
+                body,
+            );
+            return response.data;
+        } catch (err) {
             const status = err.response?.status || 403;
             const message = err.response?.data?.message || 'Unauthorized';
             throw new HttpException(message, status);
         }
-}
+    }
 
-async getAllFormatos() {
-  try {
-    const response = await axiosServicioFunciones.get(
-      '/formato'
-    );
-    return response.data;
-  } catch (err) {
+    async getAllFormatos() {
+        try {
+            const response = await axiosServicioFunciones.get('/formato');
+            return response.data;
+        } catch (err) {
             const status = err.response?.status || 403;
             const message = err.response?.data?.message || 'Unauthorized';
             throw new HttpException(message, status);
         }
-}
+    }
 
-async getFormatoById(id: number) {
-  try {
-    const response = await axiosServicioFunciones.get(
-      `/formato/${id}`
-    );
-    return response.data;
-  } catch (err) {
+    async getFormatoById(id: number) {
+        try {
+            const response = await axiosServicioFunciones.get(`/formato/${id}`);
+            return response.data;
+        } catch (err) {
             const status = err.response?.status || 403;
             const message = err.response?.data?.message || 'Unauthorized';
             throw new HttpException(message, status);
         }
-}
+    }
 
-async updateFormato(id: number, body: any) {
-  try {
-    const response = await axiosServicioFunciones.put(
-      `/formato/admin/${id}`,
-      body
-    );
-    return response.data;
-  } catch (err) {
+    async updateFormato(id: number, body: any) {
+        try {
+            const response = await axiosServicioFunciones.put(
+                `/formato/admin/${id}`,
+                body,
+            );
+            return response.data;
+        } catch (err) {
             const status = err.response?.status || 403;
             const message = err.response?.data?.message || 'Unauthorized';
             throw new HttpException(message, status);
         }
-}
+    }
 
-async deleteFormato(id: number) {
-  try {
-    const response = await axiosServicioFunciones.delete(
-      `/formato/admin/${id}`
-    );
-    return response.data;
-  } catch (err) {
+    async deleteFormato(id: number) {
+        try {
+            const response = await axiosServicioFunciones.delete(
+                `/formato/admin/${id}`,
+            );
+            return response.data;
+        } catch (err) {
             const status = err.response?.status || 403;
             const message = err.response?.data?.message || 'Unauthorized';
             throw new HttpException(message, status);
         }
-}
+    }
 
-async getAllFormatosAdmin() {
-  try {
-    const response = await axiosServicioFunciones.get(
-      '/formato/admin/all'
-    );
-    return response.data;
-  } catch (err) {
+    async getAllFormatosAdmin() {
+        try {
+            const response =
+                await axiosServicioFunciones.get('/formato/admin/all');
+            return response.data;
+        } catch (err) {
             const status = err.response?.status || 403;
             const message = err.response?.data?.message || 'Unauthorized';
             throw new HttpException(message, status);
         }
-}
+    }
 
-async getFormatoAdminById(id: number) {
-  try {
-    const response = await axiosServicioFunciones.get(
-      `/formato/admin/${id}`
-    );
-    return response.data;
-  } catch (err) {
+    async getFormatoAdminById(id: number) {
+        try {
+            const response = await axiosServicioFunciones.get(
+                `/formato/admin/${id}`,
+            );
+            return response.data;
+        } catch (err) {
             const status = err.response?.status || 403;
             const message = err.response?.data?.message || 'Unauthorized';
             throw new HttpException(message, status);
         }
-}
+    }
 
-async getFormatoForPut(id: number) {
-  try {
-    const response = await axiosServicioFunciones.get(
-      `/formato/${id}/admin`
-    );
-    return response.data;
-  } catch (err) {
+    async getFormatoForPut(id: number) {
+        try {
+            const response = await axiosServicioFunciones.get(
+                `/formato/${id}/admin`,
+            );
+            return response.data;
+        } catch (err) {
             const status = err.response?.status || 403;
             const message = err.response?.data?.message || 'Unauthorized';
             throw new HttpException(message, status);
         }
-}
+    }
 
-//idioma
-async createIdioma(body: any) {
-  try {
-    const response = await axiosServicioFunciones.post(
-      '/idioma/admin/new',
-      body
-    );
-    return response.data;
-  } catch (err) {
+    //idioma
+    async createIdioma(body: any) {
+        try {
+            const response = await axiosServicioFunciones.post(
+                '/idioma/admin/new',
+                body,
+            );
+            return response.data;
+        } catch (err) {
             const status = err.response?.status || 403;
             const message = err.response?.data?.message || 'Unauthorized';
             throw new HttpException(message, status);
         }
-}
+    }
 
-async getAllIdiomas() {
-  try {
-    const response = await axiosServicioFunciones.get(
-      '/idioma/admin/all'
-    );
-    return response.data;
-  } catch (err) {
+    async getAllIdiomas() {
+        try {
+            const response =
+                await axiosServicioFunciones.get('/idioma/admin/all');
+            return response.data;
+        } catch (err) {
             const status = err.response?.status || 403;
             const message = err.response?.data?.message || 'Unauthorized';
             throw new HttpException(message, status);
         }
-}
+    }
 
-async getIdiomaById(id: number) {
-  try {
-    const response = await axiosServicioFunciones.get(
-      `/idioma/admin/${id}`
-    );
-    return response.data;
-  } catch (err) {
+    async getIdiomaById(id: number) {
+        try {
+            const response = await axiosServicioFunciones.get(
+                `/idioma/admin/${id}`,
+            );
+            return response.data;
+        } catch (err) {
             const status = err.response?.status || 403;
             const message = err.response?.data?.message || 'Unauthorized';
             throw new HttpException(message, status);
         }
-}
+    }
 
-async updateIdioma(id: number, body: any) {
-  try {
-    const response = await axiosServicioFunciones.put(
-      `/idioma/admin/${id}`,
-      body
-    );
-    return response.data;
-  } catch (err) {
+    async updateIdioma(id: number, body: any) {
+        try {
+            const response = await axiosServicioFunciones.put(
+                `/idioma/admin/${id}`,
+                body,
+            );
+            return response.data;
+        } catch (err) {
             const status = err.response?.status || 403;
             const message = err.response?.data?.message || 'Unauthorized';
             throw new HttpException(message, status);
         }
-}
+    }
 
-async updateIdiomaPartial(id: number, body: any) {
-  try {
-    const response = await axiosServicioFunciones.patch(
-      `/idioma/${id}`,
-      body
-    );
-    return response.data;
-  } catch (err) {
+    async updateIdiomaPartial(id: number, body: any) {
+        try {
+            const response = await axiosServicioFunciones.patch(
+                `/idioma/${id}`,
+                body,
+            );
+            return response.data;
+        } catch (err) {
             const status = err.response?.status || 403;
             const message = err.response?.data?.message || 'Unauthorized';
             throw new HttpException(message, status);
         }
-}
+    }
 
-async deleteIdioma(id: number) {
-  try {
-    const response = await axiosServicioFunciones.delete(
-      `/idioma/admin/${id}`
-    );
-    return response.data;
-  } catch (err) {
+    async deleteIdioma(id: number) {
+        try {
+            const response = await axiosServicioFunciones.delete(
+                `/idioma/admin/${id}`,
+            );
+            return response.data;
+        } catch (err) {
             const status = err.response?.status || 403;
             const message = err.response?.data?.message || 'Unauthorized';
             throw new HttpException(message, status);
         }
-}
+    }
 
-//sala
-async createSala(body: any) {
-  try {
-    const response = await axiosServicioFunciones.post(
-      '/salas/admin/new',
-      body
-    );
-    return response.data;
-  }catch (err) {
+    //sala
+    async createSala(body: any) {
+        try {
+            const response = await axiosServicioFunciones.post(
+                '/salas/admin/new',
+                body,
+            );
+            return response.data;
+        } catch (err) {
             const status = err.response?.status || 403;
             const message = err.response?.data?.message || 'Unauthorized';
             throw new HttpException(message, status);
         }
+    }
 
-}
-
-async getAllSalas() {
-  try {
-    const response = await axiosServicioFunciones.get(
-      '/salas'
-    );
-    return response.data;
-  } catch (err) {
+    async getAllSalas() {
+        try {
+            const response = await axiosServicioFunciones.get('/salas');
+            return response.data;
+        } catch (err) {
             const status = err.response?.status || 403;
             const message = err.response?.data?.message || 'Unauthorized';
             throw new HttpException(message, status);
         }
+    }
 
-}
-
-async getSalaById(id: number) {
-  try {
-    const response = await axiosServicioFunciones.get(
-      `/salas/admin/${id}`
-    );
-    return response.data;
-  } catch (err) {
+    async getSalaById(id: number) {
+        try {
+            const response = await axiosServicioFunciones.get(
+                `/salas/admin/${id}`,
+            );
+            return response.data;
+        } catch (err) {
             const status = err.response?.status || 403;
             const message = err.response?.data?.message || 'Unauthorized';
             throw new HttpException(message, status);
         }
-}
+    }
 
-async updateSala(id: number, body: any) {
-  try {
-    const response = await axiosServicioFunciones.put(
-      `/salas/admin/${id}`,
-      body
-    );
-    return response.data;
-  } catch (err) {
+    async updateSala(id: number, body: any) {
+        try {
+            const response = await axiosServicioFunciones.put(
+                `/salas/admin/${id}`,
+                body,
+            );
+            return response.data;
+        } catch (err) {
             const status = err.response?.status || 403;
             const message = err.response?.data?.message || 'Unauthorized';
             throw new HttpException(message, status);
         }
-}
+    }
 
-async deleteSala(id: number) {
-  try {
-    const response = await axiosServicioFunciones.delete(
-      `/salas/admin/${id}`
-    );
-    return response.data;
-  } catch (err) {
+    async deleteSala(id: number) {
+        try {
+            const response = await axiosServicioFunciones.delete(
+                `/salas/admin/${id}`,
+            );
+            return response.data;
+        } catch (err) {
             const status = err.response?.status || 403;
             const message = err.response?.data?.message || 'Unauthorized';
             throw new HttpException(message, status);
         }
-}
+    }
 
-async getSalasForSelect() {
-  try {
-    const response = await axiosServicioFunciones.get(
-      '/salas/admin/selec'
-    );
-    return response.data;
-  } catch (err) {
+    async getSalasForSelect() {
+        try {
+            const response =
+                await axiosServicioFunciones.get('/salas/admin/selec');
+            return response.data;
+        } catch (err) {
             const status = err.response?.status || 403;
             const message = err.response?.data?.message || 'Unauthorized';
             throw new HttpException(message, status);
         }
-}
-async getAllSalasAdmin() {
-  try {
-    const response = await axiosServicioFunciones.get(
-      '/salas/admin/all'
-    );
-    return response.data;
-  } catch (err) {
+    }
+    async getAllSalasAdmin() {
+        try {
+            const response =
+                await axiosServicioFunciones.get('/salas/admin/all');
+            return response.data;
+        } catch (err) {
             const status = err.response?.status || 403;
             const message = err.response?.data?.message || 'Unauthorized';
             throw new HttpException(message, status);
         }
-}
+    }
 }

@@ -27,7 +27,8 @@ export const config = {
         getFuncionesByPeliculaId: (id: number) =>
             `/funcion/funciones-por-pelicula/${id}`,
         getFuncionById: (id: number) => `/funcion/${id}`,
-        
+        getFunciones: () => `/funcion/admin/all`,
+
         registrarButaca: '/butaca',
         actualizarButacaById: (id: number) => `/butaca/${id}`,
         getAllButacas: '/butaca',
@@ -80,11 +81,11 @@ export const config = {
         actualizarIdiomaById: (id: number) => `/idioma/${id}`,
         getAllIdiomas: '/idioma',
         getIdiomaById: (id: number) => `/idioma/${id}`,
-        registrarClasificacion: '/clasificacion',
+        registrarClasificacion: '/clasificacion/admin/new',
         actualizarClasificacionById: (id: number) => `/clasificacion/${id}`,
         getAllClasificaciones: '/clasificacion',
         getClasificacionById: (id: number) => `/clasificacion/${id}`,
-        deleteClasificacionById: (id: number) => `/clasificacion/${id}`,
+        deleteClasificacionById: (id: number) => `/clasificacion/admin/${id}`,
         registrarEstadoPelicula: '/estado-pelicula',
         actualizarEstadoPeliculaById: (id: number) => `/estado-pelicula/${id}`,
         getAllEstadosPelicula: '/estado-pelicula',
