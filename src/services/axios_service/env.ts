@@ -28,6 +28,9 @@ export const config = {
             `/funcion/funciones-por-pelicula/${id}`,
         getFuncionById: (id: number) => `/funcion/${id}`,
         getFunciones: () => `/funcion/admin/all`,
+        deleteFuncion: (id: number) => `/funcion/admin/${id}`,
+        createFuncion: '/funcion/admin/new',
+        updateFuncion: (id: number) => `/funcion/admin/${id}`,
 
         registrarButaca: '/butaca',
         actualizarButacaById: (id: number) => `/butaca/${id}`,

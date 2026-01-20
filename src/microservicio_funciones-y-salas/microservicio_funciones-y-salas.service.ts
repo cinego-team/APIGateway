@@ -51,14 +51,56 @@ export class MicroservicioFuncionesYSalasService {
             throw new HttpException(message, status);
         }
     }
+    // funciones
     async getFunciones() {
         try {
-            return await axiosServicioFunciones.get(
+            const response = await axiosServicioFunciones.get(
                 config.MSFuncionesUrls.getFunciones(),
             );
+            return response.data;  // <-- Agregar .data
         } catch (err) {
             const status = err.response?.status || 403;
             const message = err.response?.data?.message || 'Unauthorized';
+            throw new HttpException(message, status);
+        }
+    }
+
+    async deleteFuncion(id: number) {
+        try {
+            const url = config.MSFuncionesUrls.deleteFuncion(id);
+            const response = await axiosServicioFunciones.delete(url);
+            return response.data;
+        } catch (err) {
+            const status = err.response?.status || 403;
+            const message = err.response?.data?.message || 'Error al eliminar función';
+            throw new HttpException(message, status);
+        }
+    }
+
+    async createFuncion(body: any) {
+        try {
+            const response = await axiosServicioFunciones.post(
+                config.MSFuncionesUrls.createFuncion,
+                body,
+            );
+            return response.data;
+        } catch (err) {
+            const status = err.response?.status || 403;
+            const message = err.response?.data?.message || 'Error al crear función';
+            throw new HttpException(message, status);
+        }
+    }
+
+    async updateFuncion(id: number, body: any) {
+        try {
+            const response = await axiosServicioFunciones.put(
+                config.MSFuncionesUrls.updateFuncion(id),
+                body,
+            );
+            return response.data;
+        } catch (err) {
+            const status = err.response?.status || 403;
+            const message = err.response?.data?.message || 'Error al actualizar función';
             throw new HttpException(message, status);
         }
     }

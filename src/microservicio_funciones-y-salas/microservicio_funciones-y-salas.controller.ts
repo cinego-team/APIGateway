@@ -29,6 +29,29 @@ export class MicroservicioFuncionesYSalasController {
             refresh_token,
         );
     }
+
+    @UseGuards(AuthGuard)
+    @Permissions('EMPLEADO')
+    @Delete('funcion/admin/:id')
+    deleteFuncion(@Param('id') id: number) {
+        return this.service.deleteFuncion(id);
+    }
+
+    @UseGuards(AuthGuard)
+    @Permissions('EMPLEADO')
+    @Post('funcion/admin/new')
+    createFuncion(@Body() body) {
+        return this.service.createFuncion(body);
+    }
+
+    @UseGuards(AuthGuard)
+    @Permissions('EMPLEADO')
+    @Put('funcion/admin/:id')
+    updateFuncion(@Param('id') id: number, @Body() body) {
+        return this.service.updateFuncion(id, body);
+    }
+
+    
     @Get('butaca-por-funcion/:id')
     findAllDisponibilidadByFuncionId(@Param('id') id: number) {
         return this.service.findAllDisponibilidadByFuncionId(id);
