@@ -13,11 +13,11 @@ import { MicroservicioPromocionesService } from './microservicio_promociones.ser
 import { AuthGuard } from 'src/middleware/auth.middleware';
 import { Permissions } from 'src/middleware/decorators/permissions.decorator';
 
-@UseGuards(AuthGuard)
+//@UseGuards(AuthGuard)
 @Controller('microservicio-promociones')
 export class MicroservicioPromocionesController {
     constructor(private readonly service: MicroservicioPromocionesService) {}
-    @Permissions('EMPLEADO')
+    //@Permissions('EMPLEADO')
     @Get('promocion/admin/all')
     getAllPromociones() {
         return this.service.getAllPromociones();
@@ -48,15 +48,16 @@ export class MicroservicioPromocionesController {
         return this.service.registrarDia(diaBody);
     }
     @Permissions('EMPLEADO')
-    @Put('dia/admin/:id')
-    actualizarDia(@Param('id') id: number, @Body() diaBody) {
-        return this.service.actualizarDia(id, diaBody);
-    }
-    @Permissions('EMPLEADO')
     @Get('dia/admin/all')
     getAllDias() {
         return this.service.getAllDias();
     }
+    @Permissions('EMPLEADO')
+    @Put('dia/admin/:id')
+    actualizarDia(@Param('id') id: number, @Body() diaBody) {
+        return this.service.actualizarDia(id, diaBody);
+    }
+
     @Permissions('EMPLEADO')
     @Get('dia/admin/:id')
     getDiaById(@Param('id') id: number) {

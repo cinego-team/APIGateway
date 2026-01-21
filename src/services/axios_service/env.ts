@@ -67,6 +67,7 @@ export const config = {
         getAllSalas: '/salas',
         getAllSalasAdmin: '/salas/admin/all',
         getSalasForSelect: '/salas/admin/selec',
+        deleteSalaById: (id: number) => `/salas/admin/${id}`,
     },
     MSPeliculasUrls: {
         baseUrl: 'http://localhost:3001',

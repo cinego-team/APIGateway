@@ -358,7 +358,7 @@ export class MicroservicioFuncionesYSalasService {
     async createFormato(body: any) {
         try {
             const response = await axiosServicioFunciones.post(
-                '/formato/admin/new',
+                config.MSFuncionesUrls.registrarFormato,
                 body,
             );
             return response.data;
@@ -538,23 +538,17 @@ export class MicroservicioFuncionesYSalasService {
     }
 
     //sala
-    async createSala(body: any) {
+    async createSala(body: any, authorization: string) {
         try {
             const response = await axiosServicioFunciones.post(
-                '/salas/admin/new',
+                config.MSFuncionesUrls.registrarSala,
                 body,
+                {
+                    headers: {
+                        Authorization: authorization,
+                    },
+                },
             );
-            return response.data;
-        } catch (err) {
-            const status = err.response?.status || 403;
-            const message = err.response?.data?.message || 'Unauthorized';
-            throw new HttpException(message, status);
-        }
-    }
-
-    async getAllSalas() {
-        try {
-            const response = await axiosServicioFunciones.get('/salas');
             return response.data;
         } catch (err) {
             const status = err.response?.status || 403;
@@ -590,10 +584,15 @@ export class MicroservicioFuncionesYSalasService {
         }
     }
 
-    async deleteSala(id: number) {
+    async deleteSala(id: number, authorization: string) {
         try {
             const response = await axiosServicioFunciones.delete(
-                `/salas/admin/${id}`,
+                config.MSFuncionesUrls.deleteSalaById(id),
+                {
+                    headers: {
+                        Authorization: authorization,
+                    },
+                },
             );
             return response.data;
         } catch (err) {
@@ -614,14 +613,32 @@ export class MicroservicioFuncionesYSalasService {
             throw new HttpException(message, status);
         }
     }
-    async getAllSalasAdmin() {
+    async getAllSalasAdmin(req: any) {
         try {
-            const response =
-                await axiosServicioFunciones.get('/salas/admin/all');
+            const authHeader =
+                req.headers?.authorization ||
+                req.headers?.get?.('authorization');
+
+            if (!authHeader) {
+                throw new HttpException('Missing Authorization header', 401);
+            }
+
+            const response = await axiosServicioFunciones.get(
+                '/salas/admin/all',
+                {
+                    headers: {
+                        Authorization: authHeader,
+                    },
+                },
+            );
+
             return response.data;
         } catch (err) {
-            const status = err.response?.status || 403;
-            const message = err.response?.data?.message || 'Unauthorized';
+            const status = err.response?.status || 500;
+            const message =
+                err.response?.data?.message ||
+                'Error calling salas microservice';
+
             throw new HttpException(message, status);
         }
     }

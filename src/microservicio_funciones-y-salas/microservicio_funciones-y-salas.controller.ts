@@ -13,6 +13,8 @@ import {
 import { MicroservicioFuncionesYSalasService } from './microservicio_funciones-y-salas.service';
 import { AuthGuard } from 'src/middleware/auth.middleware';
 import { Permissions } from 'src/middleware/decorators/permissions.decorator';
+import { Req } from '@nestjs/common';
+import { ParseIntPipe } from '@nestjs/common';
 @UseGuards(AuthGuard)
 @Controller('microservicio-funciones-y-salas')
 export class MicroservicioFuncionesYSalasController {
@@ -223,17 +225,20 @@ export class MicroservicioFuncionesYSalasController {
     }
 
     // SALA
+    @Post('salas/admin/new')
     @UseGuards(AuthGuard)
     @Permissions('EMPLEADO')
-    @Post('salas/admin/new')
-    createSala(@Body() body) {
-        return this.service.createSala(body);
+    createSala(@Body() body, @Headers('authorization') authorization: string) {
+        return this.service.createSala(body, authorization);
     }
 
-    @Get('salas')
-    getAllSalas() {
-        return this.service.getAllSalas();
+    @UseGuards(AuthGuard)
+    @Permissions('EMPLEADO')
+    @Get('salas/admin/all')
+    getAllSalasAdmin(@Req() req: any) {
+        return this.service.getAllSalasAdmin(req);
     }
+
     @UseGuards(AuthGuard)
     @Permissions('EMPLEADO')
     @Get('salas/admin/:id')
@@ -246,24 +251,23 @@ export class MicroservicioFuncionesYSalasController {
     updateSala(@Param('id') id: number, @Body() body) {
         return this.service.updateSala(id, body);
     }
+    @Delete('salas/admin/:id')
     @UseGuards(AuthGuard)
     @Permissions('EMPLEADO')
-    @Delete('salas/admin/:id')
-    deleteSala(@Param('id') id: number) {
-        return this.service.deleteSala(id);
+    remove(
+        @Param('id', ParseIntPipe) id: number,
+        @Headers('authorization') authorization: string,
+    ) {
+        return this.service.deleteSala(id, authorization);
     }
+
     @UseGuards(AuthGuard)
     @Permissions('EMPLEADO')
     @Get('salas/admin/selec')
     getSalasForSelect() {
         return this.service.getSalasForSelect();
     }
-    @UseGuards(AuthGuard)
-    @Permissions('EMPLEADO')
-    @Get('salas/admin/all')
-    getAllSalasAdmin() {
-        return this.service.getAllSalasAdmin();
-    }
+
     @UseGuards(AuthGuard)
     @Permissions('EMPLEADO')
     @Get('funcion/admin/all')

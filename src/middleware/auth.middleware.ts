@@ -1,19 +1,13 @@
 import {
     CanActivate,
     ExecutionContext,
-    HttpException,
     Injectable,
     UnauthorizedException,
+    ForbiddenException,
 } from '@nestjs/common';
 import { Reflector } from '@nestjs/core';
-import axios from 'axios';
-import { Permissions as PermissionsDecorator } from './decorators/permissions.decorator';
-import { RequestWithUserInput } from 'src/microservicio_usuarios/request-with-user.interface';
 import { JwtService } from 'src/services/jwt_service/jwt.service';
 import { Payload } from 'src/services/jwt_service/payload.interface';
-
-const LOCALHOST_URL = `http://localhost:3004`;
-const PRODUCCION_URL = null;
 
 @Injectable()
 export class AuthGuard implements CanActivate {
@@ -21,6 +15,7 @@ export class AuthGuard implements CanActivate {
         private readonly jwtService: JwtService,
         private reflector: Reflector,
     ) {}
+
     canActivate(context: ExecutionContext): boolean {
         const request = context.switchToHttp().getRequest();
 
@@ -33,15 +28,14 @@ export class AuthGuard implements CanActivate {
         if (!token) {
             throw new UnauthorizedException('Invalid token format');
         }
-        //desencriptamos el payload
-        const payload = this.jwtService.getPayload(token) as Payload;
 
-        console.log('PAYLOAD:', payload);
+        const payload = this.jwtService.getPayload(token) as Payload;
         request.user = payload;
-        //manejo de permisos
+
         const requiredPermissions =
             this.reflector.get<string[]>('permissions', context.getHandler()) ||
             [];
+
         if (requiredPermissions.length === 0) {
             return true;
         }
@@ -51,7 +45,7 @@ export class AuthGuard implements CanActivate {
         );
 
         if (!hasPermission) {
-            throw new UnauthorizedException('Permission denied');
+            throw new ForbiddenException('Permission denied');
         }
 
         return true;

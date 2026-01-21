@@ -177,10 +177,8 @@ export class MicroservicioUsuariosService {
     async createTipoCliente(createTipoClienteDto: any) {
         try {
             const response = await axiosServicioUsuarios.post(
-                config.MSUsuariosUrls.CreateTipoCliente,
-                {
-                    body: createTipoClienteDto,
-                },
+                config.MSUsuariosUrls.CreateTipoCliente,createTipoClienteDto
+                
             );
             return response.data;
         } catch (err) {

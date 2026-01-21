@@ -44,11 +44,13 @@ export class MicroservicioVentasService {
         return data;
     }
     async findAllVentas() {
-        const data = await axiosServicioVentas.get(
+        const response = await axiosServicioVentas.get(
             config.MSVentasUrls.findAllVentas,
         );
-        return data;
+
+        return response.data;
     }
+
     async crearEstadoVenta(dato: any) {
         const data = await axiosServicioVentas.post(
             config.MSVentasUrls.crearEstadoVenta,
