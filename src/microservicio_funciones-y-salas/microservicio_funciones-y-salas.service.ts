@@ -77,18 +77,13 @@ export class MicroservicioFuncionesYSalasService {
         }
     }
 
-    async createFuncion(body: any) {
-        try {
-            const response = await axiosServicioFunciones.post(
-                config.MSFuncionesUrls.createFuncion,
-                body,
-            );
-            return response.data;
-        } catch (err) {
-            const status = err.response?.status || 403;
-            const message = err.response?.data?.message || 'Error al crear función';
-            throw new HttpException(message, status);
-        }
+    async createFuncion(body: any, token: string) {
+    const response = await axiosServicioFunciones.post(
+        config.MSFuncionesUrls.createFuncion,
+        body,
+        { headers: { Authorization: token } }
+    );
+    return response.data;
     }
 
     async updateFuncion(id: number, body: any) {

@@ -40,8 +40,8 @@ export class MicroservicioFuncionesYSalasController {
     @UseGuards(AuthGuard)
     @Permissions('EMPLEADO')
     @Post('funcion/admin/new')
-    createFuncion(@Body() body) {
-        return this.service.createFuncion(body);
+    createFuncion(@Body() body, @Headers('authorization') token: string) {
+        return this.service.createFuncion(body, token);
     }
 
     @UseGuards(AuthGuard)
