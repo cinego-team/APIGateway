@@ -1,24 +1,15 @@
-import {
-    Delete,
-    Param,
-    Body,
-    Controller,
-    Post,
-    UseGuards,
-    Get,
-    Query,
-    Req,
-} from '@nestjs/common';
+import { Delete, Param, Body, Controller, Post, UseGuards, Get, Query, Req } from '@nestjs/common';
 import { MicroservicioVentasService } from './microservicio_ventas.service';
 import { AuthGuard } from 'src/middleware/auth.middleware';
 import { DefaultValuePipe, ParseIntPipe } from '@nestjs/common/pipes';
-import { Permissions } from 'src/middleware/decorators/permissions.decorator';
-
-@UseGuards(AuthGuard)
+import { Permissions } from 'src/middleware/decorators/permissions.decorator';//@UseGuards(AuthGuard)
+export interface VentaInput {
+    disponibilidadButacaIds: number[];
+    funcionId: number;
+}
 @Controller('microservicio-ventas')
 export class MicroservicioVentasController {
     constructor(private readonly service: MicroservicioVentasService) {}
-
     @Post('proceso-pago')
     iniciarProcesoPago(@Body() idDisponibilidades: number[]) {
         return this.service.iniciarProcesoPago(idDisponibilidades);
@@ -85,10 +76,22 @@ export class MicroservicioVentasController {
     crearEntradaPorDisponibilidadIds(@Body() ids: number[]) {
         return this.service.crearEntradaPorDisponibilidadIds(ids);
     }
-    @Post('venta/abrir-venta')
+  @UseGuards(AuthGuard)
     @Post('abrir-venta')
-    abrirVenta(@Req() req, @Body() dato: any) {
-        return this.service.abrirVenta(req.user, dato);
+    async abrirVenta(@Req() req, @Body() dato: any) {
+        const usuarioParaVentas = {
+            id: Number(req.user.id || req.user.sub),
+            email: req.user.email
+        };
+
+        const ventaInput: VentaInput = {
+            funcionId: Number(dato.funcionId),
+            disponibilidadButacaIds: Array.isArray(dato.disponibilidadButacaIds) 
+                ? dato.disponibilidadButacaIds.map(Number) 
+                : []
+        };
+
+        return this.service.abrirVenta(usuarioParaVentas, ventaInput);
     }
     @Post('venta/cerrar-venta/:id')
     cerrarVenta(@Param('id') id: number, @Body() data: any) {

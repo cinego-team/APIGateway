@@ -114,7 +114,7 @@ export const config = {
         getAllButacas: '/butaca',
     },
     MSVentasUrls: {
-        baseUrl: 'http://localhost:3003',
+        baseUrl: 'http://localhost:3002',
         iniciarProcesoPago: '/venta/proceso-pago',
         getHorariosMasElegidos:
             '/venta/admin/reportes/horarios-mas-elegidos/actual',

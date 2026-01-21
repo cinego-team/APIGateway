@@ -82,26 +82,25 @@ export class MicroservicioVentasService {
         return response.data;
     }
     async abrirVenta(usuario: any, dato: any) {
-        try {
-            const body = {
-                ...dato,
-                usuarioId: usuario.id,
-            };
+    try {
+        // Metemos el ID del usuario dentro del body para que el microservicio lo vea
+        const body = {
+            ...dato,
+            usuarioId: usuario.id 
+        };
 
-            const { data } = await axiosServicioVentas.post(
-                config.MSVentasUrls.abrirVenta,
-                body,
-            );
-
-            return data;
-        } catch (error: any) {
-            // devolvemos el error recibido del microservicio, si existe
-            throw new HttpException(
-                error.response?.data || 'Error al abrir la venta',
-                error.response?.status || 500,
-            );
-        }
+        const { data } = await axiosServicioVentas.post(
+            config.MSVentasUrls.abrirVenta,
+            body,
+        );
+        return data;
+    } catch (error: any) {
+        throw new HttpException(
+            error.response?.data || 'Error al abrir la venta',
+            error.response?.status || 500,
+        );
     }
+}
     async cerrarVenta(idVenta: number, data: any) {
         try {
             const { data: response } = await axiosServicioVentas.post(
