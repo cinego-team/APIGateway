@@ -4,17 +4,12 @@ import { config } from 'src/services/axios_service/env';
 
 @Injectable()
 export class MicroservicioPromocionesService {
-    async getAllPromociones() {
-        try {
-            const response = await axiosServicioPromociones.get(
-                config.MSPromocionesUrls.getAllPromociones,
-            );
-            return response.data;
-        } catch (err) {
-            const status = err.response?.status || 403;
-            const message = err.response?.data?.message || 'Unauthorized';
-            throw new HttpException(message, status);
-        }
+    async getAllPromociones(token: string) {
+    const response = await axiosServicioPromociones.get(
+        config.MSPromocionesUrls.getAllPromociones,
+        { headers: { Authorization: token } }
+    );
+    return response.data;
     }
 
     async getPromocionById(id: number) {
@@ -34,8 +29,8 @@ export class MicroservicioPromocionesService {
         try {
             const response = await axiosServicioPromociones.post(
                 config.MSPromocionesUrls.registrarPromocion,
-                { body: promocionBody },
-            );
+                promocionBody,  
+            )
             return response.data;
         } catch (err) {
             const status = err.response?.status || 403;
@@ -44,11 +39,12 @@ export class MicroservicioPromocionesService {
         }
     }
 
-    async actualizarPromocion(id: number, promocionBody: any) {
+    async actualizarPromocion(id: number, promocionBody: any, token: string) {
         try {
             const response = await axiosServicioPromociones.put(
                 config.MSPromocionesUrls.actualizarPromocionById(id),
-                { body: promocionBody },
+                promocionBody,  
+                { headers: { Authorization: token } }
             );
             return response.data;
         } catch (err) {

@@ -88,15 +88,16 @@ export class MicroservicioUsuariosController {
     }
     @UseGuards(AuthGuard)
     @Permissions('EMPLEADO')
-    @Get('tipo-cliente/admin/:id')
-    getTipoClienteById(@Param('id') id: number) {
-        return this.service.getTipoClienteById(id);
-    }
-    @UseGuards(AuthGuard)
-    @Permissions('EMPLEADO')
     @Get('tipo-cliente/admin/all')
     getAllTipoClientes() {
         return this.service.getAllTipoClientes();
+    }
+
+    @UseGuards(AuthGuard)
+    @Permissions('EMPLEADO')
+    @Get('tipo-cliente/admin/:id')
+    getTipoClienteById(@Param('id') id: number) {
+        return this.service.getTipoClienteById(id);
     }
     @UseGuards(AuthGuard)
     @Permissions('EMPLEADO')

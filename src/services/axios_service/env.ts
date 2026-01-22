@@ -133,7 +133,7 @@ export const config = {
         cerrarVenta: (id: number) => `/venta/cerrar-venta/${id}`,
     },
     MSPromocionesUrls: {
-        baseUrl: 'http://localhost:3004',
+        baseUrl: 'http://localhost:3005',
         registrarPromocion: '/promocion/admin/new',
         actualizarPromocionById: (id: number) => `/promocion/admin/${id}`,
         getAllPromociones: '/promocion/admin/all',
