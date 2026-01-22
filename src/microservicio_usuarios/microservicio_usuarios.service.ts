@@ -86,7 +86,7 @@ export class MicroservicioUsuariosService {
                 config.MSUsuariosUrls.getDatosCliente,
                 {
                     headers: {
-                        Authorization: `Bearer ${access_token}`,
+                        Authorization: access_token,
                         'refresh-token': refresh_token || '',
                     },
                 },
@@ -100,10 +100,16 @@ export class MicroservicioUsuariosService {
         }
     }
 
-    async getDatosEmpleadoById(id: number) {
+    async getDatosEmpleadoById(access_token, refresh_token) {
         try {
             const response = await axiosServicioUsuarios.get(
-                config.MSUsuariosUrls.getDatosEmpleadoById(id),
+                config.MSUsuariosUrls.getDatosEmpleado,
+                {
+                    headers: {
+                        Authorization: access_token,
+                        'refresh-token': refresh_token || '',
+                    },
+                }
             );
             return response.data;
         } catch (err) {
@@ -177,8 +183,8 @@ export class MicroservicioUsuariosService {
     async createTipoCliente(createTipoClienteDto: any) {
         try {
             const response = await axiosServicioUsuarios.post(
-                config.MSUsuariosUrls.CreateTipoCliente,createTipoClienteDto
-                
+                config.MSUsuariosUrls.CreateTipoCliente, createTipoClienteDto
+
             );
             return response.data;
         } catch (err) {

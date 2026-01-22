@@ -6,7 +6,7 @@ export const config = {
         registerEmpleado: '/usuario/register/empleado',
         refreshToken: '/usuario/refresh-token',
         getDatosCliente: '/usuario/datos-cliente',
-        getDatosEmpleadoById: (id: number) => `/usuario/datos-empleado/${id}`,
+        getDatosEmpleado: '/usuario/datos-empleado',
         verificarExistenciaTipoClienteById: (id: number) =>
             `/tipo-cliente/validar-existencia/${id}`,
         findUserByEmail: (email: string) => `/usuario/find-by-email/${email}`,

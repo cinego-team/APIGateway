@@ -20,7 +20,7 @@ export class MicroservicioUsuariosController {
     constructor(
         private service: MicroservicioUsuariosService,
         private captchaService: CaptchaService,
-    ) {}
+    ) { }
 
     @Post('usuario/login')
     async login(
@@ -67,9 +67,12 @@ export class MicroservicioUsuariosController {
     //admin
     @UseGuards(AuthGuard)
     @Permissions('EMPLEADO')
-    @Get('datos-empleado/:id')
-    getDatosEmpleadoById(@Param('id') id: number) {
-        return this.service.getDatosEmpleadoById(id);
+    @Get('datos-empleado')
+    getDatosEmpleadoById(
+        @Headers('authorization') access_token: string,
+        @Headers('refresh-token') refresh_token: string,
+    ) {
+        return this.service.getDatosEmpleadoById(access_token, refresh_token);
     }
     @UseGuards(AuthGuard)
     @Permissions('EMPLEADO')
