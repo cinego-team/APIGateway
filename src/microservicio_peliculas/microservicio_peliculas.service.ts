@@ -266,10 +266,11 @@ export class MicroservicioPeliculasService {
         }
     }
 
-    async getAllGenerosAdmin() {
+    async getAllGenerosAdmin(page = 1, quantity = 10) {
         try {
-            const response =
-                await axiosServicioPeliculas.get('/genero/admin/all');
+            const response = await axiosServicioPeliculas.get(
+                `/genero/admin/all?page=${page}&quantity=${quantity}`
+            );
             return response.data;
         } catch (err) {
             const status = err.response?.status || 403;

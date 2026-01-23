@@ -25,11 +25,12 @@ export class MicroservicioPromocionesService {
         }
     }
 
-    async registrarPromocion(promocionBody: any) {
+    async registrarPromocion(promocionBody: any, token: string) {
         try {
             const response = await axiosServicioPromociones.post(
                 config.MSPromocionesUrls.registrarPromocion,
-                promocionBody,  
+                promocionBody,
+                { headers: { Authorization: token } }  // Agregar headers
             )
             return response.data;
         } catch (err) {

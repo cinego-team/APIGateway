@@ -9,6 +9,7 @@ import {
     Post,
     Put,
     UseGuards,
+    Query,
 } from '@nestjs/common';
 import { MicroservicioPeliculasService } from './microservicio_peliculas.service';
 import { AuthGuard } from 'src/middleware/auth.middleware';
@@ -126,11 +127,12 @@ export class MicroservicioPeliculasController {
     crearGenero(@Body() body) {
         return this.service.registrarGenero(body);
     }
-    @UseGuards(AuthGuard)
-    @Permissions('EMPLEADO')
     @Get('genero/admin/all')
-    getAllGenerosAdmin() {
-        return this.service.getAllGenerosAdmin();
+    getAllGenerosAdmin(
+        @Query('page') page = '1',
+        @Query('quantity') quantity = '10'
+    ) {
+        return this.service.getAllGenerosAdmin(Number(page), Number(quantity));
     }
     @UseGuards(AuthGuard)
     @Permissions('EMPLEADO')

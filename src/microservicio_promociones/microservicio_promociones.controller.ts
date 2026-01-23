@@ -30,8 +30,11 @@ export class MicroservicioPromocionesController {
     }
     @Permissions('EMPLEADO')
     @Post('promocion/admin/new')
-    registrarPromocion(@Body() promocionBody) {
-        return this.service.registrarPromocion(promocionBody);
+    registrarPromocion(
+        @Body() promocionBody,
+        @Headers('authorization') token: string  // Agregar
+    ) {
+        return this.service.registrarPromocion(promocionBody, token);  // Pasar token
     }
     @Permissions('EMPLEADO')
     @Put('promocion/admin/:id')
