@@ -46,7 +46,7 @@ export class MicroservicioUsuariosController {
 
     @UseGuards(AuthGuard)
     @Permissions('EMPLEADO')
-    @Post('usaurio/register/empleado')
+    @Post('usuario/admin/register/empleado')
     registerEmpleado(@Body() registerBody) {
         return this.service.registerEmpleado(registerBody);
     }

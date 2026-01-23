@@ -3,7 +3,7 @@ export const config = {
         baseUrl: 'http://localhost:3004',
         login: '/usuario/login',
         register: '/usuario/register',
-        registerEmpleado: '/usuario/register/empleado',
+        registerEmpleado: '/usuario/admin/register/empleado',
         refreshToken: '/usuario/refresh-token',
         getDatosCliente: '/usuario/datos-cliente',
         getDatosEmpleado: '/usuario/datos-empleado',
