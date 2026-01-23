@@ -100,7 +100,7 @@ export class MicroservicioUsuariosService {
         }
     }
 
-    async getDatosEmpleadoById(access_token, refresh_token) {
+    async getDatosEmpleado(access_token: string, refresh_token: string) {
         try {
             const response = await axiosServicioUsuarios.get(
                 config.MSUsuariosUrls.getDatosEmpleado,
@@ -109,7 +109,7 @@ export class MicroservicioUsuariosService {
                         Authorization: access_token,
                         'refresh-token': refresh_token || '',
                     },
-                }
+                },
             );
             return response.data;
         } catch (err) {
@@ -183,8 +183,8 @@ export class MicroservicioUsuariosService {
     async createTipoCliente(createTipoClienteDto: any) {
         try {
             const response = await axiosServicioUsuarios.post(
-                config.MSUsuariosUrls.CreateTipoCliente, createTipoClienteDto
-
+                config.MSUsuariosUrls.CreateTipoCliente,
+                createTipoClienteDto,
             );
             return response.data;
         } catch (err) {
@@ -254,6 +254,18 @@ export class MicroservicioUsuariosService {
         try {
             const response = await axiosServicioUsuarios.get(
                 config.MSUsuariosUrls.GetAllPermissions(),
+            );
+            return response.data;
+        } catch (err) {
+            const status = err.response?.status || 403;
+            const message = err.response?.data?.message || 'Unauthorized';
+            throw new HttpException(message, status);
+        }
+    }
+      async getDatosClienteByIdForVentas(id: number) {
+        try {
+            const response = await axiosServicioUsuarios.get(
+                config.MSUsuariosUrls.GetDatosClienteByIdForVentas(id),
             );
             return response.data;
         } catch (err) {

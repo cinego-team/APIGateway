@@ -1,8 +1,18 @@
-import { Delete, Param, Body, Controller, Post, UseGuards, Get, Query, Req } from '@nestjs/common';
+import {
+    Delete,
+    Param,
+    Body,
+    Controller,
+    Post,
+    UseGuards,
+    Get,
+    Query,
+    Req,
+} from '@nestjs/common';
 import { MicroservicioVentasService } from './microservicio_ventas.service';
 import { AuthGuard } from 'src/middleware/auth.middleware';
 import { DefaultValuePipe, ParseIntPipe } from '@nestjs/common/pipes';
-import { Permissions } from 'src/middleware/decorators/permissions.decorator';//@UseGuards(AuthGuard)
+import { Permissions } from 'src/middleware/decorators/permissions.decorator'; //@UseGuards(AuthGuard)
 export interface VentaInput {
     disponibilidadButacaIds: number[];
     funcionId: number;
@@ -15,17 +25,17 @@ export class MicroservicioVentasController {
         return this.service.iniciarProcesoPago(idDisponibilidades);
     }
     @Permissions('EMPLEADO')
-    @Get('admin/reportes/horarios-mas-elegidos/actual')
+    @Get('venta/admin/reportes/horarios-mas-elegidos/actual')
     obtenerHorarioMasElegidoActual() {
         return this.service.getHorariosMasElegidos();
     }
     @Permissions('EMPLEADO')
-    @Get('admin/reportes/entradas-por-dia-semana/actual')
+    @Get('venta/admin/reportes/entradas-por-dia-semana/actual')
     async getEntradasPorDiaSemanaMesActual() {
         return await this.service.getEntradasPorDiaSemanaMesActual();
     }
     @Permissions('EMPLEADO')
-    @Get('admin/reportes/peliculas-rango-ventas/trimestral')
+    @Get('venta/admin/reportes/peliculas-rango-ventas/trimestral')
     getPeliculasPorRangoVentasTrimestral(
         @Query(
             'trimestre',
@@ -76,19 +86,19 @@ export class MicroservicioVentasController {
     crearEntradaPorDisponibilidadIds(@Body() ids: number[]) {
         return this.service.crearEntradaPorDisponibilidadIds(ids);
     }
-  @UseGuards(AuthGuard)
+    @UseGuards(AuthGuard)
     @Post('abrir-venta')
     async abrirVenta(@Req() req, @Body() dato: any) {
         const usuarioParaVentas = {
             id: Number(req.user.id || req.user.sub),
-            email: req.user.email
+            email: req.user.email,
         };
 
         const ventaInput: VentaInput = {
             funcionId: Number(dato.funcionId),
-            disponibilidadButacaIds: Array.isArray(dato.disponibilidadButacaIds) 
-                ? dato.disponibilidadButacaIds.map(Number) 
-                : []
+            disponibilidadButacaIds: Array.isArray(dato.disponibilidadButacaIds)
+                ? dato.disponibilidadButacaIds.map(Number)
+                : [],
         };
 
         return this.service.abrirVenta(usuarioParaVentas, ventaInput);

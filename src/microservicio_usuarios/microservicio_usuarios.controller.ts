@@ -20,7 +20,7 @@ export class MicroservicioUsuariosController {
     constructor(
         private service: MicroservicioUsuariosService,
         private captchaService: CaptchaService,
-    ) { }
+    ) {}
 
     @Post('usuario/login')
     async login(
@@ -64,16 +64,16 @@ export class MicroservicioUsuariosController {
     ) {
         return this.service.getDatosClienteById(access_token, refresh_token);
     }
-    //admin
     @UseGuards(AuthGuard)
     @Permissions('EMPLEADO')
-    @Get('datos-empleado')
-    getDatosEmpleadoById(
+    @Get('usuario/datos-empleado')
+    getDatosEmpleado(
         @Headers('authorization') access_token: string,
         @Headers('refresh-token') refresh_token: string,
     ) {
-        return this.service.getDatosEmpleadoById(access_token, refresh_token);
+        return this.service.getDatosEmpleado(access_token, refresh_token);
     }
+
     @UseGuards(AuthGuard)
     @Permissions('EMPLEADO')
     @Get('tipo-cliente/validar-existencia-tipoCliente/:id')
@@ -143,5 +143,11 @@ export class MicroservicioUsuariosController {
     @Get('permissions/admin/all')
     getAllPermissions() {
         return this.service.getAllPermissions();
+    }
+    @UseGuards(AuthGuard)
+    @Permissions('EMPLEADO')
+    @Get('usuario/admin/datos-cliente/:id')
+    getDatosClienteByIdForVenta(@Param('id') id: number) {
+        return this.service.getTipoClienteById(id);
     }
 }

@@ -57,7 +57,7 @@ export class MicroservicioFuncionesYSalasService {
             const response = await axiosServicioFunciones.get(
                 config.MSFuncionesUrls.getFunciones(),
             );
-            return response.data;  // <-- Agregar .data
+            return response.data; // <-- Agregar .data
         } catch (err) {
             const status = err.response?.status || 403;
             const message = err.response?.data?.message || 'Unauthorized';
@@ -72,18 +72,19 @@ export class MicroservicioFuncionesYSalasService {
             return response.data;
         } catch (err) {
             const status = err.response?.status || 403;
-            const message = err.response?.data?.message || 'Error al eliminar función';
+            const message =
+                err.response?.data?.message || 'Error al eliminar función';
             throw new HttpException(message, status);
         }
     }
 
     async createFuncion(body: any, token: string) {
-    const response = await axiosServicioFunciones.post(
-        config.MSFuncionesUrls.createFuncion,
-        body,
-        { headers: { Authorization: token } }
-    );
-    return response.data;
+        const response = await axiosServicioFunciones.post(
+            config.MSFuncionesUrls.createFuncion,
+            body,
+            { headers: { Authorization: token } },
+        );
+        return response.data;
     }
 
     async updateFuncion(id: number, body: any) {
@@ -95,7 +96,8 @@ export class MicroservicioFuncionesYSalasService {
             return response.data;
         } catch (err) {
             const status = err.response?.status || 403;
-            const message = err.response?.data?.message || 'Error al actualizar función';
+            const message =
+                err.response?.data?.message || 'Error al actualizar función';
             throw new HttpException(message, status);
         }
     }
@@ -604,8 +606,9 @@ export class MicroservicioFuncionesYSalasService {
 
     async getSalasForSelect() {
         try {
-            const response =
-                await axiosServicioFunciones.get('/salas/admin/selec');
+            const response = await axiosServicioFunciones.get(
+                config.MSFuncionesUrls.getSalasForSelect,
+            );
             return response.data;
         } catch (err) {
             const status = err.response?.status || 403;

@@ -19,6 +19,8 @@ export const config = {
         CreatePermission: '/permissions/admin/create',
         GetAllRoles: () => '/roles/admin/all',
         GetAllPermissions: () => '/permissions/admin/all',
+        GetDatosClienteByIdForVentas: (id: number) =>
+            `/usuario/admin/datos-cliente/${id}`,
     },
     MSFuncionesUrls: {
         baseUrl: 'http://localhost:3003',

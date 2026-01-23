@@ -53,7 +53,6 @@ export class MicroservicioFuncionesYSalasController {
         return this.service.updateFuncion(id, body);
     }
 
-    
     @Get('butaca-por-funcion/:id')
     findAllDisponibilidadByFuncionId(@Param('id') id: number) {
         return this.service.findAllDisponibilidadByFuncionId(id);
@@ -238,7 +237,12 @@ export class MicroservicioFuncionesYSalasController {
     getAllSalasAdmin(@Req() req: any) {
         return this.service.getAllSalasAdmin(req);
     }
-
+    @UseGuards(AuthGuard)
+    @Permissions('EMPLEADO')
+    @Get('salas/admin/selec')
+    getSalasForSelect() {
+        return this.service.getSalasForSelect();
+    }
     @UseGuards(AuthGuard)
     @Permissions('EMPLEADO')
     @Get('salas/admin/:id')
@@ -259,13 +263,6 @@ export class MicroservicioFuncionesYSalasController {
         @Headers('authorization') authorization: string,
     ) {
         return this.service.deleteSala(id, authorization);
-    }
-
-    @UseGuards(AuthGuard)
-    @Permissions('EMPLEADO')
-    @Get('salas/admin/selec')
-    getSalasForSelect() {
-        return this.service.getSalasForSelect();
     }
 
     @UseGuards(AuthGuard)
