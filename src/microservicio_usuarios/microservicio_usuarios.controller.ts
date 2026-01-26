@@ -150,4 +150,10 @@ export class MicroservicioUsuariosController {
     getDatosClienteByIdForVenta(@Param('id') id: number) {
         return this.service.getTipoClienteById(id);
     }
+    @UseGuards(AuthGuard)
+    @Permissions('EMPLEADO')
+    @Get('usuario/admin/datos-empleado/:id')
+    getDatosEmpleadoByIdAdmin(@Param('id') id: number) {
+        return this.service.getDatosEmpleadoByIdAdmin(id);
+}
 }

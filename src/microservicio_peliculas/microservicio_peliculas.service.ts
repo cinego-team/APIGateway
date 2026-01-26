@@ -118,18 +118,19 @@ export class MicroservicioPeliculasService {
         }
     }
 
-    async getPeliculasAdmin() {
-        try {
-            const response = await axiosServicioPeliculas.get(
-                '/pelicula/admin/all',
-            );
-            return response.data;
-        } catch (err) {
-            const status = err.response?.status || 403;
-            const message = err.response?.data?.message || 'Unauthorized';
-            throw new HttpException(message, status);
-        }
+    async getPeliculasAdmin(token: string) {
+    try {
+        const response = await axiosServicioPeliculas.get(
+            '/pelicula/admin/all',
+            { headers: { Authorization: token } }
+        );
+        return response.data;
+    } catch (err) {
+        const status = err.response?.status || 403;
+        const message = err.response?.data?.message || 'Unauthorized';
+        throw new HttpException(message, status);
     }
+}
 
     async getPeliculaAdminById(id: number) {
         try {

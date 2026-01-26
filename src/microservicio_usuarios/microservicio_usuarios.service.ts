@@ -197,9 +197,7 @@ export class MicroservicioUsuariosService {
         try {
             const response = await axiosServicioUsuarios.put(
                 config.MSUsuariosUrls.UpdateTipoCliente(id),
-                {
-                    body: updateTipoClienteDto,
-                },
+                updateTipoClienteDto,  // Enviar directamente, sin envolver en { body: ... }
             );
             return response.data;
         } catch (err) {
@@ -262,7 +260,7 @@ export class MicroservicioUsuariosService {
             throw new HttpException(message, status);
         }
     }
-      async getDatosClienteByIdForVentas(id: number) {
+    async getDatosClienteByIdForVentas(id: number) {
         try {
             const response = await axiosServicioUsuarios.get(
                 config.MSUsuariosUrls.GetDatosClienteByIdForVentas(id),
@@ -271,6 +269,18 @@ export class MicroservicioUsuariosService {
         } catch (err) {
             const status = err.response?.status || 403;
             const message = err.response?.data?.message || 'Unauthorized';
+            throw new HttpException(message, status);
+        }
+    }
+    async getDatosEmpleadoByIdAdmin(id: number) {
+        try {
+            const response = await axiosServicioUsuarios.get(
+                `/usuario/admin/datos-empleado/${id}`
+            );
+            return response.data;
+        } catch (err) {
+            const status = err.response?.status || 404;
+            const message = err.response?.data?.message || 'Empleado no encontrado';
             throw new HttpException(message, status);
         }
     }
