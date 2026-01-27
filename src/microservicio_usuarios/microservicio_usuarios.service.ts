@@ -52,9 +52,7 @@ export class MicroservicioUsuariosService {
         try {
             const response = await axiosServicioUsuarios.post(
                 config.MSUsuariosUrls.registerEmpleado,
-                {
-                    body: registerBody,
-                },
+                registerBody,  
             );
             return response.data;
         } catch (err) {

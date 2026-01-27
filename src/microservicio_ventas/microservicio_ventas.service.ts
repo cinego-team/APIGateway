@@ -19,29 +19,29 @@ export class MicroservicioVentasService {
         }
     }
     async getHorariosMasElegidos() {
-        const data = await axiosServicioVentas.get(
+        const response = await axiosServicioVentas.get(
             config.MSVentasUrls.getHorariosMasElegidos,
         );
-        return data;
-    }
+        return response.data;  
+}
     async getEntradasPorDiaSemanaMesActual() {
-        const data = await axiosServicioVentas.get(
+        const response = await axiosServicioVentas.get(
             config.MSVentasUrls.getEntradasPorDiaSemanaMesActual,
         );
-        return data;
+        return response.data;
     }
     async getPeliculasPorRangoVentasTrimestral(
         trimestre: number,
         anio: number,
     ) {
-        const data = await axiosServicioVentas.get(
+        const response = await axiosServicioVentas.get(
             config.MSVentasUrls.getPeliculasPorRangoVentasTrimestral,
             {
                 params: { trimestre, anio },
             },
         );
 
-        return data;
+        return response.data;
     }
     async findAllVentas() {
         const response = await axiosServicioVentas.get(

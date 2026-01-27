@@ -35,7 +35,7 @@ export class MicroservicioVentasController {
         return await this.service.getEntradasPorDiaSemanaMesActual();
     }
     @Permissions('EMPLEADO')
-    @Get('venta/admin/reportes/peliculas-rango-ventas/trimestral')
+    @Get('venta/admin/reportes/peliculas-por-rango-trimestral')
     getPeliculasPorRangoVentasTrimestral(
         @Query(
             'trimestre',
