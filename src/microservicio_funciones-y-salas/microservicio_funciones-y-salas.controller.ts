@@ -42,15 +42,16 @@ export class MicroservicioFuncionesYSalasController {
     @UseGuards(AuthGuard)
     @Permissions('EMPLEADO')
     @Post('funcion/admin/new')
-    createFuncion(@Body() body, @Headers('authorization') token: string) {
-        return this.service.createFuncion(body, token);
+    createFuncion(@Body() body, @Req() req) {
+        console.log('REQ.USER:', req.user);
+        return this.service.createFuncion(body, req.user);
     }
 
     @UseGuards(AuthGuard)
     @Permissions('EMPLEADO')
-    @Put('funcion/admin/:id')
-    updateFuncion(@Param('id') id: number, @Body() body) {
-        return this.service.updateFuncion(id, body);
+    @Put('funcion/admin/edit/:id')
+    updateFuncion(@Param('id') id: number, @Body() body, @Req() req) {
+        return this.service.updateFuncion(id, body, req.user);
     }
 
     @Get('butaca-por-funcion/:id')

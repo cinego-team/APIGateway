@@ -135,7 +135,7 @@ export class MicroservicioPeliculasService {
     async getPeliculaAdminById(id: number) {
         try {
             const response = await axiosServicioPeliculas.get(
-                `/pelicula/admin/${id}`,
+                config.MSPeliculasUrls.getPeliculaAdminById(id),
             );
             return response.data;
         } catch (err) {
@@ -270,7 +270,7 @@ export class MicroservicioPeliculasService {
     async getAllGenerosAdmin(page = 1, quantity = 10) {
         try {
             const response = await axiosServicioPeliculas.get(
-                `/genero/admin/all?page=${page}&quantity=${quantity}`
+                `/genero/admin/all?page=${page}&quantity=${quantity}`,
             );
             return response.data;
         } catch (err) {

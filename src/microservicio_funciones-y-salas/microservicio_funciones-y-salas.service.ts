@@ -1,6 +1,7 @@
 import { HttpException, Injectable } from '@nestjs/common';
 import { axiosServicioFunciones } from 'src/services/axios_service/axios.client';
 import { config } from 'src/services/axios_service/env';
+import { Payload } from '../services/jwt_service/payload.interface';
 
 @Injectable()
 export class MicroservicioFuncionesYSalasService {
@@ -78,23 +79,33 @@ export class MicroservicioFuncionesYSalasService {
         }
     }
 
-    async createFuncion(body: any, token: string) {
+    async createFuncion(body: any, user: Payload) {
         const response = await axiosServicioFunciones.post(
             config.MSFuncionesUrls.createFuncion,
             body,
-            { headers: { Authorization: token } },
+            {
+                headers: {
+                    'x-user-id': user.sub,
+                    'x-user-role': user.role,
+                },
+            },
         );
         return response.data;
     }
 
-    async updateFuncion(id: number, body: any) {
+    async updateFuncion(id: number, body: any, user: any) {
         try {
             const response = await axiosServicioFunciones.put(
-                config.MSFuncionesUrls.updateFuncion(id),
+                `${config.MSFuncionesUrls.updateFuncion(id)}`,
                 body,
+                {
+                    headers: {
+                        'x-user': JSON.stringify(user), // enviamos el payload completo del usuario
+                    },
+                },
             );
             return response.data;
-        } catch (err) {
+        } catch (err: any) {
             const status = err.response?.status || 403;
             const message =
                 err.response?.data?.message || 'Error al actualizar función';

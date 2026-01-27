@@ -32,7 +32,7 @@ export const config = {
         getFunciones: () => `/funcion/admin/all`,
         deleteFuncion: (id: number) => `/funcion/admin/${id}`,
         createFuncion: '/funcion/admin/new',
-        updateFuncion: (id: number) => `/funcion/admin/${id}`,
+        updateFuncion: (id: number) => `/funcion/admin/edit/${id}`,
 
         registrarButaca: '/butaca',
         actualizarButacaById: (id: number) => `/butaca/${id}`,
@@ -77,6 +77,7 @@ export const config = {
         actualizarPeliculaById: (id: number) => `/pelicula/${id}`,
         getAllPeliculas: '/pelicula',
         getPeliculaById: (id: number) => `/pelicula/${id}`,
+        getPeliculaAdminById: (id: number) => `/pelicula/admin/${id}`,
         deletePeliculaById: (id: number) => `/pelicula/${id}`,
         registrarGenero: '/genero/admin/new',
         actualizarGeneroById: (id: number) => `/genero/${id}`,
