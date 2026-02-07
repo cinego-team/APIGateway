@@ -18,6 +18,7 @@ export class MicroservicioUsuariosService {
             );
             return response.data;
         } catch (err) {
+            console.log(err);
             const status = err.response?.status || 403;
             const message = err.response?.data?.message || 'Unauthorized';
             throw new HttpException(message, status);
