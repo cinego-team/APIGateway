@@ -11,8 +11,7 @@ export class MicroservicioUsuariosService {
                 loginBody,
                 {
                     headers: {
-                        Authorization: access_token || '',
-                        'refresh-token': refresh_token || '',
+                        'Content-Type': 'application/json',
                     },
                 },
             );
