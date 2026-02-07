@@ -18,6 +18,8 @@ export class MicroservicioUsuariosService {
             );
             return response.data;
         } catch (err) {
+            console.log("aca");
+            console.log(err.message);
             console.log(err);
             const status = err.response?.status || 403;
             const message = err.response?.data?.message || 'Unauthorized';
