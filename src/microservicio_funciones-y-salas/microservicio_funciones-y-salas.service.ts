@@ -1,6 +1,6 @@
 import { HttpException, Injectable } from '@nestjs/common';
-import { axiosServicioFunciones } from 'src/services/axios_service/axios.client';
-import { config } from 'src/services/axios_service/env';
+import { axiosServicioFunciones } from '../services/axios_service/axios.client';
+import { config } from '../services/axios_service/env';
 import { Payload } from '../services/jwt_service/payload.interface';
 
 @Injectable()

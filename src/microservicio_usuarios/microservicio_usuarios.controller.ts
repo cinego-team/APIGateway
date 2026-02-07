@@ -11,16 +11,16 @@ import {
     Delete,
 } from '@nestjs/common';
 import { MicroservicioUsuariosService } from './microservicio_usuarios.service';
-import { CaptchaService } from 'src/services/captcha_service/captcha-service';
-import { AuthGuard } from 'src/middleware/auth.middleware';
-import { Permissions } from 'src/middleware/decorators/permissions.decorator';
+import { CaptchaService } from '../services/captcha_service/captcha-service';
+import { AuthGuard } from '../middleware/auth.middleware';
+import { Permissions } from '../middleware/decorators/permissions.decorator';
 
 @Controller('microservicio-usuarios')
 export class MicroservicioUsuariosController {
     constructor(
         private service: MicroservicioUsuariosService,
         private captchaService: CaptchaService,
-    ) {}
+    ) { }
 
     @Post('usuario/login')
     async login(
@@ -155,5 +155,5 @@ export class MicroservicioUsuariosController {
     @Get('usuario/admin/datos-empleado/:id')
     getDatosEmpleadoByIdAdmin(@Param('id') id: number) {
         return this.service.getDatosEmpleadoByIdAdmin(id);
-}
+    }
 }

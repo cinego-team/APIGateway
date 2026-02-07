@@ -1,6 +1,6 @@
 import { HttpException, Injectable } from '@nestjs/common';
-import { axiosServicioPeliculas } from 'src/services/axios_service/axios.client';
-import { config } from 'src/services/axios_service/env';
+import { axiosServicioPeliculas } from '../services/axios_service/axios.client';
+import { config } from '../services/axios_service/env';
 
 @Injectable()
 export class MicroservicioPeliculasService {
@@ -119,18 +119,18 @@ export class MicroservicioPeliculasService {
     }
 
     async getPeliculasAdmin(token: string) {
-    try {
-        const response = await axiosServicioPeliculas.get(
-            '/pelicula/admin/all',
-            { headers: { Authorization: token } }
-        );
-        return response.data;
-    } catch (err) {
-        const status = err.response?.status || 403;
-        const message = err.response?.data?.message || 'Unauthorized';
-        throw new HttpException(message, status);
+        try {
+            const response = await axiosServicioPeliculas.get(
+                '/pelicula/admin/all',
+                { headers: { Authorization: token } }
+            );
+            return response.data;
+        } catch (err) {
+            const status = err.response?.status || 403;
+            const message = err.response?.data?.message || 'Unauthorized';
+            throw new HttpException(message, status);
+        }
     }
-}
 
     async getPeliculaAdminById(id: number) {
         try {

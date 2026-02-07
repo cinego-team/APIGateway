@@ -12,13 +12,13 @@ import {
     Query,
 } from '@nestjs/common';
 import { MicroservicioPeliculasService } from './microservicio_peliculas.service';
-import { AuthGuard } from 'src/middleware/auth.middleware';
-import { Permissions } from 'src/middleware/decorators/permissions.decorator';
+import { AuthGuard } from '../middleware/auth.middleware';
+import { Permissions } from '../middleware/decorators/permissions.decorator';
 import { ParseIntPipe } from '@nestjs/common/pipes/parse-int.pipe';
 @UseGuards(AuthGuard)
 @Controller('microservicio-peliculas')
 export class MicroservicioPeliculasController {
-    constructor(private readonly service: MicroservicioPeliculasService) {}
+    constructor(private readonly service: MicroservicioPeliculasService) { }
 
     @Get('peliculas')
     getAllPeliculas(

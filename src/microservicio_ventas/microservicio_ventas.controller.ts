@@ -10,16 +10,16 @@ import {
     Req,
 } from '@nestjs/common';
 import { MicroservicioVentasService } from './microservicio_ventas.service';
-import { AuthGuard } from 'src/middleware/auth.middleware';
+import { AuthGuard } from '../middleware/auth.middleware';
 import { DefaultValuePipe, ParseIntPipe } from '@nestjs/common/pipes';
-import { Permissions } from 'src/middleware/decorators/permissions.decorator'; //@UseGuards(AuthGuard)
+import { Permissions } from '../middleware/decorators/permissions.decorator'; //@UseGuards(AuthGuard)
 export interface VentaInput {
     disponibilidadButacaIds: number[];
     funcionId: number;
 }
 @Controller('microservicio-ventas')
 export class MicroservicioVentasController {
-    constructor(private readonly service: MicroservicioVentasService) {}
+    constructor(private readonly service: MicroservicioVentasService) { }
     @Post('proceso-pago')
     iniciarProcesoPago(@Body() idDisponibilidades: number[]) {
         return this.service.iniciarProcesoPago(idDisponibilidades);

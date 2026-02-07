@@ -1,6 +1,6 @@
 import { HttpException, Injectable } from '@nestjs/common';
 import { axiosServicioUsuarios } from '../services/axios_service/axios.client';
-import { config } from 'src/services/axios_service/env';
+import { config } from '../services/axios_service/env';
 
 @Injectable()
 export class MicroservicioUsuariosService {

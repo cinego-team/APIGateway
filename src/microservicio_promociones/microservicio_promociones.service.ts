@@ -1,15 +1,15 @@
 import { Injectable, HttpException } from '@nestjs/common';
-import { axiosServicioPromociones } from 'src/services/axios_service/axios.client';
-import { config } from 'src/services/axios_service/env';
+import { axiosServicioPromociones } from '../services/axios_service/axios.client';
+import { config } from '../services/axios_service/env';
 
 @Injectable()
 export class MicroservicioPromocionesService {
     async getAllPromociones(token: string) {
-    const response = await axiosServicioPromociones.get(
-        config.MSPromocionesUrls.getAllPromociones,
-        { headers: { Authorization: token } }
-    );
-    return response.data;
+        const response = await axiosServicioPromociones.get(
+            config.MSPromocionesUrls.getAllPromociones,
+            { headers: { Authorization: token } }
+        );
+        return response.data;
     }
 
     async getPromocionById(id: number) {
@@ -44,7 +44,7 @@ export class MicroservicioPromocionesService {
         try {
             const response = await axiosServicioPromociones.put(
                 config.MSPromocionesUrls.actualizarPromocionById(id),
-                promocionBody,  
+                promocionBody,
                 { headers: { Authorization: token } }
             );
             return response.data;

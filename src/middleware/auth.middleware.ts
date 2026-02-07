@@ -6,15 +6,15 @@ import {
     ForbiddenException,
 } from '@nestjs/common';
 import { Reflector } from '@nestjs/core';
-import { JwtService } from 'src/services/jwt_service/jwt.service';
-import { Payload } from 'src/services/jwt_service/payload.interface';
+import { JwtService } from '../services/jwt_service/jwt.service';
+import { Payload } from '../services/jwt_service/payload.interface';
 
 @Injectable()
 export class AuthGuard implements CanActivate {
     constructor(
         private readonly jwtService: JwtService,
         private reflector: Reflector,
-    ) {}
+    ) { }
 
     canActivate(context: ExecutionContext): boolean {
         const request = context.switchToHttp().getRequest();

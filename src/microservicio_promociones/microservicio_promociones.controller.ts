@@ -11,13 +11,13 @@ import {
     Headers,
 } from '@nestjs/common';
 import { MicroservicioPromocionesService } from './microservicio_promociones.service';
-import { AuthGuard } from 'src/middleware/auth.middleware';
-import { Permissions } from 'src/middleware/decorators/permissions.decorator';
+import { AuthGuard } from '../middleware/auth.middleware';
+import { Permissions } from '../middleware/decorators/permissions.decorator';
 
 //@UseGuards(AuthGuard)
 @Controller('microservicio-promociones')
 export class MicroservicioPromocionesController {
-    constructor(private readonly service: MicroservicioPromocionesService) {}
+    constructor(private readonly service: MicroservicioPromocionesService) { }
     //@Permissions('EMPLEADO')
     @Get('promocion/admin/all')
     getAllPromociones(@Headers('authorization') token: string) {
@@ -39,11 +39,11 @@ export class MicroservicioPromocionesController {
     @Permissions('EMPLEADO')
     @Put('promocion/admin/:id')
     actualizarPromocion(
-    @Param('id') id: number, 
-    @Body() promocionBody,
-    @Headers('authorization') token: string  // Extraer el token
+        @Param('id') id: number,
+        @Body() promocionBody,
+        @Headers('authorization') token: string  // Extraer el token
     ) {
-        return this.service.actualizarPromocion(id, promocionBody, token);  
+        return this.service.actualizarPromocion(id, promocionBody, token);
     }
     @Permissions('EMPLEADO')
     @Delete('promocion/admin/:id')

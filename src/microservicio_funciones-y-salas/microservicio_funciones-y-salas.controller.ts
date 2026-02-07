@@ -11,14 +11,14 @@ import {
     UseGuards,
 } from '@nestjs/common';
 import { MicroservicioFuncionesYSalasService } from './microservicio_funciones-y-salas.service';
-import { AuthGuard } from 'src/middleware/auth.middleware';
-import { Permissions } from 'src/middleware/decorators/permissions.decorator';
+import { AuthGuard } from '../middleware/auth.middleware';
+import { Permissions } from '../middleware/decorators/permissions.decorator';
 import { Req } from '@nestjs/common';
 import { ParseIntPipe } from '@nestjs/common';
 @UseGuards(AuthGuard)
 @Controller('microservicio-funciones-y-salas')
 export class MicroservicioFuncionesYSalasController {
-    constructor(private service: MicroservicioFuncionesYSalasService) {}
+    constructor(private service: MicroservicioFuncionesYSalasService) { }
     @Get('funciones-por-pelicula/:id')
     findAllByPeliculaId(
         @Param('id') id: number,
