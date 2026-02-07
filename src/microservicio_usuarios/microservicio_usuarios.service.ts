@@ -1,5 +1,5 @@
 import { HttpException, Injectable } from '@nestjs/common';
-import { axiosServicioUsuarios } from 'src/services/axios_service/axios.client';
+import { axiosServicioUsuarios } from '../services/axios_service/axios.client';
 import { config } from 'src/services/axios_service/env';
 
 @Injectable()
@@ -52,7 +52,7 @@ export class MicroservicioUsuariosService {
         try {
             const response = await axiosServicioUsuarios.post(
                 config.MSUsuariosUrls.registerEmpleado,
-                registerBody,  
+                registerBody,
             );
             return response.data;
         } catch (err) {
