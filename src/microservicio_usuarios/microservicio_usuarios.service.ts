@@ -4,7 +4,7 @@ import { config } from '../services/axios_service/env';
 
 @Injectable()
 export class MicroservicioUsuariosService {
-    async login(loginBody: any, access_token: string, refresh_token: string) {
+    async login(loginBody: any) {
         try {
             const response = await axiosServicioUsuarios.post(
                 config.MSUsuariosUrls.login,

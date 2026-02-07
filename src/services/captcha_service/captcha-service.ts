@@ -18,6 +18,7 @@ export class CaptchaService {
         const data = response.data;
 
         if (!data.success) {
+            console.log('Captcha inválido:', data);
             throw new BadRequestException('Captcha inválido');
         }
 
