@@ -21,7 +21,7 @@ export class CaptchaService {
             console.log('Captcha inválido:', data);
             throw new BadRequestException('Captcha inválido');
         }
-
+        console.log('Captcha válido:', data);
         return true;
     }
 }
