@@ -136,7 +136,7 @@ export const config = {
         cerrarVenta: (id: number) => `/venta/cerrar-venta/${id}`,
     },
     MSPromocionesUrls: {
-        baseUrl: process.env.PUERTO_MS_PROMOCIONES || 'http://localhost:3005',
+        baseUrl: `http://localhost:${process.env.PUERTO_MS_PROMOCIONES}`,
         registrarPromocion: '/promocion/admin/new',
         actualizarPromocionById: (id: number) => `/promocion/admin/${id}`,
         getAllPromociones: '/promocion/admin/all',
