@@ -8,8 +8,6 @@ async function bootstrap() {
             `https://localhost:${process.env.PUERTO_FRONTEND_USUARIO}`,
             `https://localhost:${process.env.PUERTO_FRONTEND_EMPLEADO}`,
         ],
-        methods: 'GET,HEAD,PUT,PATCH,POST,DELETE,OPTIONS',
-        allowedheaders: 'Content-Type, Authorization',
         credentials: true
     });
     // app.use((req, res, next) => {
