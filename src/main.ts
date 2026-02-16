@@ -5,8 +5,8 @@ async function bootstrap() {
     const app = await NestFactory.create(AppModule);
     app.enableCors({
         origin: [
-            'https://fronted-usuario.vercel.app',
-            'https://fronted_empleado.vercel.app'
+            `https://localhost:${process.env.PUERTO_FRONTEND_USUARIO}`,
+            `https://localhost:${process.env.PUERTO_FRONTEND_EMPLEADO}`,
         ],
         methods: 'GET,HEAD,PUT,PATCH,POST,DELETE,OPTIONS',
         allowedheaders: 'Content-Type, Authorization',
@@ -18,6 +18,6 @@ async function bootstrap() {
     //     }
     //     next();
     // });
-    await app.listen(3000);
+    await app.listen(process.env.PUERTO_APIGATEWAY!);
 }
 bootstrap();
