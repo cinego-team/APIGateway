@@ -1,6 +1,6 @@
 export const config = {
     MSUsuariosUrls: {
-        baseUrl: `http://localhost:${process.env.PUERTO_MS_USUARIOS}`,
+        baseUrl: `http://localhost:3004`,
         login: '/usuario/login',
         register: '/usuario/register',
         registerEmpleado: '/usuario/admin/register/empleado',
@@ -23,7 +23,7 @@ export const config = {
             `/usuario/admin/datos-cliente/${id}`,
     },
     MSFuncionesUrls: {
-        baseUrl: `http://localhost:${process.env.PUERTO_MS_FUNCIONES}`,
+        baseUrl: `http://localhost:3002`,
         getDisponibilidadByFuncionId: (id: number) =>
             `/funcion/${id}/butacas-detalle`,
         getFuncionesByPeliculaId: (id: number) =>
@@ -72,7 +72,7 @@ export const config = {
         deleteSalaById: (id: number) => `/salas/admin/${id}`,
     },
     MSPeliculasUrls: {
-        baseUrl: `http://localhost:${process.env.PUERTO_MS_PELICUAS}`,
+        baseUrl: `http://localhost:3001`,
         registrarPelicula: '/pelicula/new',
         actualizarPeliculaById: (id: number) => `/pelicula/${id}`,
         getAllPeliculas: '/pelicula',
@@ -118,7 +118,7 @@ export const config = {
         getAllButacas: '/butaca',
     },
     MSVentasUrls: {
-        baseUrl: `http://localhost:${process.env.PUERTO_MS_VENTAS}`,
+        baseUrl: `http://localhost:3003`,
         iniciarProcesoPago: '/venta/proceso-pago',
         getHorariosMasElegidos:
             '/venta/admin/reportes/horarios-mas-elegidos/actual',
@@ -136,7 +136,7 @@ export const config = {
         cerrarVenta: (id: number) => `/venta/cerrar-venta/${id}`,
     },
     MSPromocionesUrls: {
-        baseUrl: `http://localhost:${process.env.PUERTO_MS_PROMOCIONES}`,
+        baseUrl: `http://localhost:3005`,
         registrarPromocion: '/promocion/admin/new',
         actualizarPromocionById: (id: number) => `/promocion/admin/${id}`,
         getAllPromociones: '/promocion/admin/all',
