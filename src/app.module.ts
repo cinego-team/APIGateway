@@ -7,9 +7,13 @@ import { MicroservicioFuncionesYSalasModule } from './microservicio_funciones-y-
 import { MicroservicioPeliculasModule } from './microservicio_peliculas/microservicio_peliculas.module';
 import { MicroservicioUsuariosModule } from './microservicio_usuarios/microservicio_usuarios.module';
 import { JwtModule } from './services/jwt_service/jwt.module';
+import { ConfigModule } from '@nestjs/config';
 
 @Module({
     imports: [
+        ConfigModule.forRoot({
+            isGlobal: true,
+        }),
         MicroservicioVentasModule,
         MicroservicioPromocionesModule,
         MicroservicioFuncionesYSalasModule,
