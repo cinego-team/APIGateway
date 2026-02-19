@@ -35,11 +35,9 @@ export class MicroservicioUsuariosController {
     async register(
         @Body() registerBody,
         @Headers('x-captcha-token') captchaToken: string,
-        @Headers('authorization') access_token: string,
-        @Headers('refresh-token') refresh_token: string,
     ) {
         await this.captchaService.validateCaptcha(captchaToken);
-        return this.service.register(registerBody, access_token, refresh_token);
+        return this.service.register(registerBody);
     }
 
     @UseGuards(AuthGuard)

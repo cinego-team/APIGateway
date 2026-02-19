@@ -20,6 +20,7 @@ export class MicroservicioFuncionesYSalasService {
                     },
                 },
             );
+            console.log(response.data)
             return response.data;
         } catch (err) {
             const status = err.response?.status || 403;

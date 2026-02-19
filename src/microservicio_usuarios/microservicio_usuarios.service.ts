@@ -28,8 +28,6 @@ export class MicroservicioUsuariosService {
 
     async register(
         registerBody: any,
-        access_token: string,
-        refresh_token: string,
     ) {
         try {
             const response = await axiosServicioUsuarios.post(
@@ -37,8 +35,7 @@ export class MicroservicioUsuariosService {
                 registerBody,
                 {
                     headers: {
-                        Authorization: access_token || '',
-                        'refresh-token': refresh_token || '',
+                        'Content-Type': 'application/json',
                     },
                 },
             );

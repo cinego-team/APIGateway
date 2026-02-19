@@ -5,11 +5,11 @@ async function bootstrap() {
     const app = await NestFactory.create(AppModule);
     app.enableCors({
         origin: [
-            `http://localhost:${process.env.PUERTO_FRONTEND_USUARIO}`,
-            `http://localhost:${process.env.PUERTO_FRONTEND_EMPLEADO}`,
+            'http://localhost:4200',
+            'http://localhost:4201',
         ],
         credentials: true
     });
-    await app.listen(process.env.PUERTO_APIGATEWAY!);
+    await app.listen(Number(process.env.PUERTO_APIGATEWAY));
 }
 bootstrap();
