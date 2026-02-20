@@ -7,6 +7,7 @@ async function bootstrap() {
         origin: [
             'http://localhost:4200',
             'http://localhost:4201',
+            'https://gave-hosted-mistakes-drain.trycloudflare.com' //link solo valido para pc rama
         ],
         credentials: true
     });
