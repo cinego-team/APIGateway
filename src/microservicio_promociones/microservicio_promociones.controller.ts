@@ -76,8 +76,10 @@ export class MicroservicioPromocionesController {
     eliminarDia(@Param('id') id: number) {
         return this.service.eliminarDia(id);
     }
+
+    @UseGuards(AuthGuard)
     @Get('promocion/verificar-promocion')
     verificarPromocion(@Req() req) {
-        return this.service.verificarPromocionById(req.user.id);
+        return this.service.verificarPromocionById(req.user.sub);
     }
 }
