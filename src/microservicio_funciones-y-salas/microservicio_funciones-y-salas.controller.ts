@@ -43,7 +43,6 @@ export class MicroservicioFuncionesYSalasController {
     @Permissions('EMPLEADO')
     @Post('funcion/admin/new')
     createFuncion(@Body() body, @Req() req) {
-        console.log('REQ.USER:', req.user);
         return this.service.createFuncion(body, req.user);
     }
 

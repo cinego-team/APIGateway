@@ -7,7 +7,7 @@ async function bootstrap() {
         origin: [
             'http://localhost:4200',
             'http://localhost:4201',
-            'https://september-cancellation-claire-repair.trycloudflare.com' //link solo valido para pc rama
+            'https://increasingly-thomas-subsidiaries-benefit.trycloudflare.com' //link solo valido para pc rama
         ],
         credentials: true
     });
