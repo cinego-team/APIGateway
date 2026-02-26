@@ -53,12 +53,15 @@ export class MicroservicioFuncionesYSalasService {
         }
     }
     // funciones
-    async getFunciones() {
+    async getFunciones(page: number, quantity: number) {
         try {
             const response = await axiosServicioFunciones.get(
-                config.MSFuncionesUrls.getFunciones(),
+                config.MSFuncionesUrls.getFunciones,
+                {
+                    params: { page, quantity },
+                }
             );
-            return response.data; // <-- Agregar .data
+            return response.data;
         } catch (err) {
             const status = err.response?.status || 403;
             const message = err.response?.data?.message || 'Unauthorized';

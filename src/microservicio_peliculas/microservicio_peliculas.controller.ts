@@ -68,8 +68,12 @@ export class MicroservicioPeliculasController {
     @UseGuards(AuthGuard)
     @Permissions('EMPLEADO')
     @Get('pelicula/admin/all')
-    getPeliculasAdmin(@Headers('authorization') token: string) {
-        return this.service.getPeliculasAdmin(token);
+    getPeliculasAdmin(
+        @Headers('authorization') token: string,
+        @Query('page') page,
+        @Query('quantity') quantity
+    ) {
+        return this.service.getPeliculasAdmin(token, Number(page), Number(quantity));
     }
     @UseGuards(AuthGuard)
     @Permissions('EMPLEADO')

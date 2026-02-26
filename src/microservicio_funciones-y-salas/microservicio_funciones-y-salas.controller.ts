@@ -9,6 +9,7 @@ import {
     Headers,
     Param,
     UseGuards,
+    Query,
 } from '@nestjs/common';
 import { MicroservicioFuncionesYSalasService } from './microservicio_funciones-y-salas.service';
 import { AuthGuard } from '../middleware/auth.middleware';
@@ -268,7 +269,10 @@ export class MicroservicioFuncionesYSalasController {
     @UseGuards(AuthGuard)
     @Permissions('EMPLEADO')
     @Get('funcion/admin/all')
-    getFunciones() {
-        return this.service.getFunciones();
+    getFunciones(
+        @Query('page') page,
+        @Query('quantity') quantity,
+    ) {
+        return this.service.getFunciones(Number(page), Number(quantity));
     }
 }

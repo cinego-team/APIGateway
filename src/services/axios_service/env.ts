@@ -29,7 +29,7 @@ export const config = {
         getFuncionesByPeliculaId: (id: number) =>
             `/funcion/funciones-por-pelicula/${id}`,
         getFuncionById: (id: number) => `/funcion/${id}`,
-        getFunciones: () => `/funcion/admin/all`,
+        getFunciones: `/funcion/admin/all`,
         deleteFuncion: (id: number) => `/funcion/admin/${id}`,
         createFuncion: '/funcion/admin/new',
         updateFuncion: (id: number) => `/funcion/admin/edit/${id}`,

@@ -118,11 +118,14 @@ export class MicroservicioPeliculasService {
         }
     }
 
-    async getPeliculasAdmin(token: string) {
+    async getPeliculasAdmin(token: string, page: number, quantity: number) {
         try {
             const response = await axiosServicioPeliculas.get(
                 '/pelicula/admin/all',
-                { headers: { Authorization: token } }
+                {
+                    headers: { Authorization: token },
+                    params: { page, quantity }
+                }
             );
             return response.data;
         } catch (err) {
